@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" class="w-100 h-100">
+  <head>
+    <meta charset="utf-8">
+    <title>2016 05 27</title>
+    <meta name="description" content="Tom Critchlow. Move. Think. Create.">
+
+    
+
+<link href='https://fonts.googleapis.com/css?family=Libre+Franklin:400,400italic,600,700,300,800|IBM+Plex+Mono|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet" href="/css/tachyons.min.css">
+<link rel="stylesheet" href="/css/hamburgers.css">
+
+
+<link href="/css/all.css" rel="stylesheet">
+<link href="/css/mobile.css" rel="stylesheet">
+
+<link rel="icon" href="/images/favicon.png" />
+
+<meta name="viewport" content="width=device-width">
+
+<script src="//code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="/js/feather.min.js" type="text/javascript"></script>
+
+<!--Custom Jquery UI only used for slidetoggle left/right-->
+<script src="/js/jquery-ui.min.js" type="text/javascript"></script>
+
+
+<link rel="alternate" type="application/rss+xml" title="RSS Feed for tomcritchlow.com" href="/feed.xml" />
+
+
+ <meta property="og:type"   content="article" />
+ <meta property="og:url"    content="https://tomcritchlow.com/links/2016-05-27/" />
+ <meta property="og:title"  content="2016 05 27" />
+ <meta name="og:description" content="
+">
+ 
+ <meta property="og:image"  content="https://tomcritchlow.com/images/green.png" />
+ 
+ <meta property="og:image:width"  content="600" />
+ <meta property="og:image:height"  content="315" />
+
+
+
+
+ 
+<meta name="pocket-site-verification" content="d481265d27c9597cbdc003abbf1994" />
+
+<link rel="webmention" href="https://webmention.io/tomcritchlow.com/webmention" />
+<link rel="pingback" href="https://webmention.io/tomcritchlow.com/xmlrpc" />
+
+
+
+</head>
+
+<body class="ph0-l center">
+
+
+
+<div class="topnav">
+  
+  <div class="header pacifico mobilehidden"><a href="/">TomCritchlow</a></div>
+  <div class="header pacifico desktophidden mobileheader">TomCritchlow</div>
+  
+  <div class="navigation mobilehidden">
+
+    <span><a href="/about">about me</a></span>
+    <span><a href="/now">now</a></span>
+    <span><a href="/writing">writing</a></span>
+	<span><a href="http://twitter.com/tomcritchlow">@tomcritchlow</a></span>
+    <span class="desktophidden opensans close">X</span>
+  </div>
+</div>
+
+
+
+<div class="blogcontent">
+  <h1>Deeply thought provoking, <a href="http://nymag.com/thecut/2016/04/portrait-motherhood-creativity-c-v-r.html?mid=fb-share-thecut">a portrait of the artist as a young mom</a>. As new parents I'm thinking a lot about how to keep a creative practice for both of us, but especially for the Mum.</h1>
+
+
+  
+<p><blockquote>Her experience of sacrifice and loss might seem extreme, but among the women I spoke with, it wasn’t uncommon. What was more unusual were women who were willing to talk about ways in which they accepted that their devotion to art made them, at least at times, less of a parent. One of those was writer and mother Zoe Zolbrod. Like me, she has two children. Like me, she is about to publish a book she struggled to write through the early years of motherhood. We talk about the various challenges of writing, parenting, working a day job, stealing time. “The truth,” she says, “is that I think I’m a better mom when I’m not writing. I’m not writing right now and I’m enjoying the kids more. I’m better at home when I’m writing less.”</blockquote></p>
+
+
+</div>
+
+
+
+<div class="footer">
+  <a href="https://twitter.com/@tomcritchlow">@tomcritchlow</a>
+</div>
+
+<div class="hamburgermenu">
+  <button class="hamburger hamburger--3dx" type="button">
+  <span class="hamburger-box">
+    <span class="hamburger-inner"></span>
+  </span>
+  </button>
+</div>
+
+<div class="newmenu">
+ <span><a href="/about">about me</a></span>
+    <span><a href="/now">/now</a></span>
+    <span><a href="/writing">writing</a></span>
+	<span><a href="http://twitter.com/tomcritchlow">@tomcritchlow</a></span>
+  </div>
+  
+  <div class="shade">
+  </div>
+
+
+
+<!--From GA include-->
+
+
+
+
+<script defer data-domain="tomcritchlow.com" src="https://plausible.io/js/script.js"></script>
+
+
+
+<script>
+
+$('p img').each(function(){
+  $(this).parent().addClass("imgonly");
+});
+
+
+$(".hamburger").click(function(){
+  $(".hamburger").toggleClass("is-active");
+  $(".newmenu").slideToggle();
+  $(".shade").fadeToggle();
+});
+
+
+$(".slider").attr("data-count","0");
+$(".slider").prepend("<i class='fa fa-angle-left fa-3x prev'></i>");
+$(".slider").append("<i class='fa fa-angle-right fa-3x next'></i>");    
+    
+$(".slider .next").click(function(){
+      var count = $(this).parent().attr("data-count");
+      var length = $(this).parent().find("img").length;
+      $(this).parent().find("img").eq(count).hide();
+      if (count == length-1){
+        count = 0;
+      } else{
+        count++
+      };
+      $(this).parent().find("img").eq(count).show();
+      $(this).parent().attr("data-count",count);
+    });
+
+$(".slider .prev").click(function(){
+      var count = $(this).parent().attr("data-count");
+      var length = $(this).parent().find("img").length;
+      $(this).parent().find("img").eq(count).hide();
+      if (count == 0){
+        count = length-1;
+      } else{
+        count--
+      };
+      $(this).parent().find("img").eq(count).show();
+      $(this).parent().attr("data-count",count);
+    });
+
+
+</script>

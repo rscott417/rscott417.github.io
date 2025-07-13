@@ -1,0 +1,62 @@
+---
+---
+{% assign tags = site.library | map: 'tags' | join: ',' | split: ',' | uniq %}
+
+{% include head.html %}
+
+{% include googleanalytics.html %}
+
+{% include 2024-nav.html %}
+
+{% include library-header.html %}
+
+<div class="mh5-l mb5 mainlinks w-100 ph0-l ph2">
+
+  <div id="main-content">
+    
+    
+    <div class="pv5 bb b--newgreen">
+    <div class="f4 b">{%if page.link %}<a class="black" href="{{page.link}}">{{page.title}}</a> <span class="pl2 fw4 f5 black-50">(<img class="mh1 v-mid" src="https://www.google.com/s2/favicons?domain={{page.link}}"> {{ page.link | split: "//" | last | split: "/" | first }})</span>{%else%}{{page.title}}{%endif%}</div>
+    
+    {% if page.description %}
+    <div class="pv2 black-50 i">
+        Page Description: {{page.description}}
+    </div>
+    {%endif%}
+
+    {% if page.insights %}
+    {% for insight in page.insights %}
+    <blockquote class="quoteback" darkmode="" data-title="{{page.title}}" data-author="{% if page.author %}{{page.author}}{% endif %}" cite="{{page.link}}">
+      {{insight}}
+      <footer><cite> <a href="{{page.link}}">{{page.link}}</a></cite></footer>
+      </blockquote>
+    {% endfor %}
+    <script note="" src="https://cdn.jsdelivr.net/gh/Blogger-Peer-Review/quotebacks@1/quoteback.js"></script>
+    {% endif %}
+
+    {% if page.link contains "album.link" or page.link contains "song.link" %}
+    <iframe width="100%" height="150" src="https://embed.odesli.co/?url={{page.link}}" frameborder="0"></iframe>
+    {% endif %}
+
+    {%if page.content %}
+    <div class="pv2">
+      {{page.content}}
+    </div>
+    {% endif %}
+    
+    <div class="pv1">{% for tag in page.tags %}<a href="/library/?query=tag%3A{{tag}}" class="f6 dib pa2 mr2 bg-light-gray newgreen b br2 link">{{tag}}</a>
+    {% endfor %}</div>
+    <div class="black-50 f6">{{page.date_saved | date: "%B %-d, %Y"}} <a class="f6 pl2 newgreen b" href="{{page.url}}">#</a></div>
+    </div>
+
+</div>  
+</div>
+
+
+</div>  
+
+</div>
+
+
+
+{% include 2024-footer.html %}

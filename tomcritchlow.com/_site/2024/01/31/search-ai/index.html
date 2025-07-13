@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en" class="w-100 h-100">
+  <head>
+    <meta charset="utf-8">
+    <title>Notes on Search and AI</title>
+    <meta name="description" content="Tom Critchlow. Move. Think. Create.">
+
+    
+
+<link href='https://fonts.googleapis.com/css?family=Libre+Franklin:400,400italic,600,700,300,800|IBM+Plex+Mono|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet" href="/css/tachyons.min.css">
+<link rel="stylesheet" href="/css/hamburgers.css">
+
+
+<link href="/css/all.css" rel="stylesheet">
+<link href="/css/mobile.css" rel="stylesheet">
+
+<link rel="icon" href="/images/favicon.png" />
+
+<meta name="viewport" content="width=device-width">
+
+<script src="//code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="/js/feather.min.js" type="text/javascript"></script>
+
+<!--Custom Jquery UI only used for slidetoggle left/right-->
+<script src="/js/jquery-ui.min.js" type="text/javascript"></script>
+
+
+<link rel="alternate" type="application/rss+xml" title="RSS Feed for tomcritchlow.com" href="/feed.xml" />
+
+
+ <meta property="og:type"   content="article" />
+ <meta property="og:url"    content="https://tomcritchlow.com/2024/01/31/search-ai/" />
+ <meta property="og:title"  content="Notes on Search and AI" />
+ <meta name="og:description" content="More questions than answers...">
+ 
+ <meta property="og:image"  content="https://tomcritchlow.com/images/ai-og.png" />
+ 
+ <meta property="og:image:width"  content="600" />
+ <meta property="og:image:height"  content="315" />
+
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@tomcritchlow">
+<meta name="twitter:creator" content="@tomcritchlow">
+<meta name="twitter:title" content="Notes on Search and AI">
+<meta name="twitter:description" content="More questions than answers...">
+
+<meta property="twitter:image"  content="https://tomcritchlow.com/images/ai-og.png" />
+
+
+
+
+
+ 
+<meta name="pocket-site-verification" content="d481265d27c9597cbdc003abbf1994" />
+
+<link rel="webmention" href="https://webmention.io/tomcritchlow.com/webmention" />
+<link rel="pingback" href="https://webmention.io/tomcritchlow.com/xmlrpc" />
+
+
+
+</head>
+
+<body class="ph0-l center">
+
+<!--From GA include-->
+
+
+
+
+<script defer data-domain="tomcritchlow.com" src="https://plausible.io/js/script.js"></script>
+
+
+
+<style>
+#nav{
+    width:223px;
+    height:100vh;
+  }
+
+  #maincontent{
+    margin-left:223px;
+  }
+
+  @media (max-width: 1024px) {
+      #nav{
+          width:100%;
+      }
+
+      #maincontent{
+          margin-left:auto;
+      }
+  }
+</style>
+
+
+<div class="dn-l db w-100 pa3 bg-near-white z-1" style="position:sticky;top:0px">
+    <a class="link dim dark-gray f6 f5-l dib ttu pt2 pt0-l dtc-l v-mid newgreen b" href="/" title="Home">TOM CRITCHLOW</a>
+    <div class="fr dib dn-l pt1">    
+        <div id="hamburger" class="hamburger hamburger--squeeze">
+                <div class="hamburger-box">
+                  <div class="hamburger-inner"></div>
+                </div>
+              </div>
+    
+    </div>
+</div>
+
+<div class="flex items-stretch h-100 w-100">
+  
+    
+
+    
+
+    <div id="nav" class="w5 bg-near-white f7 fw4 br-l bt-0-l bb-0-l bt bb b--black-10 fixed dn db-l top-0-l left-0 overflow-y-scroll z-1 pt2 pt0-l">
+      
+      
+      
+    
+      <a class="db-l dn  items-center ma2 ph3 pa2 mv3 mb4-l link fw8 f6 br3 newgreen" href="/">
+        TOM CRITCHLOW
+      </a>
+    
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Home" href="/">
+    <i data-feather="home" class="h1 pr3"></i> <span class="navname">Home</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="About me" href="/about">
+    <i data-feather="user" class="h1 pr3"></i> <span class="navname">About me</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Writing" href="/writing">
+    <i data-feather="rss" class="h1 pr3"></i> <span class="navname">Writing</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Library" href="/library">
+    <i data-feather="layers" class="h1 pr3"></i> <span class="navname">Library</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Newsletter" href="/newsletter">
+    <i data-feather="mail" class="h1 pr3"></i> <span class="navname">Newsletter</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Search" href="/search">
+    <i data-feather="search" class="h1 pr3"></i> <span class="navname">Search</span>
+  </a>
+
+
+
+<div class="mv4">
+    <div class="newgreen mh3 ph2 mv2 navname">Hire me</div>
+
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Consulting" href="/consulting">
+    <i data-feather="git-merge" class="h1 pr3"></i> <span class="navname">Consulting</span>
+  </a>
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Advisor" href="/advisor">
+    <i data-feather="git-pull-request" class="h1 pr3"></i> <span class="navname">Advisor</span>
+  </a>
+
+</div>
+
+<div class="mv4">
+    <div class="newgreen mh3 ph2 mv2 navname">Elsewhere</div>
+
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Twitter" href="https://twitter.com/tomcritchlow/">
+    <i data-feather="twitter" class="h1 pr3"></i> <span class="navname">Twitter</span>
+  </a>
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="LinkedIn" href="https://www.linkedin.com/in/tomcritchlow/">
+    <i data-feather="linkedin" class="h1 pr3"></i> <span class="navname">LinkedIn</span>
+  </a>
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Are.na" href="https://www.are.na/tom-critchlow/index">
+    <i data-feather="bookmark" class="h1 pr3"></i> <span class="navname">Are.na</span>
+  </a>
+
+</div>
+
+      
+      </div>
+
+<script>
+    
+var $hamburger = $("#hamburger");
+            $hamburger.on("click", function(e) {
+
+              $hamburger.toggleClass("is-active");
+              $("#nav").toggleClass("dn");
+   
+            }); 
+      
+            feather.replace();
+
+function addClassBasedOnUrlWithSwitch() {
+  // Get the current URL
+  const url = window.location.href;
+  
+  switch (true) {
+    case url == "https://tomcritchlow.com/":
+      const div0 = document.getElementById("Home");
+      if (div0) {
+        div0.classList.add('bg-white');
+      }
+      break;
+    case url.includes("https://tomcritchlow.com/?"):
+      const div1 = document.getElementById("Home");
+      if (div1) {
+        div1.classList.add('bg-white');
+      }
+      break;      
+    case url.includes("/about/"):
+      const div2 = document.getElementById("About me");
+      if (div2) {
+        div2.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/writing/"):
+      const div3 = document.getElementById("Writing");
+      if (div3) {
+        div3.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/newsletter"):
+      const div4 = document.getElementById("Newsletter");
+      if (div4) {
+        div4.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/search"):
+      const div5 = document.getElementById("Search");
+      if (div5) {
+        div5.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/start-here"):
+      const div6 = document.getElementById("Start here");
+      if (div6) {
+        div6.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/topics/"):
+      const div7 = document.getElementById("Topics");
+      if (div7) {
+        div7.classList.add('bg-white');
+      }
+      break;                              
+    
+    default:
+      // Code to run if none of the above cases are true
+      break;
+  }
+}
+
+// Call the function
+addClassBasedOnUrlWithSwitch();
+
+
+
+</script>
+
+    <div class="w-100 h-100" id="maincontent">
+      <div class="mw8 center w-100 h-100">
+        
+    
+        
+    
+
+
+
+
+
+
+<div class="pt4 pt5-l pb2 w-two-thirds-ns center">
+
+<div class="f4 ph3 pb4 ph0-l lh-copy">
+
+  
+<div class="bb b--newgreen w-100 ibmplexmono ttu f6 dt-published mb5" datetime="2024-01-31 00:00:00 -0500">
+    January 31, 2024
+  </div>
+  
+        <h1 class="f2 fw8 lh-solid mv1 posttitle p-name">Notes on Search and AI</h1>
+  
+      
+      <h2 class="f3 fw3 lh-copy mt1 subtitle pb2 p-summary i">More questions than answers...</h2>
+        
+    
+    <div class="postcontainer">
+    <p>What to say about the future of AI and search?</p>
+
+<p>Obviously, we don’t know. But I’m going to jot down a few thoughts.</p>
+
+<p>🤖🤖🤖</p>
+
+<h2 id="clicks-to-websites-will-go-updownsideways">Clicks to Websites will go up/down/sideways?</h2>
+
+<p>There’s an interesting spectrum of responses to the new “generative search experiences” and what it means for clicks out to websites.</p>
+
+<p>The <strong>super optimistic outlook</strong> says:</p>
+
+<p><em>“Generative search &amp; AI is going to absolutely explode the number of search queries per user per day. Just like mobile search and youtube search are largely additive to “regular” search, we’re going to see more search queries than ever and eventually more outbound clicks than ever before”</em></p>
+
+<p>The <strong>pragmatic positive</strong> outlook says:</p>
+
+<p><em>“Look, Google’s ads business model relies on showing you links and driving clicks to websites. So however the future interface changes there’s going to be a fundamental notion of links and clicks that will continue to exist. So there will be changes big and small to the number of clicks but ultimately it’s not going to be a “50% decline in all search” scenario”</em></p>
+
+<p>The <strong>pragmatic pessimist</strong> outlook says:</p>
+
+<p><em>“Sure, search click curves are going to change - but actually for A LOT of queries you simply don’t need to click out - the query is well served by an LLM model. While many transactional queries will survive, the informational and exploratory queries will be completely re-shaped. This will lead to broad-scale changes across the media landscape in particular.</em></p>
+
+<p>The <strong>super pessimistic</strong> outlook says:</p>
+
+<p><em>“LLMs are going to fundamentally rewrite how people interact with the web to the point that search itself diminishes as a behavior - leading not only to dramatically fewer clicks to websites but even Google’s core ads business model will come under threat.”</em></p>
+
+<p>Whichever outlook you have, I think one thing is becoming obvious - with how fast open source and small local models are getting - I don’t think search is going to be threatened by a membership model (a la $20 / month for chatGPT). I think search is going to remain free and ad supported for some time to come.<sup id="fnref:ads"><a href="#fn:ads" class="footnote" rel="footnote" role="doc-noteref">1</a></sup></p>
+
+<p>🤖🤖🤖</p>
+
+<h2 id="just-in-time-interfaces">Just-in-time Interfaces</h2>
+
+<p>There’s another outlook though - maybe the era of search-first is just over? What I mean is this - you could argue that today we <em>start</em> our queries in search (just like we used to start our search in directories many moons ago). Whether it’s voice search, Google search etc we start there.</p>
+
+<p>But you could argue that we’re entering an era where we <em>start</em> our queries with an LLM/assistant interface. Something that results in search <strong><em>some of the time</em></strong> - but NOT all the time. Some times it results in novel, new interfaces - whether it’s a just-in-time UI that is assembled to support your task completion or whether it’s a collaborative document / code environment.</p>
+
+<p>I’ve been playing around with a workflow that goes something like:</p>
+
+<ol>
+  <li>Tell GPT what I want to do</li>
+  <li>Ask GPT to think about what interface would enable that task completion</li>
+  <li>Ask GPT to give me the code for that interface</li>
+  <li>Copy and paste that code into Replit</li>
+</ol>
+
+<p>This is all quite manual and a little bit slow today - but when it gets it right, the results are magical and truly novel. I could easily imagine a new OpenAI beta playground environment that tried to build interfaces on the fly for you. It’s all there today.</p>
+
+<p>See: <a href="https://twitter.com/simonw/status/1724990427756200115">the tldraw experiment that lets you draw a UI and have GPT build a working version</a>.</p>
+
+<p>(Aside: Google search results are essentially adaptive UI designed for the query at this point! I mean look at the custom ecommerce UI all over a standard <a href="https://www.google.com/search?q=green+raincoat+for+men">shopping query</a> these days.)</p>
+
+<p>🤖🤖🤖</p>
+
+<h2 id="what-new-kinds-of-queries-will-exist">What new kinds of queries will exist?</h2>
+
+<p>Ok, so if we have a different kind of box to type or talk into - how will this differ from a search box? Well, I think the affordances of natural language will change the kinds of behaviors that we find ourselves familiar with.</p>
+
+<p>Here’s a simple example. People used to search for things with specific location modifiers - think “restaurants in NYC” but as it became obvious and predictable that Google already knows where the query is coming from, we stopped searching for “restaurants in NYC” and started searching for “restaurants near me”.</p>
+
+<p>The “near me” version of queries became the dominant version <a href="https://trends.google.com/trends/explore?date=all&amp;geo=US-NY&amp;q=restaurant%20in%20nyc,restaurant%20near%20me&amp;hl=en">about 10 years ago</a>.</p>
+
+<p>So the affordances of the search results changes our behavior.</p>
+
+<p>It’s fun to imagine whole new <em>kinds</em> of search queries / questions that you simply wouldn’t type into Google because it wouldn’t make sense. Things like:</p>
+
+<ul>
+  <li><em>Why am I feeling anxious today?</em></li>
+  <li><em>What should I work on today?</em></li>
+  <li><em>Should I take the job offer I was just sent?</em></li>
+  <li><em>Can I afford a holiday this year?</em></li>
+  <li><em>Give me a poem to start my day</em></li>
+</ul>
+
+<p>I’m betting that as we get comfortable talking to LLMs we’ll slowly get comfortable asking more personal, more spiritual, more emotional, more goal-oriented questions and discussions.</p>
+
+<p><em>(Obviously, I’m guessing the real queries of the future will look nothing like this - it’ll be some other weird second order effect that no one anticipated)</em></p>
+
+<p>🤖🤖🤖</p>
+
+<h2 id="were-going-to-need-new-ideas-for-measurement">We’re going to need new ideas for measurement</h2>
+
+<p>Two things we’re going to need to invent new ideas around measurement for: <strong>search quality</strong> and <strong>search rankings</strong>.</p>
+
+<p>Google hasn’t had any serious competition for <strong>decades</strong> - and so collectively I think we’ve all kind of given up on measuring search quality? Even Google I think has become lazy in how they measure search quality in recent years.</p>
+
+<p>But it’s suddenly a serious question to ask who did it better for a particular category of search.</p>
+
+<p><em>(In 10 minutes I built a little side by side for Google and Perplexity. Play around here: <a href="https://llm-search-comparison.replit.app/">https://llm-search-comparison.replit.app/</a>)</em></p>
+
+<p>Of course - it’s not quite true that no one is measuring search quality. Daniel S. Griffin has <a href="https://danielsgriffin.com/docs/2023/07/05/search-audits/">a really interesting collection of articles, academic papers and resources around “search audits”</a>. Ok, so I guess we all have some homework to do.</p>
+
+<p>But/and - because the affordances are changing and search behavior is changing we’re still going to need some careful thinking around how we measure the quality of search results.</p>
+
+<p>Meanwhile, in the SEO industry, we’ve been relying on “rank tracking” for a long time (too long?). I’m excited that this new era of generative search experiences might usher in some innovation from the SEO tool providers around how we measure performance in search. It’s needed.</p>
+
+<p>🤖🤖🤖</p>
+
+<p>Actually, there’s a third thing we’re going to need to invent new measurement standards for: clicks. AI-assisted clicks. Do they show in analytics? Do bots declare themselves? When a bot browses on your behalf what user-agent does it use? Are bots allowed to fetch URLs on your behalf if they do it locally? Or only via direct user-initiated command?</p>
+
+<p>🤖🤖🤖</p>
+
+<h2 id="the-skill-of-searching">The Skill of Searching</h2>
+
+<p>Here’s another way of thinking about the impact of LLMs.</p>
+
+<p>You know how some people are just better at searching than others? If you’re reading this article you’re probably thinking that you’re <em>good at searching</em>. Maybe your significant other turns to you to help you find the right thing, maybe you feel like you’re competent at weeding through 10 blue links to find the most relevant result. You’re fluent and competent at the internet.</p>
+
+<p>Being good at searching is a combination of query formulation, looking for signs, recognizing trusted sites etc.</p>
+
+<p>Well, studies find that for knowledge worker tasks, LLMs lift the below average people <em>the most</em> and close the gap between top and bottom performers:</p>
+
+<blockquote class="quoteback" darkmode="" data-title="Everyone%20is%20above%20average" data-author="Ethan Mollick" cite="https://www.oneusefulthing.org/p/everyone-is-above-average?publication_id=1180644&amp;utm_campaign=email-post-title&amp;r=k">
+<p>Across a set of 18 tasks designed to test a range of business skills - from analysis to idea generation to persuasion - consultants who had previously tested in the lower half of the group increased the quality of their outputs by 43% with AI help while the top half only gained 17%. Where previously the gap between the average performances of top and bottom performers was 22%, it shrunk to a mere 4% once the consultants used GPT-4.</p><a class="image-link is-viewable-img image2" target="_blank" href="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F70be2300-5536-4226-a401-a49529a1fa62_1228x610.png" data-component-name="Image2ToDOM" rel="noopener"><picture><img src="https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F70be2300-5536-4226-a401-a49529a1fa62_1228x610.png" width="1228" height="610" data-attrs="{&quot;src&quot;:&quot;https://substack-post-media.s3.amazonaws.com/public/images/70be2300-5536-4226-a401-a49529a1fa62_1228x610.png&quot;,&quot;srcNoWatermark&quot;:null,&quot;fullscreen&quot;:null,&quot;imageSize&quot;:null,&quot;height&quot;:610,&quot;width&quot;:1228,&quot;resizeWidth&quot;:null,&quot;bytes&quot;:192954,&quot;alt&quot;:null,&quot;title&quot;:null,&quot;type&quot;:&quot;image/png&quot;,&quot;href&quot;:null,&quot;belowTheFold&quot;:true,&quot;topImage&quot;:false,&quot;internalRedirect&quot;:null}" class="sizing-normal" alt="" srcset="https://substackcdn.com/image/fetch/w_424,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F70be2300-5536-4226-a401-a49529a1fa62_1228x610.png 424w, https://substackcdn.com/image/fetch/w_848,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F70be2300-5536-4226-a401-a49529a1fa62_1228x610.png 848w, https://substackcdn.com/image/fetch/w_1272,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F70be2300-5536-4226-a401-a49529a1fa62_1228x610.png 1272w, https://substackcdn.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F70be2300-5536-4226-a401-a49529a1fa62_1228x610.png 1456w" sizes="100vw" loading="lazy" /></picture></a>
+<footer>Ethan Mollick <cite><a href="https://www.oneusefulthing.org/p/everyone-is-above-average?publication_id=1180644&amp;utm_campaign=email-post-title&amp;r=k">https://www.oneusefulthing.org/p/everyone-is-above-average?publication_id=1180644&amp;utm_campaign=email-post-title&amp;r=k</a></cite></footer>
+</blockquote>
+<script note="" src="https://cdn.jsdelivr.net/gh/Blogger-Peer-Review/quotebacks@1/quoteback.js"></script>
+
+<p>So, maybe our model for how search will evolve is instead of imagining your average person searching for a generic query, imagine them being as <strong>good as you are</strong> at searching. How would that change your ideas for the future of search behavior?</p>
+
+<p>After all - maybe you’re the obsessive nerd who opens 15 tabs for every search. Well, everyone can do that now:</p>
+
+<p><img src="/images/2024-01-31-09-11-23.png" alt="" /></p>
+
+<p>🤖🤖🤖</p>
+
+<h2 id="context--persistence">Context &amp; Persistence</h2>
+
+<p>It’s clear to me that two missing “obvious” ideas from the LLM chat interfaces we have today are context and persistence.</p>
+
+<p><strong>Context</strong> - because although you can write your own custom GPTs and so on, today even Bard doesn’t have access to your calendar, your email and your chats. Surely the eventual assistant will have much more awareness of who you are, what you’re working on, where you are etc. This is part of the bull case for Apple/Google dominance in the AI era.</p>
+
+<p><strong>Persistence</strong> - why can’t I ask GPT to remind me next month about something? Or to notify when some future thing happens? This feels like Google Alerts (or Yahoo Pipes) on steroids and it’s simply a quirk of the technology today that they don’t do this. I think before the year is out GPT will have a way of sending you alerts, notifications and reminders.</p>
+
+<p>My friends at Addition are building a kind of LLM-powered Google Alerts here in early beta: <a href="https://insightly.co/">Insightly</a></p>
+
+<p>🤖🤖🤖</p>
+
+<p>Of course - the future will be agents, doing tasks with you and for you. Acting on your behalf. I think we’re a little ways off from that happening for anything beyond basic tasks today - but it’ll come, and when it does we’ll need new paradigms for all kinds of things.</p>
+
+<p>🤖🤖🤖</p>
+
+<h2 id="publishers--poisoned-wells">Publishers &amp; Poisoned Wells</h2>
+
+<p>Do you remember the poisoned well argument around Google AMP? Basically publishers hated Google AMP because it broke the rules of the web - Google acting like a hosted intermediary between Google and publishers. But of course Google argued that if publishers didn’t have such shitty websites covered in ads and bloat and crap, AMP wouldn’t be needed.</p>
+
+<p>Well.</p>
+
+<p>I think we’re going to see a <em>very</em> similar story play out with Google vs publishers. The publishers right now are up in arms that Google could use LLMs to answer queries, thus reducing clicks to the “open web”. And yet - in conversations I’m having with publishers and brands behind the scenes, companies are desperate for traffic and many are planning for large-scale deployment of AI-written content.</p>
+
+<p>Honestly - I’m not sure this is a bad thing! There’s a lot of very terrible human-written content out there.</p>
+
+<p>But of course this is going to trigger a bit of an arms race where Google points to all the AI-generated bloat and spam from publishers as an excuse for introducing their AI experiences.</p>
+
+<p>🤖🤖🤖</p>
+
+<p>Here’s one idea - everyone is focused on generating indexable content for Google to consume and rank.</p>
+
+<p>Maybe the future is indexable experiences.</p>
+
+<p>No, I don’t care to explain myself.</p>
+
+<p>Ok alright, well I think most <em>content</em> that brands create should actually be an <em>experience</em>. A little web-app that helps you. For example for a query like “how to get slime out of carpet”<sup id="fnref:slime"><a href="#fn:slime" class="footnote" rel="footnote" role="doc-noteref">2</a></sup> - I don’t want an article with 1000 words of SEO-focused garbage with the history of slime, headers answering all the “FAQs” like “what is slime”.</p>
+
+<p>What I want is a little slime helper that says “what kind of slime is it? how long has it been there? do you have vinegar?” then gives me some help to guide me through.</p>
+
+<p>I mean, what I <em>really</em> want is to yell at my kids. Maybe an LLM can help me parent better in the future. Maybe an LLM can stop my kids putting slime on the carpet in the future. See above: new kinds of queries.</p>
+
+<p>No, I don’t know how “indexable experiences” will work. Do you?</p>
+
+<p>🤖🤖🤖</p>
+
+<h2 id="the-only-certain-thing-is-uncertainty">The only certain thing is uncertainty</h2>
+
+<p>Here’s a nice analogy from Sean Blanda around how the fundamental predictability of platforms has changed:</p>
+
+<blockquote class="quoteback" darkmode="" data-title="What's%20About%20to%20Happen%20(to%20Content%2C%20Journalism%2C%20and%20Comms)" data-author="@seanblanda" cite="https://www.seanblanda.com/whats-about-to-happen/">
+<p>Much like stable national business and predictable tax policy attract investment, stable internet platforms attract makers and creators. I'm more willing to build my audience on your service if I can expect a reasonable amount of stability and predictability. For more than a decade, Google, Twitter, YouTube, and LinkedIn had stable rules and incentives. </p>
+<p>However, thanks to a mix of AI and changing market conditions, each of these platforms is now antagonistic to linking to outside sources. Their reliance on humans to create chum for the algorithm may be temporary as AI and machine-generated content are now easier to create.</p>
+<p>As a creator, journalist, or brand, you can no longer reliably pour money or labor into a platform and have it reliably return an audience that you can turn into customers. As a result, audience growth has slowed across the board.</p>
+<footer>@seanblanda<cite> <a href="https://www.seanblanda.com/whats-about-to-happen/">https://www.seanblanda.com/whats-about-to-happen/</a></cite></footer>
+</blockquote>
+<script note="" src="https://cdn.jsdelivr.net/gh/Blogger-Peer-Review/quotebacks@1/quoteback.js"></script>
+
+<p>I’ve seen personally how much this lack of predictability has paralyzed client budgets. Most companies are not very good at operating in uncertainty. (I’m guessing <a href="https://uncertaintymindset.org/">Vaughn Tan</a> is very much in demand right now).</p>
+
+<p>🤖🤖🤖</p>
+
+<p>Some default recommendations that I’m using with clients I work with:</p>
+
+<ol>
+  <li>Put AI in the loop for content creation today, but be very thoughtful in creating AI content without humans in the loop.</li>
+  <li>I’m more interested in AI-generated experiences than I am AI-generated content. AI-generated experiences can start very simply but are surprisingly scaleable. Remember that intent / information gain / task completion is always the goal.</li>
+  <li>Developing AI capabilities is more important than knowing exactly where it shows up or how you’ll use it. This typically means starting with a small pilot, and carefully talking about it and sharing it internally.</li>
+  <li>CRM is a huge opportunity for AI (though I suppose CRM was always a huge opportunity - but it was neglected even before AI).</li>
+  <li>Now is a <em>great</em> time to carefully consider the question of “quality content” and “quality experiences” - for a long time companies operated without a strong definition or measurement of quality. “Humans made it” was a proxy for “it’s good” but now we need new benchmarks and metrics for what “good”. We need that before we can start using AI.</li>
+  <li>Yes, once you have a clear understanding of “quality” an LLM can be very useful in quality control.</li>
+</ol>
+
+<p>🤖🤖🤖</p>
+
+<p>We invented computers and they changed everything. And then one day we discovered they can talk…</p>
+
+<p>🤖🤖🤖</p>
+
+<p>Beep boop. What are you thinking about?</p>
+
+<hr />
+
+<p><em>Update from a cold room later that same day, Jan 31st:</em> Jared Hecht has a nice little riff on <a href="https://paragraph.xyz/@jaredhecht/agent-native-applications">agent native applications</a> that provokes the question of whether web3 enters the chat. This piece helped me think a bit more deeply about the role of aggregators, data layers and protocols as it relates to search.</p>
+
+<p>Here’s an interesting perspective. For a keyword like “best laptop”, Google could <em>already</em> remove the middle-man of publishers regurgitating 4,000 comparison pieces. But they choose not to. For how long? And in an agent-first world we might need more <a href="https://otherinter.net/research/headless-brands/">headless brands</a> where attribution and kickbacks and royalties are paid out to various players along the value chain…</p>
+
+<hr />
+
+<p><em>Update #2: Feb 5th</em>: I saw <a href="https://twitter.com/GlavinW/status/1753487101793038693">this excellent demo of just-in-time interfaces assembled using AI</a> - starts around 3min in.</p>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:ads">
+      <p>Which means that one of the most interesting areas of research right now is how you put ads inside an LLM! The greatest minds of our generation etc etc. But this <em>is</em> a trillion dollar problem and it doesn’t seem like there’s much progress yet? <a href="#fnref:ads" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:slime">
+      <p>Yes, an actual search query from 1am last night. Thanks kids. <a href="#fnref:slime" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
+    
+    <hr class="w3 mv5">
+    
+
+  
+
+  
+  <div class="w-100 mv3 pa3 ba b--newgreen br2 f5 bg-near-white">
+    <div class="b pv1">More blog posts:</div>
+    
+    <div class="flex w-100">
+      <p class="pv0 mv1"><a href="/2025/06/27/taking-blogging-seriously/">Taking Blogging Seriously</a></p>
+      <p class="f6 black-50 ml-auto w-20-l w-40 tr pv0 mv1">June 27, 2025</p>
+    </div>
+    
+    
+    <div class="flex w-100">
+      <p class="pv0 mv1"><a href="/2025/03/21/better-ai-mode/">Google is Grounded and Needs to Learn How to Soar</a></p>
+      <p class="f6 black-50 ml-auto w-20-l w-40 tr pv0 mv1">March 21, 2025</p>
+    </div>
+    
+    
+    <div class="flex w-100">
+      <p class="pv0 mv1"><a href="/2024/09/03/3573-on-the-road/">3,573 Days On The Road</a></p>
+      <p class="f6 black-50 ml-auto w-20-l w-40 tr pv0 mv1">September 3, 2024</p>
+    </div>
+    
+    
+        
+    <div class="bt b--black-10 mt3">
+      <p>This post was written by Tom Critchlow - blogger and independent consultant. Subscribe to join my occassional newsletter:</p>
+        <form action="https://buttondown.email/api/emails/embed-subscribe/tomcritchlow" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.email/tomcritchlow', 'popupwindow')" class="embeddable-buttondown-form flex items-center w-100 f5">
+            <input placeholder="Email Address" type="email" name="email" id="bd-email" class="bg-light-gray w-100 input-reset ba b--black-20 pv2 ph3 border-box br2 br--left">
+            <input type="hidden" name="metadata__cta" value="blogend">
+            <input type="submit" value="Subscribe" class="input-reset w-auto-ns pv2 ph3 ba b--newgreen bg-light-gray br2 br--right pointer">
+            </form>
+    </div>
+        
+    </div>
+    
+
+
+
+<hr class="w3 mv5">
+
+
+<script>
+
+    $( document ).ready(function() {
+        var footnotes = $(".footnotes p");
+        $("sup").each(function(index){
+            var fn = footnotes[index].removeChild(footnotes[index].lastChild);
+            $(this).replaceWith("<label for='"+index+"' class='margin-toggle sidenote-number'></label><input type='checkbox' id='"+index+"' class='margin-toggle'/><span class='sidenote'>"+footnotes[index].innerHTML+"</span>")  
+        });   
+        $(".footnotes").hide()
+    });    
+       
+
+    </script>
+
+
+<script type="application/json" class="js-hypothesis-config">
+  {
+    "openSidebar": false,
+    "theme": "clean"
+  }
+</script>
+
+
+<script src="https://hypothes.is/embed.js" async></script>
+
+<script type="text/javascript">
+
+window.hypothesisConfig = function () {
+  return {
+    branding: {
+      appBackgroundColor: 'white',
+      ctaBackgroundColor: 'rgba(3, 11, 16, 1)',
+      ctaTextColor: '#eee',
+      selectionFontFamily: 'helvetica, arial, sans serif'
+    }
+  };
+};
+
+if ($(window).width()<600){
+      window.hypothesisConfig = function () {
+        return {
+          "externalContainerSelector": "#hypbox",
+          "onLayoutChange": function(layout) {
+            if (layout.expanded) {
+              $('#hypbox').show();
+            } else {
+              $('#hypbox').hide();
+            }
+          }
+        };
+      };
+    };
+</script>
+
+<script defer src="https://cdn.commento.io/js/commento.js"></script>
+<div id="commento"></div>
+
+
+
+</div>
+</div>
+
+<div id="hypbox" style="display:none;width:100%;height:65%;position:fixed;bottom:0px;border-top:1px solid #02AD28;">
+      
+</div>
+
+</div>
+
+      
+    </div>
+      
+    </div>
+    </div>
+    
+    
+    
+    
+    <script>
+      feather.replace();
+    </script>
+
+    </body>
+    </html>

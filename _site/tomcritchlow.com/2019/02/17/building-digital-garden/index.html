@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en" class="w-100 h-100">
+  <head>
+    <meta charset="utf-8">
+    <title>Building a digital garden</title>
+    <meta name="description" content="Tom Critchlow. Move. Think. Create.">
+
+    
+
+<link href='https://fonts.googleapis.com/css?family=Libre+Franklin:400,400italic,600,700,300,800|IBM+Plex+Mono|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet" href="/css/tachyons.min.css">
+<link rel="stylesheet" href="/css/hamburgers.css">
+
+
+<link href="/css/all.css" rel="stylesheet">
+<link href="/css/mobile.css" rel="stylesheet">
+
+<link rel="icon" href="/images/favicon.png" />
+
+<meta name="viewport" content="width=device-width">
+
+<script src="//code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="/js/feather.min.js" type="text/javascript"></script>
+
+<!--Custom Jquery UI only used for slidetoggle left/right-->
+<script src="/js/jquery-ui.min.js" type="text/javascript"></script>
+
+
+<link rel="alternate" type="application/rss+xml" title="RSS Feed for tomcritchlow.com" href="/feed.xml" />
+
+
+ <meta property="og:type"   content="article" />
+ <meta property="og:url"    content="https://tomcritchlow.com/tomcritchlow.com/2019/02/17/building-digital-garden/" />
+ <meta property="og:title"  content="Building a digital garden" />
+ <meta name="og:description" content="How I built myself a simple wiki using folders and files and published via Jekyll">
+ 
+ <meta property="og:image"  content="https://tomcritchlow.com/images/green.png" />
+ 
+ <meta property="og:image:width"  content="600" />
+ <meta property="og:image:height"  content="315" />
+
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@tomcritchlow">
+<meta name="twitter:creator" content="@tomcritchlow">
+<meta name="twitter:title" content="Building a digital garden">
+<meta name="twitter:description" content="How I built myself a simple wiki using folders and files and published via Jekyll">
+
+<meta name="twitter:image" content="https://tomcritchlow-tom_og.web.val.run/?headline=Building a digital garden&subheadline=How I built myself a simple wiki using folders and files and published via Jekyll&date=February 17, 2019">
+
+
+
+
+
+ 
+<meta name="pocket-site-verification" content="d481265d27c9597cbdc003abbf1994" />
+
+<link rel="webmention" href="https://webmention.io/tomcritchlow.com/webmention" />
+<link rel="pingback" href="https://webmention.io/tomcritchlow.com/xmlrpc" />
+
+
+
+</head>
+
+<body class="ph0-l center">
+
+<!--From GA include-->
+
+
+
+
+<script defer data-domain="tomcritchlow.com" src="https://plausible.io/js/script.js"></script>
+
+
+
+<style>
+#nav{
+    width:223px;
+    height:100vh;
+  }
+
+  #maincontent{
+    margin-left:223px;
+  }
+
+  @media (max-width: 1024px) {
+      #nav{
+          width:100%;
+      }
+
+      #maincontent{
+          margin-left:auto;
+      }
+  }
+</style>
+
+
+<div class="dn-l db w-100 pa3 bg-near-white z-1" style="position:sticky;top:0px">
+    <a class="link dim dark-gray f6 f5-l dib ttu pt2 pt0-l dtc-l v-mid newgreen b" href="/" title="Home">TOM CRITCHLOW</a>
+    <div class="fr dib dn-l pt1">    
+        <div id="hamburger" class="hamburger hamburger--squeeze">
+                <div class="hamburger-box">
+                  <div class="hamburger-inner"></div>
+                </div>
+              </div>
+    
+    </div>
+</div>
+
+<div class="flex items-stretch h-100 w-100">
+  
+    
+
+    
+
+    <div id="nav" class="w5 bg-near-white f7 fw4 br-l bt-0-l bb-0-l bt bb b--black-10 fixed dn db-l top-0-l left-0 overflow-y-scroll z-1 pt2 pt0-l">
+      
+      
+      
+    
+      <a class="db-l dn  items-center ma2 ph3 pa2 mv3 mb4-l link fw8 f6 br3 newgreen" href="/">
+        TOM CRITCHLOW
+      </a>
+    
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Home" href="/">
+    <i data-feather="home" class="h1 pr3"></i> <span class="navname">Home</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="About me" href="/about">
+    <i data-feather="user" class="h1 pr3"></i> <span class="navname">About me</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Writing" href="/writing">
+    <i data-feather="rss" class="h1 pr3"></i> <span class="navname">Writing</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Library" href="/library">
+    <i data-feather="layers" class="h1 pr3"></i> <span class="navname">Library</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Newsletter" href="/newsletter">
+    <i data-feather="mail" class="h1 pr3"></i> <span class="navname">Newsletter</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Search" href="/search">
+    <i data-feather="search" class="h1 pr3"></i> <span class="navname">Search</span>
+  </a>
+
+
+
+<div class="mv4">
+    <div class="newgreen mh3 ph2 mv2 navname">Hire me</div>
+
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Consulting" href="/consulting">
+    <i data-feather="git-merge" class="h1 pr3"></i> <span class="navname">Consulting</span>
+  </a>
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Advisor" href="/advisor">
+    <i data-feather="git-pull-request" class="h1 pr3"></i> <span class="navname">Advisor</span>
+  </a>
+
+</div>
+
+<div class="mv4">
+    <div class="newgreen mh3 ph2 mv2 navname">Elsewhere</div>
+
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Twitter" href="https://twitter.com/tomcritchlow/">
+    <i data-feather="twitter" class="h1 pr3"></i> <span class="navname">Twitter</span>
+  </a>
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="LinkedIn" href="https://www.linkedin.com/in/tomcritchlow/">
+    <i data-feather="linkedin" class="h1 pr3"></i> <span class="navname">LinkedIn</span>
+  </a>
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Are.na" href="https://www.are.na/tom-critchlow/index">
+    <i data-feather="bookmark" class="h1 pr3"></i> <span class="navname">Are.na</span>
+  </a>
+
+</div>
+
+      
+      </div>
+
+<script>
+    
+var $hamburger = $("#hamburger");
+            $hamburger.on("click", function(e) {
+
+              $hamburger.toggleClass("is-active");
+              $("#nav").toggleClass("dn");
+   
+            }); 
+      
+            feather.replace();
+
+function addClassBasedOnUrlWithSwitch() {
+  // Get the current URL
+  const url = window.location.href;
+  
+  switch (true) {
+    case url == "https://tomcritchlow.com/":
+      const div0 = document.getElementById("Home");
+      if (div0) {
+        div0.classList.add('bg-white');
+      }
+      break;
+    case url.includes("https://tomcritchlow.com/?"):
+      const div1 = document.getElementById("Home");
+      if (div1) {
+        div1.classList.add('bg-white');
+      }
+      break;      
+    case url.includes("/about/"):
+      const div2 = document.getElementById("About me");
+      if (div2) {
+        div2.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/writing/"):
+      const div3 = document.getElementById("Writing");
+      if (div3) {
+        div3.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/newsletter"):
+      const div4 = document.getElementById("Newsletter");
+      if (div4) {
+        div4.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/search"):
+      const div5 = document.getElementById("Search");
+      if (div5) {
+        div5.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/start-here"):
+      const div6 = document.getElementById("Start here");
+      if (div6) {
+        div6.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/topics/"):
+      const div7 = document.getElementById("Topics");
+      if (div7) {
+        div7.classList.add('bg-white');
+      }
+      break;                              
+    
+    default:
+      // Code to run if none of the above cases are true
+      break;
+  }
+}
+
+// Call the function
+addClassBasedOnUrlWithSwitch();
+
+
+
+</script>
+
+    <div class="w-100 h-100" id="maincontent">
+      <div class="mw8 center w-100 h-100">
+        
+    
+        
+    
+
+
+    
+    
+
+    <div class="bg-washed-green pa2 mv3 f5">Part of the <a href="/blogchains/digital-gardens">digital-gardens</a> blogchain <span class="fr-ns blogchainexpand"><a href="javascript:void(0)">+ expand</a></span>
+      <div class="dn blogchainlist">
+          <ol>
+            
+            <li><a href="/2018/10/10/of-gardens-and-wikis/">Of Digital Streams, Campfires and Gardens</a></li>
+            
+            <li><a href="/tomcritchlow.com/2018/10/10/of-gardens-and-wikis/">Of Digital Streams, Campfires and Gardens</a></li>
+            
+            <li><a href="/2019/02/17/building-digital-garden/">Building a digital garden</a></li>
+            
+            <li><a href="/tomcritchlow.com/2019/02/17/building-digital-garden/">Building a digital garden</a></li>
+            
+            <li><a href="/2019/06/19/screenotate-wiki/">Planting new varietals in my digital garden</a></li>
+            
+            <li><a href="/tomcritchlow.com/2019/06/19/screenotate-wiki/">Planting new varietals in my digital garden</a></li>
+            
+            <li><a href="/2020/04/20/tiddlyblink-glitch/">TiddlyBlink on Glitch</a></li>
+            
+            <li><a href="/tomcritchlow.com/2020/04/20/tiddlyblink-glitch/">TiddlyBlink on Glitch</a></li>
+            
+            <li><a href="/2020/05/19/tiddlywiki-krystal/">A Good Looking Tiddly Theme for Digital Gardens</a></li>
+            
+            <li><a href="/tomcritchlow.com/2020/05/19/tiddlywiki-krystal/">A Good Looking Tiddly Theme for Digital Gardens</a></li>
+            
+          </ol>
+        </div>
+    </div>
+    
+
+<script>
+            
+            $(".blogchainexpand").click(function(){
+              $(".blogchainlist").toggle();
+            });
+</script>
+
+
+
+
+
+
+<div class="pt4 pt5-l pb2 w-two-thirds-ns center">
+
+<div class="f4 ph3 pb4 ph0-l lh-copy">
+
+  
+<div class="bb b--newgreen w-100 ibmplexmono ttu f6 dt-published mb5" datetime="2019-02-17 00:00:00 -0500">
+    February 17, 2019
+  </div>
+  
+        <h1 class="f2 fw8 lh-solid mv1 posttitle p-name">Building a digital garden</h1>
+  
+      
+      <h2 class="f3 fw3 lh-copy mt1 subtitle pb2 p-summary i">How I built myself a simple wiki using folders and files and published via Jekyll</h2>
+        
+    
+    <div class="postcontainer">
+    <p><img src="/images/digital-garden-cleaned.jpg" alt="" /></p>
+
+<p><em>This post is slightly long and slightly technical. The TL;DR is that I built a personal wiki out of files and folders and a few templates in Jekyll hosted on Github Pages. If you want to head straight to the wiki head here: <a href="https://tomcritchlow.com/wiki/">tomcritchlow.com/wiki/</a> and if you want to skip straight to the technical how-to <a href="#how-it-all-works">jump here</a></em></p>
+
+<p>For a while I’ve been searching for better ways of managing my information flows. Catch up by reading my last post <a href="https://tomcritchlow.com/2018/10/10/of-gardens-and-wikis/">of digital streams, campfires and gardens</a>.</p>
+
+<p>I left that post with the following concept:</p>
+
+<p><strong>Streams</strong> - For me this is twitter and is more than enough stream for now.</p>
+
+<p><strong>Campfires</strong> - For me this is the blog here (and more broadly the blogosphere that I read and engage with). Room to grow here but generally I’m satisfied here.</p>
+
+<p><strong>Gardens</strong> - This is where there’s a gap for me personally. No place to store and evolve deeper longer-term thinking. Many of my friends have gravitated to <a href="https://are.na">Are.na</a> but I just can’t get it to work for me.</p>
+
+<p>For my personal garden (note: your requirements and needs might be different!) I set out to build something that would focus on stock over flow, be a blogging product without a publish button and create a space for collecting the dots.</p>
+
+<p>Let’s break those down one by one:</p>
+
+<h2 id="stock-over-flow">Stock over flow</h2>
+
+<p>If you’re familiar with this blog then the chances are high that you’ve read this seminal piece from Robin Sloan: <a href="http://snarkmarket.com/2010/4890">stock and flow</a>. Robin lays out (in 2010!) the concept of stock and flow:</p>
+
+<blockquote>
+  <p>Flow is the feed. It’s the posts and the tweets. It’s the stream of daily and sub-daily updates that reminds people you exist.</p>
+</blockquote>
+
+<blockquote>
+  <p>Stock is the durable stuff. It’s the content you produce that’s as interesting in two months (or two years) as it is today. It’s what people discover via search. It’s what spreads slowly but surely, building fans over time.</p>
+</blockquote>
+
+<p>And is clear not to deride flow - it’s the currency of the modern world - but rather to ensure you’re well-balanced:</p>
+
+<blockquote>
+  <p>You can tell that I want you to stop and think about stock here. I feel like we all got really good at flow, really fast. But flow is ephemeral, while stock sticks around. Stock is capital. Stock is protein.</p>
+</blockquote>
+
+<blockquote>
+  <p>And the real magic trick is to put them both together. To keep the ball bouncing with your flow—to maintain that open channel of communication—while you work on some kick-ass stock in the background. Sacrifice neither. The hybrid strategy.</p>
+</blockquote>
+
+<p>Personally? I’m out of balance. I spend too much time in flow and not nearly enough in stock.</p>
+
+<h2 id="a-blog-without-a-publish-button">A blog without a publish button</h2>
+
+<p>I’m stealing this quote from my modern friend<label for="modern" class="margin-toggle sidenote-number"></label>
+<input type="checkbox" id="modern" class="margin-toggle" />
+<span class="sidenote">
+          Ryan also has a nice little idea for <a href="https://medium.com/@ryandawidjan/modern-friends-e9ca5b6f855a">modern friends</a> as being something between internet stranger and ‘actual friend’. That’s me and Ryan
+        </span>        <a href="https://twitter.com/ryandawidjan">Ryan Dawidjan</a> who has been pioneering this concept of open-access writing and blogging without a publish button. For a long time he has maintained a quip file called <a href="https://quip.com/jgBUALiGBjwp">high cadence thoughts</a> that is open access and serves as a long-running note of his thinking and ideas.</p>
+
+<p>It’s a less-performative version of blogging - more of a captain’s log than a broadcast blog.</p>
+
+<p>The distinction will come down to how you blog - some people blog in much the same way. For me however blogging is mostly <em>performative thinking</em> and less captain’s log. So I am looking for a space to nurture, edit in real time and evolve my thinking.</p>
+
+<h2 id="a-space-for-collecting-the-dots">A space for collecting the dots</h2>
+
+<p>This one might be the most important. Creative research is all about collecting the dots. It’s more common to think of “connecting the dots” but the truth is that you can’t connect the dots you can’t see. And we can only hold a tiny number of things in our brains at once. So a space for collecting (and organizing) the dots is a crucial foundation for thinking, creativity and more:</p>
+
+<blockquote>
+  <p>But ideas aren’t summoned from nowhere: they come from raw material, other ideas or observations about the world. Hence a two-step creative process: collect raw material, then think about it. From this process comes pattern recognition and eventually the insights that form the basis of novel ideas.</p>
+</blockquote>
+
+<p>This quote from the wonderful piece by Ink and Switch: <a href="https://www.inkandswitch.com/capstone-manuscript.html">capstone, a tablet for thinking</a><label for="hunch" class="margin-toggle sidenote-number"></label>
+<input type="checkbox" id="hunch" class="margin-toggle" />
+<span class="sidenote">
+          I’ve not read the book but I think the concept of <a href="https://www.youtube.com/watch?v=0af00UcTO-c">the slow hunch</a> covers the same ground of collecting the dots and research leading to creative breakthroughs.
+        </span>       .</p>
+
+<h2 id="longevity-text-files-and-folders">Longevity, text files and folders</h2>
+
+<p>The lightbulb moment for me came by connecting two ideas together:</p>
+
+<p>Firstly - apparently, folders and files is the “best in class” tool (better than tags and search) for personal information management<label for="folders" class="margin-toggle sidenote-number"></label>
+<input type="checkbox" id="folders" class="margin-toggle" />
+<span class="sidenote">
+          This gem came via the Ink and Switch article linked above.
+        </span>       :</p>
+
+<blockquote>
+  <p>Bergman and Whittaker report that many of us use hierarchical folders for our personal digital organizing. Critics of this method point out that information is hidden from sight in folders that are often within other folders so that we have to remember the exact location of information to access it. Because of this, information scientists suggest other methods: search, more flexible than navigating folders; tags, which allow multiple categorizations; and group information management. Yet Bergman and Whittaker have found in their pioneering personal information management research that these other methods that work best for public information management don’t work as well for personal information management.</p>
+</blockquote>
+
+<p><a href="https://mitpress.mit.edu/books/science-managing-our-digital-stuff">Source</a></p>
+
+<p>Secondly - I write this blog on Github pages using Jekyll - aka using folders and files!</p>
+
+<p><strong>So what if I could build the digital garden I want right here using Jekyll using nothing more than folders and text files?</strong></p>
+
+<p>There are a few benefits:</p>
+
+<ul>
+  <li>Files and folders feels like it has a long shelf-life. If I’m building this for the long-term (and I think I am) then I want a format I can back-up, archive and re-publish in the future independent of platform.</li>
+  <li>Using files and folders allows me to drag and drop files into my wiki with zero authoring - CSV, pdf, png and txt files all are hosted and contained gracefully</li>
+  <li>It’s robust since I can back up this wiki folder to any service, dropbox, Google Drive, Github, etc.</li>
+</ul>
+
+<h2 id="how-it-all-works">How it all works</h2>
+
+<p><em>For those that aren’t so interested in the technical details you can skip past this section.</em></p>
+
+<p>So the core of this project is that something robust and simple like files and folders like this:</p>
+
+<p><img src="/images/wiki-folders.png" alt="" /></p>
+
+<p>Is published looking something like this:</p>
+
+<p><img src="/images/maps-wiki.png" alt="" /></p>
+
+<p>Browse the HTML version here: <a href="https://tomcritchlow.com/wiki/">tomcritchlow.com/wiki</a></p>
+
+<p>For those comfortable reading Jekyll code then you can dive right in on Github here: <a href="https://github.com/tomcritchlow/tomcritchlow.github.io">https://github.com/tomcritchlow/tomcritchlow.github.io</a></p>
+
+<p>The broad-strokes overview is as follows<label for="wip" class="margin-toggle sidenote-number"></label>
+<input type="checkbox" id="wip" class="margin-toggle" />
+<span class="sidenote">
+          All of this is subject to change - consider this V0.1. This project is not finished, and by it’s nature may in fact never be finished!
+        </span>       :</p>
+
+<ul>
+  <li>The wiki folder is made of a series of folders - each one containing any kind of files.</li>
+  <li>Markdown files are treated as pages</li>
+  <li>Image files are displayed as thumbnails with a link to the image, with the filename displayed to store any kind of title you want</li>
+  <li>PDf, CSV, txt files and anything else are displayed with a link to the file.</li>
+  <li>The “magic” comes from each wiki folder having an index.html file which handles all of the display by using a custom layout <a href="https://github.com/tomcritchlow/tomcritchlow.github.io/blob/master/_layouts/wikiindex.html">wikiindex</a></li>
+  <li>The root wiki page loops through all the files to create a master index automatically. <a href="https://github.com/tomcritchlow/tomcritchlow.github.io/blob/master/wiki/index.html">Code here</a>.</li>
+  <li>Of course, the meat of the wiki is contained in note files which are just markdown files so easily portable. I intentionally designed the wiki to not rely on a ton of front-matter for portability and simplicity. To do this I added a default layout to wiki files in the <a href="https://github.com/tomcritchlow/tomcritchlow.github.io/blob/master/_config.yml">config file</a>.</li>
+  <li>It’s not all about layout though - it’s about presentation too. I added a single flag to the wikiindex frontmatter for “expand” to be true or false that displays the notes either fully expanded or as simple links. My <a href="https://tomcritchlow.com/wiki/parenting/">parenting wiki</a> is an example of the notes expanded, while my <a href="https://tomcritchlow.com/wiki/drafts/">drafts folder</a> is just a list of links because it’s long.</li>
+  <li>Finally, where I have a long list of links I added the ability for individual notes to be “pinned” to the top of the page to ensure more important or frequently-used links are easy to find.</li>
+</ul>
+
+<p>Phew. So this all sounds rather complicated - and especially for programming n00b like myself some of the bits felt like hard work to get right. But it’s important that all of the complexity and “programming” lies in the layout and index files and none of the complexity lies in the files and folders which remain text files for longevity and easy portability. I doubt it would overly simple but I also doubt it would be hard to port this across to Hugo or Wordpress or something else in the future.</p>
+
+<h2 id="some-other-interesting-wikis">Some other interesting wikis</h2>
+
+<p>Credit for inspiration for this whole project comes from a variety of wikis and wiki-like collections on the web:</p>
+
+<p><a href="https://buster.wiki/">buster.wiki/</a> - Strong design and everything has a date by the looks of it which enables an RSS feed. Very polished and thought through.</p>
+
+<p><a href="https://are.na">are.na</a> - A platform that all the cool kids use for building personal knowledge libraries. Lightly social, perhaps the right answer but slightly questionable if they’ll be around for a long time. Ymmv.</p>
+
+<p><a href="https://www.brendanschlagel.com/2017/11/05/canonize-creating-personal-canon-template/">Brendan’s /canon</a> - this was part of the original inspiration for me. A curated list of pure stock - things that Brendan returns to again and again. He has a template you can copy too.</p>
+
+<p><a href="http://worrydream.com/#!/quotes">Worrydream’s quotes page</a> - just a massive list of interesting quotes collected by Brett Victor. Notice how being one giant page makes it instantly searchable.</p>
+
+<p><a href="http://daywreckers.com/">daywreckers.com</a> - from Ben Pieratt, not quite a wiki but a very minimal site designed to collect the dots. A daily visit from me.</p>
+
+<p><a href="https://sivers.org/dj">derek sivers’ daily journal</a> - a post from Derek Sivers on how to keep a text-file long-term store for your ideas and notes.</p>
+
+<p>And there’s lots more too - <a href="https://twitter.com/tomcritchlow/status/1083823277712248832">this twitter thread</a> has a whole bunch of interesting rabbit holes.</p>
+
+<p>And, you can of course find this list of wikis <a href="https://tomcritchlow.com/wiki/wikis">on my wiki</a> :)</p>
+
+<p><em>By the way - the illustration at the top was done by my wonderful partner <a href="http://erinprz.com">Erin Przekop</a>. If you like what you see check out <a href="http://erinprz.com/journey/">her picture book</a> that’s hitting the shelves in 2019!</em></p>
+
+
+  </div>
+
+    
+    <hr class="w3 mv5">
+    
+
+  
+    
+    
+
+    <div class="bg-washed-green pa2 mv2 f5">Part of the <a href="/blogchains/digital-gardens">digital-gardens</a> blogchain <span class="fr-ns blogchainexpand"></span>
+      <div class="">
+          <ol>
+            
+            <li><a href="/2018/10/10/of-gardens-and-wikis/">Of Digital Streams, Campfires and Gardens</a></li>
+            
+            <li><a href="/tomcritchlow.com/2018/10/10/of-gardens-and-wikis/">Of Digital Streams, Campfires and Gardens</a></li>
+            
+            <li><a href="/2019/02/17/building-digital-garden/">Building a digital garden</a></li>
+            
+            <li><a href="/tomcritchlow.com/2019/02/17/building-digital-garden/">Building a digital garden</a></li>
+            
+            <li><a href="/2019/06/19/screenotate-wiki/">Planting new varietals in my digital garden</a></li>
+            
+            <li><a href="/tomcritchlow.com/2019/06/19/screenotate-wiki/">Planting new varietals in my digital garden</a></li>
+            
+            <li><a href="/2020/04/20/tiddlyblink-glitch/">TiddlyBlink on Glitch</a></li>
+            
+            <li><a href="/tomcritchlow.com/2020/04/20/tiddlyblink-glitch/">TiddlyBlink on Glitch</a></li>
+            
+            <li><a href="/2020/05/19/tiddlywiki-krystal/">A Good Looking Tiddly Theme for Digital Gardens</a></li>
+            
+            <li><a href="/tomcritchlow.com/2020/05/19/tiddlywiki-krystal/">A Good Looking Tiddly Theme for Digital Gardens</a></li>
+            
+          </ol>
+        </div>
+    </div>
+    
+
+
+  
+  <div class="w-100 mv3 pa3 ba b--newgreen br2 f5 bg-near-white">
+    <div class="b pv1">More blog posts:</div>
+    
+    <div class="flex w-100">
+      <p class="pv0 mv1"><a href="/tomcritchlow.com/2025/06/27/taking-blogging-seriously/">Taking Blogging Seriously</a></p>
+      <p class="f6 black-50 ml-auto w-20-l w-40 tr pv0 mv1">June 27, 2025</p>
+    </div>
+    
+    
+    <div class="flex w-100">
+      <p class="pv0 mv1"><a href="/2025/06/27/taking-blogging-seriously/">Taking Blogging Seriously</a></p>
+      <p class="f6 black-50 ml-auto w-20-l w-40 tr pv0 mv1">June 27, 2025</p>
+    </div>
+    
+    
+    <div class="flex w-100">
+      <p class="pv0 mv1"><a href="/tomcritchlow.com/2025/03/21/better-ai-mode/">Google is Grounded and Needs to Learn How to Soar</a></p>
+      <p class="f6 black-50 ml-auto w-20-l w-40 tr pv0 mv1">March 21, 2025</p>
+    </div>
+    
+    
+        
+    <div class="bt b--black-10 mt3">
+      <p>This post was written by Tom Critchlow - blogger and independent consultant. Subscribe to join my occassional newsletter:</p>
+        <form action="https://buttondown.email/api/emails/embed-subscribe/tomcritchlow" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.email/tomcritchlow', 'popupwindow')" class="embeddable-buttondown-form flex items-center w-100 f5">
+            <input placeholder="Email Address" type="email" name="email" id="bd-email" class="bg-light-gray w-100 input-reset ba b--black-20 pv2 ph3 border-box br2 br--left">
+            <input type="hidden" name="metadata__cta" value="blogend">
+            <input type="submit" value="Subscribe" class="input-reset w-auto-ns pv2 ph3 ba b--newgreen bg-light-gray br2 br--right pointer">
+            </form>
+    </div>
+        
+    </div>
+    
+
+
+
+<hr class="w3 mv5">
+
+
+<script>
+
+    $( document ).ready(function() {
+        var footnotes = $(".footnotes p");
+        $("sup").each(function(index){
+            var fn = footnotes[index].removeChild(footnotes[index].lastChild);
+            $(this).replaceWith("<label for='"+index+"' class='margin-toggle sidenote-number'></label><input type='checkbox' id='"+index+"' class='margin-toggle'/><span class='sidenote'>"+footnotes[index].innerHTML+"</span>")  
+        });   
+        $(".footnotes").hide()
+    });    
+       
+
+    </script>
+
+
+<script type="application/json" class="js-hypothesis-config">
+  {
+    "openSidebar": false,
+    "theme": "clean"
+  }
+</script>
+
+
+<script src="https://hypothes.is/embed.js" async></script>
+
+<script type="text/javascript">
+
+window.hypothesisConfig = function () {
+  return {
+    branding: {
+      appBackgroundColor: 'white',
+      ctaBackgroundColor: 'rgba(3, 11, 16, 1)',
+      ctaTextColor: '#eee',
+      selectionFontFamily: 'helvetica, arial, sans serif'
+    }
+  };
+};
+
+if ($(window).width()<600){
+      window.hypothesisConfig = function () {
+        return {
+          "externalContainerSelector": "#hypbox",
+          "onLayoutChange": function(layout) {
+            if (layout.expanded) {
+              $('#hypbox').show();
+            } else {
+              $('#hypbox').hide();
+            }
+          }
+        };
+      };
+    };
+</script>
+
+<script defer src="https://cdn.commento.io/js/commento.js"></script>
+<div id="commento"></div>
+
+
+
+</div>
+</div>
+
+<div id="hypbox" style="display:none;width:100%;height:65%;position:fixed;bottom:0px;border-top:1px solid #02AD28;">
+      
+</div>
+
+</div>
+
+      
+    </div>
+      
+    </div>
+    </div>
+    
+    
+    
+    
+    <script>
+      feather.replace();
+    </script>
+
+    </body>
+    </html>

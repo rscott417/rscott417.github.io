@@ -1,0 +1,123 @@
+---
+---
+{% assign tags = site.library | map: 'tags' | join: ',' | split: ',' | uniq %}
+
+{% include head.html %}
+
+{% include googleanalytics.html %}
+
+{% include 2024-nav.html %}
+
+{% include library-header.html %}
+
+  <script src="https://cdn.jsdelivr.net/npm/gridjs/dist/gridjs.umd.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/gridjs/dist/theme/mermaid.min.css" rel="stylesheet">
+  <style>
+    #grid {
+      margin: 20px;
+      font-size:14px;
+    }
+    .gridjs-th, .gridjs-td {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .gridjs-td a {
+      display: block;
+      width: 250px; /* Set desired max width */
+    }
+  </style>
+
+  <div class="mainlinks">
+    <h3 class="pl3">Search All Links</h3>
+    <div id="grid"></div>  
+  </div>
+  
+
+  <script>
+    // Collect data from Liquid-generated variables
+    {% capture json_data %}
+    [
+    {% assign excluded_urls = "https://twitter.com/tomcritchlow/,https://www.linkedin.com/in/tomcritchlow/,https://www.are.na/tom-critchlow/index,https://calendly.com/tomcritchlow," | split: ',' %}
+      {% assign all_links = "" | split: "" %}
+
+      {% for post in site.posts %}
+        {% assign content = post.output %}
+        {% assign links = content | split:'href="' %}
+        {% for segment in links offset:1 %}
+          {% assign link = segment | split:'"' | first %}
+          {% if link contains '://' %}
+          {% unless link contains 'tomcritchlow.com' or excluded_urls contains link or all_links contains link %}
+            {% assign all_links = all_links | push: link %}
+            {
+              link: "{{ link }}",
+              sourcePost: "{{ post.title | escape }}",
+              sourceUrl: "{{ post.url | absolute_url }}",
+              date: "{{ post.date | date: '%Y-%m-%d' }}"
+            },
+          {% endunless %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+
+      {% for post in site.library %}
+        {% assign content = post.output %}
+        {% assign links = content | split:'href="' %}
+        {% for segment in links offset:1 %}
+          {% assign link = segment | split:'"' | first %}
+          {% if link contains '://' %}
+          {% unless link contains 'tomcritchlow.com' or excluded_urls contains link or all_links contains link %}
+            {% assign all_links = all_links | push: link %}
+            {
+              link: "{{ link }}",
+              sourcePost: "{{ post.title | escape }}",
+              sourceUrl: "{{ post.url | absolute_url }}",
+              date: "{{ post.date_saved | date: '%Y-%m-%d' }}"
+            },
+          {% endunless %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    ]
+    {% endcapture %}
+    
+    const unsortedtableData = {{ json_data | strip_newlines | strip }};
+    const tableData = unsortedtableData.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    // Initialize Grid.js
+    new gridjs.Grid({
+      columns: [
+        {
+          name: 'Link',
+          formatter: (cell) =>
+            gridjs.html(`<a href="${cell}" target="_blank">${cell}</a>`),
+        },
+        {
+          name: 'Source Post',
+          formatter: (_, row) =>
+            gridjs.html(`<a href="${row.cells[2].data}" target="_blank">${row.cells[1].data}</a>`),
+        },
+        {
+          name: 'Source URL', // Include the Source URL as a hidden column
+          hidden: true,
+        },
+        {
+          name: 'Date',
+          formatter: (_, row) => {
+            // Check if the cell exists and has valid data
+            const date = row.cells[3] && row.cells[3].data ? row.cells[3].data : 'No Date Available';
+            return gridjs.html(`${date}`);
+          },
+        }
+      ],
+      data: tableData.map(row => [row.link, row.sourcePost, row.sourceUrl, row.date]),
+      search: true,
+      pagination: {
+        enabled: true,
+        limit: 100,
+      },
+      sort: true,
+    }).render(document.getElementById('grid'));
+  </script>
+
+{% include 2024-footer.html %}

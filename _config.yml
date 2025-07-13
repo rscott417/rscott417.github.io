@@ -1,0 +1,24 @@
+# Permalinks
+permalink:        pretty
+
+collections:
+  projects:
+    output: true
+  links:
+    output: true
+  music:
+    output: true
+  stories:
+    output: true
+  library:
+    output: true    
+
+defaults:
+  - scope:
+      path: "/wiki/*"
+    values:
+      layout: "wiki"
+  - scope:
+      type: "library"
+    values:
+      layout: "libraryitem"      

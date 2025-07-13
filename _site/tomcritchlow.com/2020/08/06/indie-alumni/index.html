@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en" class="w-100 h-100">
+  <head>
+    <meta charset="utf-8">
+    <title>Generating an alumni network for indies</title>
+    <meta name="description" content="Tom Critchlow. Move. Think. Create.">
+
+    
+
+<link href='https://fonts.googleapis.com/css?family=Libre+Franklin:400,400italic,600,700,300,800|IBM+Plex+Mono|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet" href="/css/tachyons.min.css">
+<link rel="stylesheet" href="/css/hamburgers.css">
+
+
+<link href="/css/all.css" rel="stylesheet">
+<link href="/css/mobile.css" rel="stylesheet">
+
+<link rel="icon" href="/images/favicon.png" />
+
+<meta name="viewport" content="width=device-width">
+
+<script src="//code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="/js/feather.min.js" type="text/javascript"></script>
+
+<!--Custom Jquery UI only used for slidetoggle left/right-->
+<script src="/js/jquery-ui.min.js" type="text/javascript"></script>
+
+
+<link rel="alternate" type="application/rss+xml" title="RSS Feed for tomcritchlow.com" href="/feed.xml" />
+
+
+ <meta property="og:type"   content="article" />
+ <meta property="og:url"    content="https://tomcritchlow.com/tomcritchlow.com/2020/08/06/indie-alumni/" />
+ <meta property="og:title"  content="Generating an alumni network for indies" />
+ <meta name="og:description" content="Musings on groups of indie consultants">
+ 
+ <meta property="og:image"  content="https://tomcritchlow.com/images/green.png" />
+ 
+ <meta property="og:image:width"  content="600" />
+ <meta property="og:image:height"  content="315" />
+
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@tomcritchlow">
+<meta name="twitter:creator" content="@tomcritchlow">
+<meta name="twitter:title" content="Generating an alumni network for indies">
+<meta name="twitter:description" content="Musings on groups of indie consultants">
+
+<meta name="twitter:image" content="https://tomcritchlow-tom_og.web.val.run/?headline=Generating an alumni network for indies&subheadline=Musings on groups of indie consultants&date=August 6, 2020">
+
+
+
+
+
+ 
+<meta name="pocket-site-verification" content="d481265d27c9597cbdc003abbf1994" />
+
+<link rel="webmention" href="https://webmention.io/tomcritchlow.com/webmention" />
+<link rel="pingback" href="https://webmention.io/tomcritchlow.com/xmlrpc" />
+
+
+
+</head>
+
+<body class="ph0-l center">
+
+<!--From GA include-->
+
+
+
+
+<script defer data-domain="tomcritchlow.com" src="https://plausible.io/js/script.js"></script>
+
+
+
+<style>
+#nav{
+    width:223px;
+    height:100vh;
+  }
+
+  #maincontent{
+    margin-left:223px;
+  }
+
+  @media (max-width: 1024px) {
+      #nav{
+          width:100%;
+      }
+
+      #maincontent{
+          margin-left:auto;
+      }
+  }
+</style>
+
+
+<div class="dn-l db w-100 pa3 bg-near-white z-1" style="position:sticky;top:0px">
+    <a class="link dim dark-gray f6 f5-l dib ttu pt2 pt0-l dtc-l v-mid newgreen b" href="/" title="Home">TOM CRITCHLOW</a>
+    <div class="fr dib dn-l pt1">    
+        <div id="hamburger" class="hamburger hamburger--squeeze">
+                <div class="hamburger-box">
+                  <div class="hamburger-inner"></div>
+                </div>
+              </div>
+    
+    </div>
+</div>
+
+<div class="flex items-stretch h-100 w-100">
+  
+    
+
+    
+
+    <div id="nav" class="w5 bg-near-white f7 fw4 br-l bt-0-l bb-0-l bt bb b--black-10 fixed dn db-l top-0-l left-0 overflow-y-scroll z-1 pt2 pt0-l">
+      
+      
+      
+    
+      <a class="db-l dn  items-center ma2 ph3 pa2 mv3 mb4-l link fw8 f6 br3 newgreen" href="/">
+        TOM CRITCHLOW
+      </a>
+    
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Home" href="/">
+    <i data-feather="home" class="h1 pr3"></i> <span class="navname">Home</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="About me" href="/about">
+    <i data-feather="user" class="h1 pr3"></i> <span class="navname">About me</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Writing" href="/writing">
+    <i data-feather="rss" class="h1 pr3"></i> <span class="navname">Writing</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Library" href="/library">
+    <i data-feather="layers" class="h1 pr3"></i> <span class="navname">Library</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Newsletter" href="/newsletter">
+    <i data-feather="mail" class="h1 pr3"></i> <span class="navname">Newsletter</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Search" href="/search">
+    <i data-feather="search" class="h1 pr3"></i> <span class="navname">Search</span>
+  </a>
+
+
+
+<div class="mv4">
+    <div class="newgreen mh3 ph2 mv2 navname">Hire me</div>
+
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Consulting" href="/consulting">
+    <i data-feather="git-merge" class="h1 pr3"></i> <span class="navname">Consulting</span>
+  </a>
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Advisor" href="/advisor">
+    <i data-feather="git-pull-request" class="h1 pr3"></i> <span class="navname">Advisor</span>
+  </a>
+
+</div>
+
+<div class="mv4">
+    <div class="newgreen mh3 ph2 mv2 navname">Elsewhere</div>
+
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Twitter" href="https://twitter.com/tomcritchlow/">
+    <i data-feather="twitter" class="h1 pr3"></i> <span class="navname">Twitter</span>
+  </a>
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="LinkedIn" href="https://www.linkedin.com/in/tomcritchlow/">
+    <i data-feather="linkedin" class="h1 pr3"></i> <span class="navname">LinkedIn</span>
+  </a>
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Are.na" href="https://www.are.na/tom-critchlow/index">
+    <i data-feather="bookmark" class="h1 pr3"></i> <span class="navname">Are.na</span>
+  </a>
+
+</div>
+
+      
+      </div>
+
+<script>
+    
+var $hamburger = $("#hamburger");
+            $hamburger.on("click", function(e) {
+
+              $hamburger.toggleClass("is-active");
+              $("#nav").toggleClass("dn");
+   
+            }); 
+      
+            feather.replace();
+
+function addClassBasedOnUrlWithSwitch() {
+  // Get the current URL
+  const url = window.location.href;
+  
+  switch (true) {
+    case url == "https://tomcritchlow.com/":
+      const div0 = document.getElementById("Home");
+      if (div0) {
+        div0.classList.add('bg-white');
+      }
+      break;
+    case url.includes("https://tomcritchlow.com/?"):
+      const div1 = document.getElementById("Home");
+      if (div1) {
+        div1.classList.add('bg-white');
+      }
+      break;      
+    case url.includes("/about/"):
+      const div2 = document.getElementById("About me");
+      if (div2) {
+        div2.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/writing/"):
+      const div3 = document.getElementById("Writing");
+      if (div3) {
+        div3.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/newsletter"):
+      const div4 = document.getElementById("Newsletter");
+      if (div4) {
+        div4.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/search"):
+      const div5 = document.getElementById("Search");
+      if (div5) {
+        div5.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/start-here"):
+      const div6 = document.getElementById("Start here");
+      if (div6) {
+        div6.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/topics/"):
+      const div7 = document.getElementById("Topics");
+      if (div7) {
+        div7.classList.add('bg-white');
+      }
+      break;                              
+    
+    default:
+      // Code to run if none of the above cases are true
+      break;
+  }
+}
+
+// Call the function
+addClassBasedOnUrlWithSwitch();
+
+
+
+</script>
+
+    <div class="w-100 h-100" id="maincontent">
+      <div class="mw8 center w-100 h-100">
+        
+    
+        
+    
+
+
+
+
+
+
+<div class="pt4 pt5-l pb2 w-two-thirds-ns center">
+
+<div class="f4 ph3 pb4 ph0-l lh-copy">
+
+  
+<div class="bb b--newgreen w-100 ibmplexmono ttu f6 dt-published mb5" datetime="2020-08-06 00:00:00 -0400">
+    August 6, 2020
+  </div>
+  
+        <h1 class="f2 fw8 lh-solid mv1 posttitle p-name">Generating an alumni network for indies</h1>
+  
+      
+      <h2 class="f3 fw3 lh-copy mt1 subtitle pb2 p-summary i">Musings on groups of indie consultants</h2>
+        
+    
+    <div class="postcontainer">
+    <p>A few indie consultants convened in the <a href="/!&amp;/">!&amp; discord space</a> recently to discuss the topic of “small group consulting”. We were inspired by a range of interesting readings:</p>
+
+<ul>
+  <li><a href="https://www.dropbox.com/s/w3z4fxvo37s7crc/Learning%20Communities%20of%20Place.doc?dl=0">Learning Communities of Place: Situating Learning Towns Within A Nested Concept of Social Learning Environments</a> (pdf)</li>
+  <li><a href="http://interconnected.org/home/2015/10/07/small_groups_and_consultancy">Small groups and consultancy and coffee mornings</a> (interconnected.org)</li>
+  <li><a href="http://documents1.worldbank.org/curated/en/166671557929384690/pdf/Improving-Management-with-Individual-and-Group-Based-Consulting-Results-from-a-Randomized-Experiment-in-Colombia.pdf">Improving Management with Individual and Group-Based Consulting</a> (pdf)</li>
+  <li><a href="https://www.theatlantic.com/health/archive/2014/10/the-importance-of-sharing-experiences/381493/">The Importance of Sharing Experiences</a> (theatlantic.com)</li>
+</ul>
+
+<p>We touched on many themes and ideas - initially excited to explore small group consultancy in the context of one consultant gathering multiple clients together we quickly realized that alumni networks play a key role in indie consulting:</p>
+
+<h2 id="the-power-of-alumni-networks">The Power of Alumni Networks</h2>
+
+<p>I was shocked when I actually ran the numbers recently:</p>
+
+<blockquote class="quoteback" darkmode="" data-title="Can Calendly Unbundle NYC?" data-author="tomcritchlow.com" cite="https://tomcritchlow.com/2020/06/26/unbundling-nyc-calendly/">
+<p><strong>40% of my consulting revenue has come from Distilled alumni</strong><span>.</span><br /></p>
+
+<p>Ok I knew this number was high but that number surprised even me. My brother’s company that I used to work at <a href="https://www.distilled.net/" target="_blank" rel="noopener">Distilled</a>&nbsp;has been a significant source of leads. This is <em>not</em> referrals from Distilled - none of these leads came as “official” referrals from Distilled the agency, but rather introductions from Distilled alumni who have spread far and wide and now lead lots of fascinating work across many different agencies, consulting practices and more.</p>
+
+<p>So, for me Distilled has functioned like an institution. I imagine this is the power people talk about of the kind of network you get doing an MBA etc.</p>
+
+<p>Perhaps there’s something to be learned from building institutions. How might you do that? What would it look like?</p>
+<footer>tomcritchlow.com<cite> <a href="https://tomcritchlow.com/2020/06/26/unbundling-nyc-calendly/">https://tomcritchlow.com/2020/06/26/unbundling-nyc-calendly/</a></cite></footer>
+</blockquote>
+<script note="" src="https://cdn.jsdelivr.net/gh/Blogger-Peer-Review/quotebacks@1/quoteback.js"></script>
+
+<p>And this was validated via discussions with other indie consultants - alumni networks have been powerful forces for generating client work.</p>
+
+<p>Why is that? We posited:</p>
+
+<ul>
+  <li>Alumni networks provide shared experience and actual work environments for people to build trust and working relationships</li>
+  <li>Crucially however, alumni networks are diverse. Your colleagues at a company span different departments and skills</li>
+</ul>
+
+<p>What this alumni network makes is a set of people who you trust and who deeply understand your skills. They are typically not competing with you for work and are motivated to make warm intros and able to spot situations where you’ll be a good fit.</p>
+
+<p>My friend <a href="https://twitter.com/itsbdell">Brian Dell</a> put together this sketch of a 2x2 to outline where and how alumni networks are valuable:</p>
+
+<p><img src="/images/alumni-matrix.svg" alt="" /></p>
+
+<p>Mmm. Lots to noodle on here.</p>
+
+<h2 id="the-mistake-indies-make">The Mistake Indies Make</h2>
+
+<p>The mistake many indies make is to band together with people who do work like them. A set of three strategists clubbing together to build a virtual agency - the theory goes that you can “act bigger than you are” to get bigger clients. Unfortunately this strategy is inherently flawed - most indies don’t have trouble closing business, they have trouble generating leads.</p>
+
+<p>In fact you could say that <em>the</em> defining challenge of an indie consultant is generating clients.</p>
+
+<p>Let’s illustrate with an example:</p>
+
+<p><em>Let’s say 3 indie strategists club together to form a virtual agency. Let’s say each gets 10 strategy client leads a year. So now they have 30 leads a year but 3x the mouths to feed. Yes they might be able to collaborate on work and so on but nothing really has changed</em>.</p>
+
+<p>Instead consider an example where indies club together with differing skillsets:</p>
+
+<p><em>Let’s say an indie developer and an indie writer club together. If the indie developer has 10 developer leads a year (that they can service) and 2 writing leads a year (that they can’t service), while the writer has 10 writing leads a year (that they service) and 3 developer leads a year (which they can’t service) - now instead of 10 leads each a year they have 12 and 13 leads a year.</em></p>
+
+<p>This dumb example highlights the importance of aligning yourself with people who have leads you need but can’t service.</p>
+
+<h2 id="career-development-for-indie-consultants">Career development for indie consultants</h2>
+
+<p>Interestingly - indie consultants are hungry for professional development:</p>
+
+<blockquote class="quoteback" darkmode="" data-title="I%2C%20consultant%3F" data-author="@tomcritchlow" cite="https://tomcritchlow.com/2019/02/27/i-consultant/">
+The thing no one tells you when you set out on your own is that you take on the task of managing your own labels. Inventing terms to describe who you are and what you do.
+<footer>@tomcritchlow <cite><a href="https://tomcritchlow.com/2019/02/27/i-consultant/">https://tomcritchlow.com/2019/02/27/i-consultant/</a></cite></footer>
+</blockquote>
+<script note="" src="https://cdn.jsdelivr.net/gh/Blogger-Peer-Review/quotebacks@1/quoteback.js"></script>
+
+<p>This work can be strange, introspective work and there’s really no guidance around how to do it.</p>
+
+<p>I’d say that 90% of professional development for indie consultants happens through client work. Clients teach you as much as you teach them. Venkatesh calls this “linked learning loops”:</p>
+
+<blockquote class="quoteback" darkmode="" data-title="The Guru Factor" data-author="Venkatesh Rao" cite="https://artofgig.substack.com/p/the-guru-factor">
+<img src="https://cdn.substack.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F4319079f-31e2-417d-9315-ba6d836d41ed_1320x956.png" />
+<p>What makes the sparring <em>partner </em>role different is that you take the fruits of marginal attention around sparring and convert them into <em><strong>nerdy explorations</strong> </em>which then turn into fodder for your own private pursuit of things that interest you (via writing, reading, and such), creating a growing store of <em><strong>appreciative knowledge</strong></em>. It is a virtuous cycle that powers growing guru-dom. This is the red loop in the diagram.</p><p>The yang to that yin is the loop experienced by the client you are sparring with. In the best case, the same sparring experience is cashed out differently. For the client, the fruits of marginal attention around sparring is converted into superior <em><strong>live-fire application</strong></em>, which leads to a growing store of <em><strong>instrumental knowledge</strong>.</em> This is the blue loop in the diagram.</p>
+<footer>Venkatesh Rao<cite> <a href="https://artofgig.substack.com/p/the-guru-factor">https://artofgig.substack.com/p/the-guru-factor</a></cite></footer>
+</blockquote>
+<script note="" src="https://cdn.jsdelivr.net/gh/Blogger-Peer-Review/quotebacks@1/quoteback.js"></script>
+
+<p>Ok - so what’s the point of all this?</p>
+
+<p>I’m building this !&amp; community for indie consultants and I’m trying to figure out how to make it a deeply valuable space. From this discussion of small group consulting comes the beginnings of a framework:</p>
+
+<ul>
+  <li>Provide an environment where indies can open up, show each other work and build trust</li>
+  <li>Create shared experiences to build trust and a sense of belonging</li>
+  <li>Integrate diverse voices and shine a light on the range of independent work</li>
+</ul>
+
+<p><strong>Can we build a space that functions like an alumni network for independents?</strong></p>
+
+<p>We’ll see.</p>
+
+
+  </div>
+
+    
+    <hr class="w3 mv5">
+    
+
+  
+
+  
+  <div class="w-100 mv3 pa3 ba b--newgreen br2 f5 bg-near-white">
+    <div class="b pv1">More blog posts:</div>
+    
+    <div class="flex w-100">
+      <p class="pv0 mv1"><a href="/tomcritchlow.com/2025/06/27/taking-blogging-seriously/">Taking Blogging Seriously</a></p>
+      <p class="f6 black-50 ml-auto w-20-l w-40 tr pv0 mv1">June 27, 2025</p>
+    </div>
+    
+    
+    <div class="flex w-100">
+      <p class="pv0 mv1"><a href="/2025/06/27/taking-blogging-seriously/">Taking Blogging Seriously</a></p>
+      <p class="f6 black-50 ml-auto w-20-l w-40 tr pv0 mv1">June 27, 2025</p>
+    </div>
+    
+    
+    <div class="flex w-100">
+      <p class="pv0 mv1"><a href="/tomcritchlow.com/2025/03/21/better-ai-mode/">Google is Grounded and Needs to Learn How to Soar</a></p>
+      <p class="f6 black-50 ml-auto w-20-l w-40 tr pv0 mv1">March 21, 2025</p>
+    </div>
+    
+    
+        
+    <div class="bt b--black-10 mt3">
+      <p>This post was written by Tom Critchlow - blogger and independent consultant. Subscribe to join my occassional newsletter:</p>
+        <form action="https://buttondown.email/api/emails/embed-subscribe/tomcritchlow" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.email/tomcritchlow', 'popupwindow')" class="embeddable-buttondown-form flex items-center w-100 f5">
+            <input placeholder="Email Address" type="email" name="email" id="bd-email" class="bg-light-gray w-100 input-reset ba b--black-20 pv2 ph3 border-box br2 br--left">
+            <input type="hidden" name="metadata__cta" value="blogend">
+            <input type="submit" value="Subscribe" class="input-reset w-auto-ns pv2 ph3 ba b--newgreen bg-light-gray br2 br--right pointer">
+            </form>
+    </div>
+        
+    </div>
+    
+
+
+
+<hr class="w3 mv5">
+
+
+<script>
+
+    $( document ).ready(function() {
+        var footnotes = $(".footnotes p");
+        $("sup").each(function(index){
+            var fn = footnotes[index].removeChild(footnotes[index].lastChild);
+            $(this).replaceWith("<label for='"+index+"' class='margin-toggle sidenote-number'></label><input type='checkbox' id='"+index+"' class='margin-toggle'/><span class='sidenote'>"+footnotes[index].innerHTML+"</span>")  
+        });   
+        $(".footnotes").hide()
+    });    
+       
+
+    </script>
+
+
+<script type="application/json" class="js-hypothesis-config">
+  {
+    "openSidebar": false,
+    "theme": "clean"
+  }
+</script>
+
+
+<script src="https://hypothes.is/embed.js" async></script>
+
+<script type="text/javascript">
+
+window.hypothesisConfig = function () {
+  return {
+    branding: {
+      appBackgroundColor: 'white',
+      ctaBackgroundColor: 'rgba(3, 11, 16, 1)',
+      ctaTextColor: '#eee',
+      selectionFontFamily: 'helvetica, arial, sans serif'
+    }
+  };
+};
+
+if ($(window).width()<600){
+      window.hypothesisConfig = function () {
+        return {
+          "externalContainerSelector": "#hypbox",
+          "onLayoutChange": function(layout) {
+            if (layout.expanded) {
+              $('#hypbox').show();
+            } else {
+              $('#hypbox').hide();
+            }
+          }
+        };
+      };
+    };
+</script>
+
+<script defer src="https://cdn.commento.io/js/commento.js"></script>
+<div id="commento"></div>
+
+
+
+</div>
+</div>
+
+<div id="hypbox" style="display:none;width:100%;height:65%;position:fixed;bottom:0px;border-top:1px solid #02AD28;">
+      
+</div>
+
+</div>
+
+      
+    </div>
+      
+    </div>
+    </div>
+    
+    
+    
+    
+    <script>
+      feather.replace();
+    </script>
+
+    </body>
+    </html>

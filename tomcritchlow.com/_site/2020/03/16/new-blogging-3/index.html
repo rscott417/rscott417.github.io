@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en" class="w-100 h-100">
+  <head>
+    <meta charset="utf-8">
+    <title>New Blogging 3 - Blog Patterns</title>
+    <meta name="description" content="Tom Critchlow. Move. Think. Create.">
+
+    
+
+<link href='https://fonts.googleapis.com/css?family=Libre+Franklin:400,400italic,600,700,300,800|IBM+Plex+Mono|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet" href="/css/tachyons.min.css">
+<link rel="stylesheet" href="/css/hamburgers.css">
+
+
+<link href="/css/all.css" rel="stylesheet">
+<link href="/css/mobile.css" rel="stylesheet">
+
+<link rel="icon" href="/images/favicon.png" />
+
+<meta name="viewport" content="width=device-width">
+
+<script src="//code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="/js/feather.min.js" type="text/javascript"></script>
+
+<!--Custom Jquery UI only used for slidetoggle left/right-->
+<script src="/js/jquery-ui.min.js" type="text/javascript"></script>
+
+
+<link rel="alternate" type="application/rss+xml" title="RSS Feed for tomcritchlow.com" href="/feed.xml" />
+
+
+ <meta property="og:type"   content="article" />
+ <meta property="og:url"    content="https://tomcritchlow.com/2020/03/16/new-blogging-3/" />
+ <meta property="og:title"  content="New Blogging 3 - Blog Patterns" />
+ <meta name="og:description" content="Fiddling with the deckchairs...">
+ 
+ <meta property="og:image"  content="https://tomcritchlow.com/images/green.png" />
+ 
+ <meta property="og:image:width"  content="600" />
+ <meta property="og:image:height"  content="315" />
+
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@tomcritchlow">
+<meta name="twitter:creator" content="@tomcritchlow">
+<meta name="twitter:title" content="New Blogging 3 - Blog Patterns">
+<meta name="twitter:description" content="Fiddling with the deckchairs...">
+
+<meta name="twitter:image" content="https://tomcritchlow-tom_og.web.val.run/?headline=New Blogging 3 - Blog Patterns&subheadline=Fiddling with the deckchairs...&date=March 16, 2020">
+
+
+
+
+
+ 
+<meta name="pocket-site-verification" content="d481265d27c9597cbdc003abbf1994" />
+
+<link rel="webmention" href="https://webmention.io/tomcritchlow.com/webmention" />
+<link rel="pingback" href="https://webmention.io/tomcritchlow.com/xmlrpc" />
+
+
+
+</head>
+
+<body class="ph0-l center">
+
+<!--From GA include-->
+
+
+
+
+<script defer data-domain="tomcritchlow.com" src="https://plausible.io/js/script.js"></script>
+
+
+
+<style>
+#nav{
+    width:223px;
+    height:100vh;
+  }
+
+  #maincontent{
+    margin-left:223px;
+  }
+
+  @media (max-width: 1024px) {
+      #nav{
+          width:100%;
+      }
+
+      #maincontent{
+          margin-left:auto;
+      }
+  }
+</style>
+
+
+<div class="dn-l db w-100 pa3 bg-near-white z-1" style="position:sticky;top:0px">
+    <a class="link dim dark-gray f6 f5-l dib ttu pt2 pt0-l dtc-l v-mid newgreen b" href="/" title="Home">TOM CRITCHLOW</a>
+    <div class="fr dib dn-l pt1">    
+        <div id="hamburger" class="hamburger hamburger--squeeze">
+                <div class="hamburger-box">
+                  <div class="hamburger-inner"></div>
+                </div>
+              </div>
+    
+    </div>
+</div>
+
+<div class="flex items-stretch h-100 w-100">
+  
+    
+
+    
+
+    <div id="nav" class="w5 bg-near-white f7 fw4 br-l bt-0-l bb-0-l bt bb b--black-10 fixed dn db-l top-0-l left-0 overflow-y-scroll z-1 pt2 pt0-l">
+      
+      
+      
+    
+      <a class="db-l dn  items-center ma2 ph3 pa2 mv3 mb4-l link fw8 f6 br3 newgreen" href="/">
+        TOM CRITCHLOW
+      </a>
+    
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Home" href="/">
+    <i data-feather="home" class="h1 pr3"></i> <span class="navname">Home</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="About me" href="/about">
+    <i data-feather="user" class="h1 pr3"></i> <span class="navname">About me</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Writing" href="/writing">
+    <i data-feather="rss" class="h1 pr3"></i> <span class="navname">Writing</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Library" href="/library">
+    <i data-feather="layers" class="h1 pr3"></i> <span class="navname">Library</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Newsletter" href="/newsletter">
+    <i data-feather="mail" class="h1 pr3"></i> <span class="navname">Newsletter</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Search" href="/search">
+    <i data-feather="search" class="h1 pr3"></i> <span class="navname">Search</span>
+  </a>
+
+
+
+<div class="mv4">
+    <div class="newgreen mh3 ph2 mv2 navname">Hire me</div>
+
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Consulting" href="/consulting">
+    <i data-feather="git-merge" class="h1 pr3"></i> <span class="navname">Consulting</span>
+  </a>
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Advisor" href="/advisor">
+    <i data-feather="git-pull-request" class="h1 pr3"></i> <span class="navname">Advisor</span>
+  </a>
+
+</div>
+
+<div class="mv4">
+    <div class="newgreen mh3 ph2 mv2 navname">Elsewhere</div>
+
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Twitter" href="https://twitter.com/tomcritchlow/">
+    <i data-feather="twitter" class="h1 pr3"></i> <span class="navname">Twitter</span>
+  </a>
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="LinkedIn" href="https://www.linkedin.com/in/tomcritchlow/">
+    <i data-feather="linkedin" class="h1 pr3"></i> <span class="navname">LinkedIn</span>
+  </a>
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Are.na" href="https://www.are.na/tom-critchlow/index">
+    <i data-feather="bookmark" class="h1 pr3"></i> <span class="navname">Are.na</span>
+  </a>
+
+</div>
+
+      
+      </div>
+
+<script>
+    
+var $hamburger = $("#hamburger");
+            $hamburger.on("click", function(e) {
+
+              $hamburger.toggleClass("is-active");
+              $("#nav").toggleClass("dn");
+   
+            }); 
+      
+            feather.replace();
+
+function addClassBasedOnUrlWithSwitch() {
+  // Get the current URL
+  const url = window.location.href;
+  
+  switch (true) {
+    case url == "https://tomcritchlow.com/":
+      const div0 = document.getElementById("Home");
+      if (div0) {
+        div0.classList.add('bg-white');
+      }
+      break;
+    case url.includes("https://tomcritchlow.com/?"):
+      const div1 = document.getElementById("Home");
+      if (div1) {
+        div1.classList.add('bg-white');
+      }
+      break;      
+    case url.includes("/about/"):
+      const div2 = document.getElementById("About me");
+      if (div2) {
+        div2.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/writing/"):
+      const div3 = document.getElementById("Writing");
+      if (div3) {
+        div3.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/newsletter"):
+      const div4 = document.getElementById("Newsletter");
+      if (div4) {
+        div4.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/search"):
+      const div5 = document.getElementById("Search");
+      if (div5) {
+        div5.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/start-here"):
+      const div6 = document.getElementById("Start here");
+      if (div6) {
+        div6.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/topics/"):
+      const div7 = document.getElementById("Topics");
+      if (div7) {
+        div7.classList.add('bg-white');
+      }
+      break;                              
+    
+    default:
+      // Code to run if none of the above cases are true
+      break;
+  }
+}
+
+// Call the function
+addClassBasedOnUrlWithSwitch();
+
+
+
+</script>
+
+    <div class="w-100 h-100" id="maincontent">
+      <div class="mw8 center w-100 h-100">
+        
+    
+        
+    
+
+
+    
+    
+
+    <div class="bg-washed-green pa2 mv3 f5">Part of the <a href="/blogchains/new-blogging">new-blogging</a> blogchain <span class="fr-ns blogchainexpand"><a href="javascript:void(0)">+ expand</a></span>
+      <div class="dn blogchainlist">
+          <ol>
+            
+            <li><a href="/2019/07/17/blogchains/">New Blogging 1 - Building Blogchains</a></li>
+            
+            <li><a href="/2019/10/31/new-blogging-2/">New Blogging 2 - Open Blogchains</a></li>
+            
+            <li><a href="/2020/03/16/new-blogging-3/">New Blogging 3 - Blog Patterns</a></li>
+            
+          </ol>
+        </div>
+    </div>
+    
+
+<script>
+            
+            $(".blogchainexpand").click(function(){
+              $(".blogchainlist").toggle();
+            });
+</script>
+
+
+
+
+
+
+<div class="pt4 pt5-l pb2 w-two-thirds-ns center">
+
+<div class="f4 ph3 pb4 ph0-l lh-copy">
+
+  
+<div class="bb b--newgreen w-100 ibmplexmono ttu f6 dt-published mb5" datetime="2020-03-16 00:00:00 -0400">
+    March 16, 2020
+  </div>
+  
+        <h1 class="f2 fw8 lh-solid mv1 posttitle p-name">New Blogging 3 - Blog Patterns</h1>
+  
+      
+      <h2 class="f3 fw3 lh-copy mt1 subtitle pb2 p-summary i">Fiddling with the deckchairs...</h2>
+        
+    
+    <div class="postcontainer">
+    <p><em>This post is a retreat from the crazy world into the <a href="https://www.ribbonfarm.com/series/domestic-cozy/">domestic cozy</a> self-care of fiddling with my blog.</em></p>
+
+<p>I’ve been fiddling with my blog lately as a way to distract myself from the world. I’ve been thinking a lot about the new age of blogging and how structures are changing. Venkatesh in <a href="https://www.ribbonfarm.com/2020/02/24/a-text-renaissance/">a text renaissance</a> outlines some ways the textual model is evolvoing and what might be “next”.</p>
+
+<p>I’m slowly formulating a response to that post but one piece of the puzzle for the “future of blogs” is better templating and components. Especially for the new hotness of static site generators like Jekyll (what I run my site on) and Gatsby etc.</p>
+
+<p>Yes - we’ve had plugins since forever but plugins are also highly problematic. They require an “install” mindset and in the Wordpress ecosystem plugins have become synonomous with security issues and hacks.</p>
+
+<p>Installing plugins is too “heavy”. What we need is more like a CSS library of <strong>blog patterns</strong> that allow you to adopt new styles, techniques and approaches without having to actually install any code - think more copy and paste.</p>
+
+<p>To that end - this is definitely not a set of re-useable patterns (ha!). One day when I get more time perhaps… For now - here’s some fiddling I’ve been doing on my own blog that might be of interest:</p>
+
+<h2 id="static-site-search-thanks-craig-mod">Static Site Search (Thanks Craig Mod!)</h2>
+
+<p>Craig Mod posted a lovely little code snippet that adds blazing fast site-search to static sites. The <a href="https://gist.github.com/cmod/5410eae147e4318164258742dd053993">code is here</a>.</p>
+
+<p>What’s great about this code is that by relying on keyboard shortcuts instead of UI you can install it in two seconds for any static site. Craig gives instructions for Hugo but if you look at the comments I provide the code for Jekyll sites. Look how nice this is!</p>
+
+<p><img src="/images/craig-mod-search.png" alt="" /></p>
+
+<p>For <em>my own</em> site I’ve added a search icon and tweaked a bunch of things. Mostly this has just made the design worse (ha, sorry Craig!) but I like having the search icon. I’ll improve the design as I go.</p>
+
+<p>Try it out! The search works across the blog, my blogchains and my wiki. Be warned the wiki has a bunch of nonsense and half-written thoughts in there!</p>
+
+<h2 id="expandcollapse-index">Expand/Collapse Index</h2>
+
+<p>Inspired by <a href="http://scripting.com/">Dave Winer</a> and from using <a href="https://roamresearch.com/">Roam</a> too much I was looking for some way to create an outline-like experience for my site. Especially as I sprawl across blogging, wikis, blogchains, book writing etc.</p>
+
+<p><img src="/images/tomcritchlow-expand.png" alt="" /></p>
+
+<p>This index expand/collapse UX is just out of the box HTML functionality with the <a href="https://www.w3schools.com/tags/tag_details.asp">details tag</a> so this is very easy to copy!</p>
+
+<p><a href="https://tomcritchlow.com/">Try it out on my homepage here</a>.</p>
+
+<h2 id="a-new-simpler-approach-to-margin-notes">A new simpler approach to margin notes</h2>
+
+<p>Finally - I’ve had margin notes for a long time on this site but writing them has always been a pain. It’s written as a Jekyll include function. So to make a margin note I’d write something like this<sup id="fnref:ack"><a href="#fn:ack" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+I like this idea - that the most useful thing you need client input and co-creation on is the “base reality” - the “Who, What, Where”. For consultants coming in from the outside attempting to “solve problems” for clients the biggest flaw in generic strategies is not properly accounting for who is at the company, what we’re actually trying to solve and where this strategy will play out{% include tufte-sn.html id="just" content="Recall from &lt;a href='https://tomcritchlow.com/2019/11/19/optimism-operating-system/'&gt;chapter 2&lt;/a&gt; - there is no 'just' in consulting - clients are ecosystems in balance..." %}.
+
+</code></pre></div></div>
+
+<p>The two most annoying things about this are a) having to switch from writing markdown to writing HTML and b) the non-standard markup / presentation.</p>
+
+<p>So I switched to using the standard markdown footnotes code like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I like this idea - that the most useful thing you need client input and co-creation on is the “base reality” - the “Who, What, Where”. For consultants coming in from the outside attempting to “solve problems” for clients the biggest flaw in generic strategies is not properly accounting for who is at the company, what we’re actually trying to solve and where this strategy will play out[^1].
+
+[^1]: Recall from [chapter 2](https://tomcritchlow.com/2019/11/19/optimism-operating-system/) - there is no 'just' in consulting - clients are ecosystems in balance...
+</code></pre></div></div>
+
+<p>And then using a little javascript to turn footnotes into margin notes client side:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$( document ).ready(function() {
+    var footnotes = $(".footnotes p");
+    $("sup").each(function(index){
+        var fn = footnotes[index].removeChild(footnotes[index].lastChild);
+        $(this).replaceWith("&lt;label for='"+index+"' class='margin-toggle sidenote-number'&gt;&lt;/label&gt;&lt;input type='checkbox' id='"+index+"' class='margin-toggle'/&gt;&lt;span class='sidenote'&gt;"+footnotes[index].innerHTML+"&lt;/span&gt;")  
+    });   
+    $(".footnotes").hide()
+});    
+</code></pre></div></div>
+
+<p>I don’t love the idea of doing this client-side but makes the writing portion much smoother and gives me more confidence that if I ever have to export this writing into another platform it’ll be easier to carry the footnotes over.</p>
+
+<h2 id="blogchains">Blogchains</h2>
+
+<p>I’ve had blogchains going for a while on this site (this post is part of the new blogging blogchain!) but I’ve recently been thinking about the UX and overall experience and design of blogchains so <a href="https://www.are.na/tom-critchlow/blogchains">I made an are.na channel here</a> to start collecting inspiration, design and ideas for ways to evolve the blogchain format.</p>
+
+<p>If you have an arena account come join in!</p>
+
+<h2 id="open-transclusion-from-toby">Open Transclusion from Toby</h2>
+
+<p>Meanwhile - in other blog patterns news my buddy Toby from Subpixel Space created this beautiful looking “open transclusion” technology:</p>
+
+<blockquote>
+  <p>My own blogging is one context in which I’ve seen this tension play out, and have been working to explore ways of making my texts richer. A lot of the ideas I talk about in various pieces of writing are connected to one another. When I publish an essay, I’m not done with it. The ideas live on and get renewed, reused, and recycled in later works. Some sentences contain definitions that are core to my mental models, and there are whole paragraphs that might be useful out of context. I’m building my knowledge network in mind maps and behind various SaaS APIs, but how can I publicly show my thinking to be part a cohesive worldview?</p>
+</blockquote>
+
+<p><a href="https://subpixel.space/entries/open-transclude/">Check out the full code over on subpixel.space</a>.</p>
+
+<p>(Yes I know I really need to get around to plugging this into my own site but just haven’t had time, sorry Toby!)</p>
+
+<p>–</p>
+
+<p>What other new and funky blog formats are out there? What do you have cooking up? Bonus points for blog patterns that work for static sites like Jekyll.</p>
+
+<p>Much love.</p>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:ack">
+      <p>Ha. The irony. This is actually not the code - I can’t figure out how to get includes and code blocks to play nice in markdown. Fuck it. We’ll fix it later. <a href="https://github.com/tomcritchlow/tomcritchlow.github.io/blob/master/_posts/2020-03-16-new-blogging-3.md">View the post on Github to see the real code format</a>. <em>Update!</em> I fixed this so it’s right. You need the <a href="https://stackoverflow.com/questions/24102498/escaping-double-curly-braces-inside-a-markdown-code-block-in-jekyll">raw tag</a>. <a href="#fnref:ack" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
+    
+    <hr class="w3 mv5">
+    
+
+  
+    
+    
+
+    <div class="bg-washed-green pa2 mv2 f5">Part of the <a href="/blogchains/new-blogging">new-blogging</a> blogchain <span class="fr-ns blogchainexpand"></span>
+      <div class="">
+          <ol>
+            
+            <li><a href="/2019/07/17/blogchains/">New Blogging 1 - Building Blogchains</a></li>
+            
+            <li><a href="/2019/10/31/new-blogging-2/">New Blogging 2 - Open Blogchains</a></li>
+            
+            <li><a href="/2020/03/16/new-blogging-3/">New Blogging 3 - Blog Patterns</a></li>
+            
+          </ol>
+        </div>
+    </div>
+    
+
+
+  
+  <div class="w-100 mv3 pa3 ba b--newgreen br2 f5 bg-near-white">
+    <div class="b pv1">More blog posts:</div>
+    
+    <div class="flex w-100">
+      <p class="pv0 mv1"><a href="/2025/06/27/taking-blogging-seriously/">Taking Blogging Seriously</a></p>
+      <p class="f6 black-50 ml-auto w-20-l w-40 tr pv0 mv1">June 27, 2025</p>
+    </div>
+    
+    
+    <div class="flex w-100">
+      <p class="pv0 mv1"><a href="/2025/03/21/better-ai-mode/">Google is Grounded and Needs to Learn How to Soar</a></p>
+      <p class="f6 black-50 ml-auto w-20-l w-40 tr pv0 mv1">March 21, 2025</p>
+    </div>
+    
+    
+    <div class="flex w-100">
+      <p class="pv0 mv1"><a href="/2024/09/03/3573-on-the-road/">3,573 Days On The Road</a></p>
+      <p class="f6 black-50 ml-auto w-20-l w-40 tr pv0 mv1">September 3, 2024</p>
+    </div>
+    
+    
+        
+    <div class="bt b--black-10 mt3">
+      <p>This post was written by Tom Critchlow - blogger and independent consultant. Subscribe to join my occassional newsletter:</p>
+        <form action="https://buttondown.email/api/emails/embed-subscribe/tomcritchlow" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.email/tomcritchlow', 'popupwindow')" class="embeddable-buttondown-form flex items-center w-100 f5">
+            <input placeholder="Email Address" type="email" name="email" id="bd-email" class="bg-light-gray w-100 input-reset ba b--black-20 pv2 ph3 border-box br2 br--left">
+            <input type="hidden" name="metadata__cta" value="blogend">
+            <input type="submit" value="Subscribe" class="input-reset w-auto-ns pv2 ph3 ba b--newgreen bg-light-gray br2 br--right pointer">
+            </form>
+    </div>
+        
+    </div>
+    
+
+
+
+<hr class="w3 mv5">
+
+
+<script>
+
+    $( document ).ready(function() {
+        var footnotes = $(".footnotes p");
+        $("sup").each(function(index){
+            var fn = footnotes[index].removeChild(footnotes[index].lastChild);
+            $(this).replaceWith("<label for='"+index+"' class='margin-toggle sidenote-number'></label><input type='checkbox' id='"+index+"' class='margin-toggle'/><span class='sidenote'>"+footnotes[index].innerHTML+"</span>")  
+        });   
+        $(".footnotes").hide()
+    });    
+       
+
+    </script>
+
+
+<script type="application/json" class="js-hypothesis-config">
+  {
+    "openSidebar": false,
+    "theme": "clean"
+  }
+</script>
+
+
+<script src="https://hypothes.is/embed.js" async></script>
+
+<script type="text/javascript">
+
+window.hypothesisConfig = function () {
+  return {
+    branding: {
+      appBackgroundColor: 'white',
+      ctaBackgroundColor: 'rgba(3, 11, 16, 1)',
+      ctaTextColor: '#eee',
+      selectionFontFamily: 'helvetica, arial, sans serif'
+    }
+  };
+};
+
+if ($(window).width()<600){
+      window.hypothesisConfig = function () {
+        return {
+          "externalContainerSelector": "#hypbox",
+          "onLayoutChange": function(layout) {
+            if (layout.expanded) {
+              $('#hypbox').show();
+            } else {
+              $('#hypbox').hide();
+            }
+          }
+        };
+      };
+    };
+</script>
+
+<script defer src="https://cdn.commento.io/js/commento.js"></script>
+<div id="commento"></div>
+
+
+
+</div>
+</div>
+
+<div id="hypbox" style="display:none;width:100%;height:65%;position:fixed;bottom:0px;border-top:1px solid #02AD28;">
+      
+</div>
+
+</div>
+
+      
+    </div>
+      
+    </div>
+    </div>
+    
+    
+    
+    
+    <script>
+      feather.replace();
+    </script>
+
+    </body>
+    </html>

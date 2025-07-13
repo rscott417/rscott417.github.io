@@ -1,0 +1,38 @@
+{% include head.html %}
+
+{% include googleanalytics.html %}
+
+{% include header.html %}
+
+<div class="mw9 center lh-copy f4 ph3 ph6-l">
+  
+  
+
+  <div class="w-100 flex-l flex-wrap-l items-start">
+  
+  <div class="bg bt bb bt-0-l bb-0-l b--newgreen pv2 pv4-l ph3-l mr5-l ttu w-100 w-auto-ns f6 f7-l nowrap overflow-x-auto mt4-l" style="position:sticky;top:0px;background-color:#f1f1f1">
+    <div class="pb3-l relative dib db-ns"><a class="link black dim {% if page.name == 'start-here.md' %}newgreen{% endif %}" href="/start-here">Start Here</a><span class="dib dn-l ph1"> | </span></div>
+    
+    <div class="pv1 relative dib db-ns"><a class="link black dim {% if page.name == 'writing.md' %}newgreen{% endif %}"  href="/writing">Latest Writing</a><span class="dib dn-l ph1"> | </span></div>
+    <div class="pv1 relative dib db-ns"><a class="link black dim {% if page.url contains 'topics' %}newgreen{% endif %}" href="/topics/">Topics</a> <span class="dib dn-l ph1"> | </span></div>
+    <div class="pv1 relative dib db-ns"><a class="link black dim {% if page.name == 'notes.md' %}newgreen{% endif %}" href="/notes">Notes</a> <span class="dib dn-l ph1"> | </span></div>
+    <div class="pv1 pb3-l relative dib db-ns"><a class="link black dim {% if page.name contains 'blogchains' %}newgreen{% endif %}"  href="/blogchains/">Blogchains</a><span class="dib dn-l ph1"> | </span></div>
+    
+    <div class="pv1 relative dib db-ns">Subscribe:</div>
+    <div class="pv1 relative dib db-ns"><a class="link black dim"  href="/feed">RSS</a><span class="dib dn-l ph1"> | </span></div>
+    <div class="pv1 relative dib db-ns"><a class="link black dim"  href="https://newsletter.tomcritchlow.com/">Email</a></div>
+  </div>
+    
+    
+    <div class="w-two-thirds-ns">
+  
+      <h1 class="f2">{{page.title}}</h1>
+
+  {{content}}
+                                    
+  </div>
+</div>
+</div>
+
+
+{% include footer.html %}

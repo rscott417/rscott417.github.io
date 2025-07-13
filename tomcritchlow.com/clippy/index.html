@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Feed Prototype</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <div class="app-container">
+
+        <div class="app-container">
+
+            <div class="search-container">
+                <input type="search" id="search-input" placeholder="Search titles..." aria-label="Search content titles">
+            </div>
+            <main id="main-content">
+                <section id="home-content" class="tab-content active">
+                    <h2>Home</h2>
+                    <div id="feed-container" class="feed-grid">
+                        </div>
+                </section>
+
+                
+    
+                <section id="profile-content" class="tab-content">
+                    <h2>My Saved Items</h2>
+                    <div id="saved-items-container" class="feed-grid">
+                        </div>
+                </section>
+            </main>
+    
+            <nav id="bottom-nav">
+               </nav>
+        </div>
+
+   
+        
+        <main id="main-content">
+            <section id="home-content" class="tab-content active">
+                <h2>Home</h2>
+                <div id="feed-container" class="feed-grid">
+                    </div>
+            </section>
+
+            <section id="videos-content" class="tab-content">
+                <h2>Videos</h2>
+                <p>Video content will appear here.</p>
+            </section>
+
+            <section id="community-content" class="tab-content">
+                <h2>Community Discussions</h2>
+                <div id="community-feed-container" class="feed-grid">
+                    </div>
+            </section>
+
+            <section id="my-recipes-content" class="tab-content">
+                <h2>My Recipes</h2>
+                <p>Your created/uploaded recipes will appear here.</p>
+            </section>
+
+            <section id="profile-content" class="tab-content">
+                <h2>My Saved Items</h2>
+                <div id="saved-items-container" class="feed-grid">
+                    </div>
+            </section>
+        </main>
+
+        <nav id="bottom-nav">
+          <ul>
+            <li><a href="#" data-tab="home-content" class="nav-link active"><i class="fas fa-home"></i>Home</a></li>
+            <li><a href="#" data-tab="videos-content" class="nav-link"><i class="fas fa-video"></i>Videos</a></li>
+            <li><a href="#" data-tab="community-content" class="nav-link"><i class="fas fa-comments"></i>Community</a></li>
+            <li><a href="#" data-tab="my-recipes-content" class="nav-link"><i class="fas fa-utensils"></i>My Recipes</a></li>
+            <li><a href="#" data-tab="profile-content" class="nav-link"><i class="fas fa-users"></i>Profile</a></li>
+        </ul>
+        </nav>
+    </div>
+
+
+    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+
+
+    <script>
+        // Define the feed data directly using placehold.co
+        const embeddedFeedData = [
+        {
+    "id": "loveandlemons-com-41763",
+    "title": "Homemade Granola",
+    "link": "https://www.loveandlemons.com/granola/",
+    "imageUrl": "https://cdn.loveandlemons.com/wp-content/uploads/2020/01/granola.jpg",
+    "excerpt": "<p>If you&#8217;re anything like me, you&#8217;ve spent hours in the granola aisle at the grocery store, trying to find just the right kind. You know the one\u2014it has lots of fun mix-ins like nuts and dried fruit; it&#8217;s sweet, but not too sweet; it&#8217;s spiced with cinnamon; and it&#8217;s filled with big clusters of oats and nuts. &#8230;And if you&#8217;re anything like me, you&#8217;ve come to realize that it&#8217;s nearly impossible to find the perfect granola at the store. Enter: my homemade granola recipe! Instead of using white or brown sugar, I sweeten it naturally with maple syrup (honey works [&hellip;]</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "loveandlemons-com-39763",
+    "title": "Creamed Spinach",
+    "link": "https://www.loveandlemons.com/creamed-spinach/",
+    "imageUrl": "https://placehold.co/300x200/eee/ccc?text=No+Image",
+    "excerpt": "<p>This creamed spinach recipe is the most luxurious way to eat your greens. Inspired by Jack&#8217;s mom&#8217;s famous creamed spinach (a staple at Thanksgiving, Easter, and other family gatherings), it&#8217;s ultra-creamy, rich, and cheesy. If you ask me, it&#8217;s just as good as any steakhouse creamed spinach&#8230;if not better. While many creamed spinach recipes call for frozen spinach, this one uses fresh. I love the silky texture of the whole, just-wilted leaves in the cream sauce. I think it makes this classic side dish feel a bit brighter and fresher. Make it for a holiday or a simple weeknight dinner. [&hellip;]</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "loveandlemons-com-63094",
+    "title": "Carrot Muffins",
+    "link": "https://www.loveandlemons.com/carrot-muffins/",
+    "imageUrl": "https://cdn.loveandlemons.com/wp-content/uploads/2022/04/carrot-muffins-1.jpg",
+    "excerpt": "<p>These carrot muffins combine two of my favorite things: carrot cake and muffins!\u00a0They&#8217;re moist, fluffy, and warmly spiced, with plenty of grated carrots, chewy raisins, and crunchy walnuts mixed in for texture. Unlike my carrot cake cupcakes, which are firmly in dessert territory, these healthy carrot muffins are a great grab-and-go breakfast or snack. I love that they taste like carrot cake while packing in some more nutrition. They freeze perfectly too. When you have time on a weekend, make a big batch and stash it in your freezer. If you&#8217;re anything like me, you&#8217;ll love having these carrot muffins [&hellip;]</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "loveandlemons-com-83721",
+    "title": "Grits and Eggs",
+    "link": "https://www.loveandlemons.com/grits-and-eggs/",
+    "imageUrl": "https://cdn.loveandlemons.com/wp-content/uploads/2025/03/eggs-and-grits-1.jpg",
+    "excerpt": "<p>Did you catch the guide to how to make grits I posted the other day? I&#8217;m following it up with this easy grits and eggs recipe, which might be my favorite way to eat grits. As much as I enjoy creamy grits on their own, I love them even more with flavorful fixings. In this recipe, I top the rich, creamy corn porridge with saut\u00e9ed greens, bursty cherry tomatoes, avocado, and\u2014of course\u2014a fried egg. Hot sauce (any kind you like!) adds a little tangy, spicy pep to make the eggs and grits a delicious, comforting meal. I love this recipe [&hellip;]</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "loveandlemons-com-83676",
+    "title": "How to Make Grits",
+    "link": "https://www.loveandlemons.com/grits-recipe/",
+    "imageUrl": "https://cdn.loveandlemons.com/wp-content/uploads/2025/03/grits-1.jpg",
+    "excerpt": "<p>We&#8217;ve been on a grits kick in our house lately. Jack grew up in the South, so he has a serious soft spot for this rich, creamy corn porridge (especially when it&#8217;s loaded up with butter and cream). Through years of enjoying grits together, I&#8217;ve become a huge fan too. I shared a grits recipe in my second cookbook, but I only recently realized that I&#8217;d never posted one here. That changes now! Below, you&#8217;ll find our simple method for how to make grits, plus tips for cooking them and serving suggestions. I hope you enjoy! Ingredients You&#8217;ll Need Here&#8217;s [&hellip;]</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "loveandlemons-com-83455",
+    "title": "Black Bean Tacos",
+    "link": "https://www.loveandlemons.com/black-bean-tacos/",
+    "imageUrl": "https://cdn.loveandlemons.com/wp-content/uploads/2025/03/black-bean-tacos-1.jpg",
+    "excerpt": "<p>These black bean tacos are a really easy, SUPER flavorful dinner. They&#8217;re packed with a delicious combination of simple ingredients: black beans, pickled cabbage, cilantro, jalape\u00f1os, and Cotija cheese. A hefty drizzle of my cilantro lime crema takes them over the top. I love the balance of textures and flavors here. These black bean tacos are creamy AND crunchy, earthy AND bright. The component that really makes them pop is the pickled cabbage. It adds a burst of sweet, tangy flavor that, if you&#8217;re me, will keep you piling on more and more. I recommend prepping the pickled cabbage ahead. [&hellip;]</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "loveandlemons-com-83502",
+    "title": "An Easy, Delicious Soup to Cook This Week",
+    "link": "https://www.loveandlemons.com/recipe-spotlight-cabbage-soup/",
+    "imageUrl": "https://cdn.loveandlemons.com/wp-content/uploads/2021/03/cabbageg-soup-1.jpg",
+    "excerpt": "<p>I know what you\u2019re thinking\u2014&#8220;Soup?! But isn\u2019t it spring??&#8221; It\u2019s certainly felt like it in Chicago over the past few days. We\u2019ve had a gorgeous stretch of sunny weather that\u2019s made me start craving asparagus, carrot cake, and other spring-y things. But I\u2019m not switching over into full-on spring mode just yet. I\u2019m holding onto soup season until at least March 17. That\u2019s because I make this cabbage soup for St. Patrick\u2019s Day each year. Packed with potatoes, carrots, and a full pound of cabbage, this humble, hearty dish is a delicious way to honor my Irish heritage. My favorite [&hellip;]</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "loveandlemons-com-83189",
+    "title": "Quick Pickled Cabbage",
+    "link": "https://www.loveandlemons.com/pickled-cabbage/",
+    "imageUrl": "https://cdn.loveandlemons.com/wp-content/uploads/2025/02/pickled-red-cabbage.jpg",
+    "excerpt": "<p>Have you ever tried pickled cabbage? If you like dill pickles, pickled red onions, or pickled anything, really, you&#8217;re going to love this pickled cabbage too. It&#8217;s tangy, it&#8217;s crunchy, and it has the most amazing bright red color. When I have a jar in the fridge, I pile it onto everything\u2014sandwiches, tacos, grain bowls, you name it. It&#8217;s a super easy, super delicious way to give a simple meal a little extra pop. I&#8217;m sharing my pickled cabbage recipe at the bottom of this post. Along the way, you&#8217;ll find tips for making it and a few tasty variations. [&hellip;]</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "loveandlemons-com-83168",
+    "title": "Easy Homemade Biscuits",
+    "link": "https://www.loveandlemons.com/biscuits-recipe/",
+    "imageUrl": "https://cdn.loveandlemons.com/wp-content/uploads/2025/02/biscuit-recipe-1.jpg",
+    "excerpt": "<p>Did you know that homemade biscuits are easy to make?\u00a0Well, they are! If the thought of making flaky, buttery biscuits from scratch feels impossible or intimidating to you, I hope you&#8217;ll try this easy biscuit recipe. It calls for 6 basic ingredients and comes together in about 30 minutes\u2014no special equipment required! Jack and I both grew up eating canned biscuits (think Pillsbury). The first time we made homemade biscuits, we couldn&#8217;t believe what we&#8217;d been missing. They are simply so much better. With this biscuit recipe, they have crisp, golden brown edges and moist, tender middles. Serve them alongside [&hellip;]</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "loveandlemons-com-83377",
+    "title": "Love &#038; Lemons Cooking Club &#8211; March!",
+    "link": "https://www.loveandlemons.com/love-lemons-cooking-club-march-5/",
+    "imageUrl": "https://placehold.co/300x200/eee/ccc?text=No+Image",
+    "excerpt": "<p>Our Cooking Club is a fun way to celebrate the Love &amp; Lemons community of readers. The concept is super simple\u2014each month, I choose a recipe. You make it, and you leave a comment on the recipe&#8217;s blog post. At the end of the month, I randomly select one winner to receive a prize. I love the sense of community that comes from so many people cooking one recipe each month. We\u2019re kicking off our March challenge today with our overnight oats recipe,\u00a0and I hope you\u2019ll join in the fun. Here\u2019s how it works: The Prize: A $100 Whole Foods [&hellip;]</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "natashaskitchen-com-107391",
+    "title": "Mini Chocolate Cupcakes",
+    "link": "https://natashaskitchen.com/mini-chocolate-cupcakes/",
+    "imageUrl": "https://natashaskitchen.com/wp-content/uploads/2025/02/Mini-Chocolate-Cupcakes-4.jpg",
+    "excerpt": "<p>These Mini Chocolate Cupcakes are adorable \u2013 they\u2019re fun to serve, and their bite-size makes them even more fun to eat! I like to top&#8230; <a href=\"https://natashaskitchen.com/mini-chocolate-cupcakes/\">Read&nbsp;More</a></p>",
+    "contentType": "article"
+  },
+  {
+    "id": "natashaskitchen-com-59236",
+    "title": "Ceviche Recipe (with VIDEO)",
+    "link": "https://natashaskitchen.com/ceviche-recipe/",
+    "imageUrl": "https://natashaskitchen.com/wp-content/uploads/2019/05/Ceviche-Recipe-3.jpg",
+    "excerpt": "<p>Ceviche is so fresh and loaded with shrimp, tomatoes, cucumber, onion, cilantro, and avocados, all marinated in fresh lime juice. For this Mexican Shrimp Cocktail,&#8230; <a href=\"https://natashaskitchen.com/ceviche-recipe/\">Read&nbsp;More</a></p>",
+    "contentType": "article"
+  },
+  {
+    "id": "natashaskitchen-com-50513",
+    "title": "Avocado Chicken Salad (with Video)",
+    "link": "https://natashaskitchen.com/avocado-chicken-salad-recipe/",
+    "imageUrl": "https://natashaskitchen.com/wp-content/uploads/2025/03/Avocado-Chicken-Salad-5.jpg",
+    "excerpt": "<p>This Avocado Chicken Salad Recipe has so much flavor and the perfect texture! We swap mayonnaise for fresh avocado, so it\u2019s creamy but light and&#8230; <a href=\"https://natashaskitchen.com/avocado-chicken-salad-recipe/\">Read&nbsp;More</a></p>",
+    "contentType": "article"
+  },
+  {
+    "id": "natashaskitchen-com-108160",
+    "title": "Cottage Cheese Egg Bites (with Video)",
+    "link": "https://natashaskitchen.com/cottage-cheese-egg-bites/",
+    "imageUrl": "https://natashaskitchen.com/wp-content/uploads/2025/03/Cottage-Cheese-Egg-Bites-copy.jpg",
+    "excerpt": "<p>My Cottage Cheese Egg Bites recipe makes the most tender, delicious on-the-go high-protein breakfast with amazing flavor. It\u2019s easier than the sou vide Starbucks egg&#8230; <a href=\"https://natashaskitchen.com/cottage-cheese-egg-bites/\">Read&nbsp;More</a></p>",
+    "contentType": "article"
+  },
+  {
+    "id": "natashaskitchen-com-108059",
+    "title": "Chicken Orzo Bake (with Video)",
+    "link": "https://natashaskitchen.com/chicken-orzo-bake/",
+    "imageUrl": "https://natashaskitchen.com/wp-content/uploads/2025/03/Orzo-Chicken-Bake-3.jpg",
+    "excerpt": "<p>This creamy and cheesy Chicken Orzo Bake is an effortless dinner, and the orzo pasta cooks right in the casserole dish! The whole family loves&#8230; <a href=\"https://natashaskitchen.com/chicken-orzo-bake/\">Read&nbsp;More</a></p>",
+    "contentType": "article"
+  },
+  {
+    "id": "natashaskitchen-com-107517",
+    "title": "Chocolate Chip Muffins (Bakery Style)",
+    "link": "https://natashaskitchen.com/chocolate-chip-muffins/",
+    "imageUrl": "https://natashaskitchen.com/wp-content/uploads/2025/02/Chocolate-Chip-Muffins-7.jpg",
+    "excerpt": "<p>Big, tall, and impressive bakery-style Chocolate Chip Muffins get that perfect domed muffin top rise in the oven every time. They have a soft and&#8230; <a href=\"https://natashaskitchen.com/chocolate-chip-muffins/\">Read&nbsp;More</a></p>",
+    "contentType": "article"
+  },
+  {
+    "id": "natashaskitchen-com-41230",
+    "title": "Chicken Tetrazzini Recipe (with Video)",
+    "link": "https://natashaskitchen.com/chicken-tetrazzini/",
+    "imageUrl": "https://natashaskitchen.com/wp-content/uploads/2025/03/Chicken-Tetrazzini-5.jpg",
+    "excerpt": "<p>This Chicken Tetrazzini Recipe is a comforting, supremely creamy, and cheesy pasta bake&nbsp;loaded with tender&nbsp;chicken and plump mushrooms. This meal is a crowd-favorite casserole dish&#8230; <a href=\"https://natashaskitchen.com/chicken-tetrazzini/\">Read&nbsp;More</a></p>",
+    "contentType": "article"
+  },
+  {
+    "id": "natashaskitchen-com-48045",
+    "title": "Chicken Kiev (with Video)",
+    "link": "https://natashaskitchen.com/easy-chicken-kiev-recipe/",
+    "imageUrl": "https://natashaskitchen.com/wp-content/uploads/2025/02/Chicken-Kiev-Recipe-3.jpg",
+    "excerpt": "<p>Chicken Kiev is making a comeback! This irresistible garlic butter-stuffed chicken breast is breaded and pan-fried. It&#8217;s crunchy with juicy chicken breast, and you&#8217;ll love&#8230; <a href=\"https://natashaskitchen.com/easy-chicken-kiev-recipe/\">Read&nbsp;More</a></p>",
+    "contentType": "article"
+  },
+  {
+    "id": "natashaskitchen-com-63029",
+    "title": "Easy Taco Salad (with VIDEO)",
+    "link": "https://natashaskitchen.com/easy-taco-salad-recipe/",
+    "imageUrl": "https://natashaskitchen.com/wp-content/uploads/2025/03/Taco-Salad-Recipe-3.jpg",
+    "excerpt": "<p>This fresh and easy Taco Salad is loaded with juicy beef on a bed of crisp lettuce with all of your favorite fresh veggies and&#8230; <a href=\"https://natashaskitchen.com/easy-taco-salad-recipe/\">Read&nbsp;More</a></p>",
+    "contentType": "article"
+  },
+  {
+    "id": "natashaskitchen-com-107591",
+    "title": "Maroulosalata &#8211; Greek Lettuce Salad (with Video)",
+    "link": "https://natashaskitchen.com/maroulosalata/",
+    "imageUrl": "https://natashaskitchen.com/wp-content/uploads/2025/02/Maroulosalata-Greek-Lettuce-Salad-6.jpg",
+    "excerpt": "<p>Traditional Greek Maroulosalata Salad is such an easy salad to make. It\u2019s crisp with the perfect lemon dressing and comes together in minutes. My Greek&#8230; <a href=\"https://natashaskitchen.com/maroulosalata/\">Read&nbsp;More</a></p>",
+    "contentType": "article"
+  },
+  {
+    "id": "tastesbetterfromscratch-com-204",
+    "title": "Pizza Dough",
+    "link": "https://tastesbetterfromscratch.com/perfect-pizza-crust/",
+    "imageUrl": "https://tastesbetterfromscratch.com/wp-content/uploads/2023/06/Pizza-Dough25-1.jpg",
+    "excerpt": "<p>This homemade Pizza Dough recipe is a staple everyone needs, made with inexpensive pantry ingredients and it can be cooked in the oven, air fryer, pizza oven, or on the grill. Pizza Night Made Easy Ready to Get Saucy? This Pizza Dough is the Perfect Base From Dough to Delicious: My Foolproof Pizza Dough Recipe&hellip;</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "tastesbetterfromscratch-com-4161",
+    "title": "Sugar Cookie Bars",
+    "link": "https://tastesbetterfromscratch.com/frosted-sugar-cookie-bars/",
+    "imageUrl": "https://placehold.co/300x200/eee/ccc?text=No+Image",
+    "excerpt": "<p>Our easy Sugar Cookie Bars recipe has a soft and chewy cookie bar topped with cream cheese frosting. It&#8217;s all the flavor you love, without the chilling, rolling, or cutting, so they&#8217;re perfect for potlucks, parties, and holidays. How to make Sugar Cookie Bars: Make Cookie Dough: Cream butter and sugar in a mixing bowl&hellip;</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "tastesbetterfromscratch-com-20729",
+    "title": "Chicken and Rice Enchiladas",
+    "link": "https://tastesbetterfromscratch.com/chicken-enchiladas/",
+    "imageUrl": "https://tastesbetterfromscratch.com/wp-content/uploads/2019/02/Chicken-and-Rice-Enchiladas.jpg",
+    "excerpt": "<p>I can&#8217;t think of many cozier dinners than Chicken and Rice Enchiladas, loaded with beans, corn, veggies and a creamy sauce, and baked with enchilada sauce and cheese. How to make Chicken and Rice Enchiladas: Make Filling: In a very large bowl, combine all ingredients except for the tortillas and enchilada sauce then stir to&hellip;</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "tastesbetterfromscratch-com-164",
+    "title": "Carrot Cake",
+    "link": "https://tastesbetterfromscratch.com/the-ultimate-carrot-cake-with-cream-cheese-frosting/",
+    "imageUrl": "https://tastesbetterfromscratch.com/wp-content/uploads/2021/03/Carrot-Cake25-1.jpg",
+    "excerpt": "<p>The best Carrot Cake recipe is extra moist from buttermilk and crushed pineapple and has a hefty coating of dreamy cream cheese frosting. This is my birthday cake of choice every single year! How to make Carrot Cake: Make Cake Batter: Combine eggs, granulated sugar, brown sugar, oil, buttermilk, vanilla, and pineapple in a large&hellip;</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "tastesbetterfromscratch-com-131114",
+    "title": "Breakfast Biscuits",
+    "link": "https://tastesbetterfromscratch.com/breakfast-biscuits/",
+    "imageUrl": "https://tastesbetterfromscratch.com/wp-content/uploads/2025/03/Breakfast-Biscuits25-2.jpg",
+    "excerpt": "<p>Our Homemade Breakfast Biscuits are the perfect way to start your day, packed with protein, super filling and freezer-friendly too, so you can batch cook them and have grab and go breakfast. How to make Breakfast Biscuits: Saut\u00e9 Veggies and Cook Meat: Heat oil in a skillet over medium heat then add onion and bell&hellip;</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "tastesbetterfromscratch-com-97346",
+    "title": "Pita Bread",
+    "link": "https://tastesbetterfromscratch.com/pita-bread/",
+    "imageUrl": "https://tastesbetterfromscratch.com/wp-content/uploads/2023/08/Pita-Bread25-1.jpg",
+    "excerpt": "<p>Homemade Pita Bread couldn&#8217;t be easier to make! It&#8217;s soft, delicious, and only requires 10 minutes to prep! They are versatile and freezer friendly too! How to make Pita Bread: Prepare Dough: Combine water, yeast, sugar, salt, olive oil, and 1 cup flour. Gradually add more flour, a little at a time, until the dough&hellip;</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "tastesbetterfromscratch-com-5410",
+    "title": "Ham Bone Soup",
+    "link": "https://tastesbetterfromscratch.com/slow-cooker-leftover-ham-bone-soup/",
+    "imageUrl": "https://tastesbetterfromscratch.com/wp-content/uploads/2021/04/Ham-Bone-Soup25-1-scaled.jpg",
+    "excerpt": "<p>There&#8217;s so much to love about our old fashioned Ham Bone Soup recipe loaded with potatoes, beans, ham, and vegetables in a delicious broth. It can be made in the slow cooker or on the stove. How to make Ham Bone Soup: Slow Cooker Method (Recommended): Make Broth: In a slow cooker, add ham bone,&hellip;</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "tastesbetterfromscratch-com-1474",
+    "title": "Ranger Cookies (Cowboy Cookies)",
+    "link": "https://tastesbetterfromscratch.com/ranger-cookies/",
+    "imageUrl": "https://tastesbetterfromscratch.com/wp-content/uploads/2020/09/Ranger-Cookies25-1.jpg",
+    "excerpt": "<p>Ranger Cookies (Cowboy Cookies) are upgraded chocolate chip cookies with oats, and cornflakes added. It&#8217;s perfectly chewy with an addicting texture and flavor! How to make Ranger Cookies: Cookie Dough: Mix butter and sugars with a hand mixer or stand mixer until creamed together. Mix in eggs and vanilla. Add flour, baking powder, baking soda,&hellip;</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "tastesbetterfromscratch-com-130815",
+    "title": "Patatas Bravas",
+    "link": "https://tastesbetterfromscratch.com/patatas-bravas/",
+    "imageUrl": "https://tastesbetterfromscratch.com/wp-content/uploads/2025/03/Patatas-Bravas25-1.jpg",
+    "excerpt": "<p>This easy Patatas Bravas recipe has become a staple in our lives here in Barcelona. It&#8217;s crispy, flavorful, and the homemade sauce and aioli takes it over the top! The Crispy, Saucy Secret I&#8217;m Finally Sharing. Get Ready to Fall Head-Over-Heels for Crispy Potatoes. Patatas Bravas: Crispy. Saucy. Done! How to make Patatas Bravas: Make&hellip;</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "tastesbetterfromscratch-com-31737",
+    "title": "Air Fryer Chicken Nuggets",
+    "link": "https://tastesbetterfromscratch.com/air-fryer-chicken-nuggets/",
+    "imageUrl": "https://tastesbetterfromscratch.com/wp-content/uploads/2024/04/Air-Fryer-Chicken-Nuggets24-1-scaled.jpg",
+    "excerpt": "<p>Our Air Fryer Chicken Nuggets recipe is healthier, tastes better, and is cooked in the air fryer for that perfect crispy coating on the outside, juicy on the inside. It&#8217;s a meal even the pickiest eaters will love! Check out all of my air fryer recipes. I recommend Air Fryer Salmon Bites, Air Fryer Meatballs,&hellip;</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "downshiftology-com-59554",
+    "title": "Best St. Patrick&#8217;s Day Food Ideas",
+    "link": "https://downshiftology.com/best-st-patricks-day-recipes/",
+    "imageUrl": "https://downshiftology.com/wp-content/uploads/2022/03/St.-Patricks-Day-Recipes-1.jpg",
+    "excerpt": "<p>St. Patrick&#8217;s Day food is all about classic Irish comfort food. Think shepherd&#8217;s pie, corned beef and cabbage, cozy Irish stew, and all the cabbage&hellip;</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "downshiftology-com-49801",
+    "title": "20+ Best Salmon Recipes",
+    "link": "https://downshiftology.com/best-easy-salmon-recipes/",
+    "imageUrl": "https://downshiftology.com/wp-content/uploads/2021/02/Best-Salmon-Recipes-5.jpg",
+    "excerpt": "<p>These salmon recipes will show you how to transform this wonderful fish into delicious, easy, and healthy meals! From perfectly baked salmon to beautifully charred&hellip;</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "downshiftology-com-76006",
+    "title": "20+ Valentine&#8217;s Day Recipes",
+    "link": "https://downshiftology.com/20-valentines-day-recipes/",
+    "imageUrl": "https://downshiftology.com/wp-content/uploads/2024/01/Valentines-Day-Recipes-1.jpg",
+    "excerpt": "<p>These Valentine&#8217;s Day recipes prove that a delicious, home-cooked meal is the ultimate way to someone&#8217;s heart. From romantic dinner ideas to indulgent chocolate desserts&hellip;</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "downshiftology-com-39240",
+    "title": "40+ Super Bowl Recipes for the Big Game",
+    "link": "https://downshiftology.com/healthy-super-bowl-recipes/",
+    "imageUrl": "https://downshiftology.com/wp-content/uploads/2020/01/Super-Bowl-Recipes-1.jpg",
+    "excerpt": "<p>It&#8217;s time for Super Bowl recipes that put a refreshing spin on classic game-day foods! From the best party dips and crispy chicken wings to&hellip;</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "downshiftology-com-83746",
+    "title": "Top 10 Recipes of 2024",
+    "link": "https://downshiftology.com/top-10-recipes-of-2024/",
+    "imageUrl": "https://downshiftology.com/wp-content/uploads/2024/12/Top-10-Recipes-2024-1.jpg",
+    "excerpt": "<p>The top 10 recipes on Downshiftology this year fell into four main themes\u2014Mexican recipes, Mediterranean recipes, slow cooker recipes, and one pan recipes. Plus, Downshiftology&hellip;</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "downshiftology-com-83471",
+    "title": "10+ Best Christmas Appetizers Your Guests Will Love",
+    "link": "https://downshiftology.com/best-christmas-appetizers/",
+    "imageUrl": "https://downshiftology.com/wp-content/uploads/2024/12/Christmas-Appetizers.jpg",
+    "excerpt": "<p>These Christmas appetizers will have everyone gathered around the table in seconds. Everyone loves a festive bite, party dip, and more! And you&#8217;ll love that&hellip;</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "downshiftology-com-37446",
+    "title": "2024 Holiday Gift Guides",
+    "link": "https://downshiftology.com/holiday-gift-guide/",
+    "imageUrl": "https://downshiftology.com/wp-content/uploads/2023/11/Gift-Guide-Featured-Image-2024.jpg",
+    "excerpt": "<p>My annual&nbsp;holiday gift guides&nbsp;are back!&nbsp;I\u2019ve got so many Christmas gift ideas for you this year, and I think presents wrapped with love are a simple&hellip;</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "downshiftology-com-37649",
+    "title": "My Favorite Cookware: The Best Pots and Pans",
+    "link": "https://downshiftology.com/best-cookware/",
+    "imageUrl": "https://downshiftology.com/wp-content/uploads/2019/11/best-cookware-to-use-12.jpg",
+    "excerpt": "<p>The best cookware (that&#8217;s worth the investment) is durable, non-toxic and lasts a lifetime. My favorite brands of cookware check all those boxes, and are&hellip;</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "downshiftology-com-46561",
+    "title": "The Ultimate List of Thanksgiving Side Dishes",
+    "link": "https://downshiftology.com/healthy-thanksgiving-side-dishes/",
+    "imageUrl": "https://downshiftology.com/wp-content/uploads/2020/11/Healthy-Thanksgiving-Side-Dishes-1.jpg",
+    "excerpt": "<p>Need a little inspiration for Thanksgiving side dishes? You&#8217;ve come to the right spot! I&#8217;ve rounded up the best options for you &#8211; from roasted&hellip;</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "downshiftology-com-45703",
+    "title": "Amazon Prime Day 2024: Best Deals for Kitchen and Home",
+    "link": "https://downshiftology.com/best-amazon-prime-day-deals/",
+    "imageUrl": "https://downshiftology.com/wp-content/uploads/2024/07/Amazon-Prime-Day.jpg",
+    "excerpt": "<p>Amazon\u2019s Prime Day 2024 is a huge savings event for Amazon Prime members \u2013 a treasure trove of the best deals spanning technology, kitchenware, home&hellip;</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "onceuponachef-com-63015",
+    "title": "Minestrone Soup",
+    "link": "https://www.onceuponachef.com/recipes/minestrone-soup.html",
+    "imageUrl": "https://www.onceuponachef.com/images/2025/03/Minestrone-Soup-16-scaled.jpg",
+    "excerpt": "<p>Minestrone is the ultimate clean-out-the-fridge soup\u2014hearty, comforting, and endlessly adaptable based on what you have on hand. At its core, it\u2019s an Italian vegetable soup, often with beans, pasta, and a tomato-based broth, but no two recipes are exactly alike. This minestrone soup recipe, sent to me by longtime reader Carol Winkelman (thank you, Carol!), [&hellip;]</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "onceuponachef-com-63127",
+    "title": "Chocolate Souffl\u00e9s",
+    "link": "https://www.onceuponachef.com/recipes/chocolate-souffles.html",
+    "imageUrl": "https://www.onceuponachef.com/images/2025/02/chocolate-souffles-4.jpg",
+    "excerpt": "<p>Many years ago, when I was an apprentice at L\u2019Auberge Chez Fran\u00e7ois, one of my nightly tasks was prepping the chocolate souffl\u00e9 dishes for evening service\u2014there were always a lot, since souffl\u00e9s are the kind of dessert people tend to order at restaurants rather than make at home. They have a reputation for being fussy\u2014there\u2019s [&hellip;]</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "onceuponachef-com-56341",
+    "title": "Creamy Potato Soup with Bacon &amp; Cheddar",
+    "link": "https://www.onceuponachef.com/recipes/creamy-potato-soup-with-bacon-cheddar.html",
+    "imageUrl": "https://www.onceuponachef.com/images/2024/10/20200914_SEGAL_JM18806.jpg",
+    "excerpt": "<p>This easy potato soup recipe from my second cookbook is so creamy and comforting, it practically wraps you up in a big hug. My kids say it tastes just like a baked potato with all the fixings, thanks to addition of butter, sour cream, cheese, and crispy bacon. Whether you need a quick weeknight dinner [&hellip;]</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "onceuponachef-com-24036",
+    "title": "Lemon Poppy Seed Cake",
+    "link": "https://www.onceuponachef.com/recipes/glazed-lemon-poppy-seed-cake.html",
+    "imageUrl": "https://www.onceuponachef.com/images/2018/12/Lemon-Poppyseed-Cake-15-scaled.jpg",
+    "excerpt": "<p>A variation of my popular lemon pound cake, this lemon poppy seed cake is laced with fresh lemon zest, filled to the brim with nutty, crackly poppy seeds, and drizzled with a bright lemon glaze. The texture is just what you hope for in a homemade cake\u2014ultra-moist and melt-in-your mouth tender. The recipe yields two [&hellip;]</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "onceuponachef-com-62812",
+    "title": "Fettuccine Alfredo",
+    "link": "https://www.onceuponachef.com/recipes/fettuccine-alfredo.html",
+    "imageUrl": "https://www.onceuponachef.com/images/2025/01/Fettuccini-Alfredo-16-scaled.jpg",
+    "excerpt": "<p>Fettuccine Alfredo was my all-time favorite food as a kid\u2014the only thing I ever ordered when I went out to dinner with my parents. Back then, I didn\u2019t think twice about calories; I was just all about that rich, creamy, and cheesy sauce and perfectly tender pasta. Originally from Rome, this dish started as a [&hellip;]</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "onceuponachef-com-51419",
+    "title": "Homemade Pasta",
+    "link": "https://www.onceuponachef.com/recipes/homemade-pasta.html",
+    "imageUrl": "https://www.onceuponachef.com/images/2024/09/Homemade-Pasta-Hero-3.jpg",
+    "excerpt": "<p>Making homemade pasta might seem intimidating, but it\u2019s easier than you\u2019d think\u2014and so rewarding! With just a few pantry staples, you can create fresh pasta with a texture and quality that\u2019s impossible to get from dried pasta. When it comes to kneading the dough, you can use a stand mixer to make things easier or [&hellip;]</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "onceuponachef-com-56201",
+    "title": "Steel Cut Oats",
+    "link": "https://www.onceuponachef.com/recipes/steel-cut-oats.html",
+    "imageUrl": "https://www.onceuponachef.com/images/2024/10/steel-cut-oats-hero-02.jpg",
+    "excerpt": "<p>If you&#8217;re craving a warm, satisfying breakfast that&#8217;s more substantial than regular oatmeal, steel cut oats are the perfect choice. A hearty, minimally processed form of whole oats, steel cut oats are chopped into pieces instead of being rolled or steamed, giving them a chewy texture and rich, nutty flavor. They take a bit longer [&hellip;]</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "onceuponachef-com-60453",
+    "title": "Taco Soup",
+    "link": "https://www.onceuponachef.com/recipes/taco-soup.html",
+    "imageUrl": "https://www.onceuponachef.com/images/2024/12/Taco-Soup-9-scaled.jpg",
+    "excerpt": "<p>Taco soup is like a quicker, soupier version of chili, ready in just 45 minutes. Made with homemade taco seasoning, Rotel tomatoes with green chilies, your choice of ground meat\u2014turkey, beef, chicken, or pork all work nicely\u2014plus beans and corn, it\u2019s the perfect way to enjoy your favorite taco flavors in a hearty soup. What [&hellip;]</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "onceuponachef-com-61804",
+    "title": "Espresso Martini",
+    "link": "https://www.onceuponachef.com/recipes/espresso-martini.html",
+    "imageUrl": "https://www.onceuponachef.com/images/2024/12/espresso-martini.jpg",
+    "excerpt": "<p>The espresso martini is one of those drinks that feels fancy but is super easy to make. With its perfect blend of vodka and espresso, it&#8217;s ideal for a little boost after a long day, as an after-dinner drink, for brunch, or even as a batch cocktail for a party. Fun fact: The espresso martini [&hellip;]</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "onceuponachef-com-49081",
+    "title": "Simple Syrup",
+    "link": "https://www.onceuponachef.com/how-to/simple-syrup.html",
+    "imageUrl": "https://www.onceuponachef.com/images/2024/06/Simple-Syrup-Hero-4.jpg",
+    "excerpt": "<p>Simple syrup is a kitchen essential, and it\u2019s as easy as it sounds\u2014just sugar and water, but the possibilities are endless! In cocktails, it\u2019s a must for adding sweetness without the grittiness of granulated sugar, and pastry chefs rely on it to keep cakes moist and fresh for days. Whether you\u2019re stirring it into iced [&hellip;]</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "halfbakedharvest-com-178640",
+    "title": "Blackened Salmon Caesar Salad.",
+    "link": "https://www.halfbakedharvest.com/salmon-caesar-salad/",
+    "imageUrl": "https://www.halfbakedharvest.com/wp-content/uploads/2025/03/Blackened-Salmon-Caesar-Salad-1-1-scaled.jpg",
+    "excerpt": "<p>A gorgeous, delicious salad that requires little effort&#8230;A great dinner from spring through summer YUM!</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "halfbakedharvest-com-178607",
+    "title": "30 Popular Spring Recipes of 2025.",
+    "link": "https://www.halfbakedharvest.com/30-popular-spring-recipes-of-2025/",
+    "imageUrl": "https://www.halfbakedharvest.com/wp-content/uploads/2024/05/3-Cheese-Lemon-Basil-Pizza-1-scaled.jpg",
+    "excerpt": "<p>If you&#8217;re looking for delicious spring recipes that combine light &#038; fresh with quick &#038; cozy, they&#8217;re here!</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "halfbakedharvest-com-178442",
+    "title": "20 Minute Cashew Chicken Noodles.",
+    "link": "https://www.halfbakedharvest.com/cashew-chicken-noodles/",
+    "imageUrl": "https://www.halfbakedharvest.com/wp-content/uploads/2025/03/20-Minute-Cashew-Chicken-Noodles-1-scaled.jpg",
+    "excerpt": "<p>Spicy, tangy, and salty\u2014all the right flavors and they all hit so well together. Delish!</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "halfbakedharvest-com-178495",
+    "title": "Nine Favorite Things.",
+    "link": "https://www.halfbakedharvest.com/nine-favorite-things-382/",
+    "imageUrl": "https://www.halfbakedharvest.com/wp-content/uploads/2024/04/IMG_9523-scaled.jpeg",
+    "excerpt": "<p>From 5 must-make recipes to spring finds on Amazon Home to &#8220;lifey&#8221; things to spring styles&#8230;Tieghan&#8217;s got you covered!</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "halfbakedharvest-com-178556",
+    "title": "HBH Meal Plan: 3/23",
+    "link": "https://www.halfbakedharvest.com/hbh-meal-plan-3-23/",
+    "imageUrl": "https://www.halfbakedharvest.com/wp-content/uploads/2025/03/Strawberry-Poptart-Sheet-Cake-1-scaled.jpg",
+    "excerpt": "No excerpt available.",
+    "contentType": "article"
+  },
+  {
+    "id": "halfbakedharvest-com-178454",
+    "title": "Divine 6 Ingredient Magic Cookie Bars.",
+    "link": "https://www.halfbakedharvest.com/6-ingredient-magic-cookie-bars/",
+    "imageUrl": "https://www.halfbakedharvest.com/wp-content/uploads/2025/03/Devine-6-Ingredient-Magic-Cookie-Bars-1-scaled.jpg",
+    "excerpt": "<p>I took my magic cookies and made them even easier. Simply layer and bake. No mixing, no bowls, simple as that!</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "halfbakedharvest-com-178392",
+    "title": "Easy Chili Lime Chicken.",
+    "link": "https://www.halfbakedharvest.com/chili-lime-chicken/",
+    "imageUrl": "https://www.halfbakedharvest.com/wp-content/uploads/2025/03/Easy-Chili-Lime-Chicken-1-scaled.jpg",
+    "excerpt": "<p>Serve to your family tonight, but don\u2019t overlook this for a dinner party&#8230;simple to create, healthy, and looks pretty!</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "halfbakedharvest-com-178323",
+    "title": "Lemon Cream Sauce Smothered Chicken and Orzo.",
+    "link": "https://www.halfbakedharvest.com/lemon-cream-sauce-smothered-chicken-and-orzo/",
+    "imageUrl": "https://www.halfbakedharvest.com/wp-content/uploads/2025/03/Lemon-Cream-Sauce-Smothered-Chicken-and-Orzo-1-scaled.jpg",
+    "excerpt": "<p>A cozy skillet dinner that&#8217;s yummy, simple to make, and enjoyed by all!</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "halfbakedharvest-com-178269",
+    "title": "Crispy Hot Honey Salmon Tenders.",
+    "link": "https://www.halfbakedharvest.com/hot-honey-salmon-tenders/",
+    "imageUrl": "https://www.halfbakedharvest.com/wp-content/uploads/2025/03/Crispy-Hot-Honey-Salmon-Tenders-1-scaled.jpg",
+    "excerpt": "<p>If you love hot honey chicken, you&#8217;ll become obsessed with this salmon &#8211; it\u2019s the easiest sheet pan dinner!</p>",
+    "contentType": "article"
+  },
+  {
+    "id": "halfbakedharvest-com-178165",
+    "title": "Nine Favorite Things.",
+    "link": "https://www.halfbakedharvest.com/nine-favorite-things-381/",
+    "imageUrl": "https://www.halfbakedharvest.com/wp-content/uploads/2025/03/IMG_0207-scaled.jpg",
+    "excerpt": "<p>From spring recipes to a spring home refresh to an evening in the kitchen with benny&#8230;Tieghan&#8217;s got you covered!</p>",
+    "contentType": "article"
+  },
+  {
+        "id": "discussion-4",
+        "title": "What are your favorite ways to use asparagus this spring?",
+        "link": "#discussion-4-link",
+        "author": "Jeanine D. Inspired", // Inspired by Love & Lemons
+        "commentCount": 22,
+        "body": "Asparagus season is here! Beyond just roasting, how do you love to cook it? Looking for new ideas!",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+    {
+        "id": "discussion-5",
+        "title": "Need a super fast (<20 min) dinner idea for tonight! Help!",
+        "link": "#discussion-5-link",
+        "author": "Natasha K. Fan", // Inspired by Natasha's Kitchen
+        "commentCount": 35,
+        "body": "Completely blanking on dinner and only have 20 mins. What are your lightning-fast go-to meals?",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+    {
+        "id": "discussion-6",
+        "title": "Why do my muffins always sink in the middle?",
+        "link": "#discussion-6-link",
+        "author": "MuffinTrouble",
+        "commentCount": 18,
+        "body": "Followed the recipe exactly, but they keep collapsing after cooling. Overmixing? Oven temp?",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+    {
+        "id": "discussion-7",
+        "title": "Favorite uses for nutritional yeast (besides 'cheese' sauce)?",
+        "link": "#discussion-7-link",
+        "author": "MinimalistInspired", // Inspired by Minimalist Baker
+        "commentCount": 25,
+        "body": "I have a big tub of nooch! What creative ways do you use it to add umami or flavour?",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+    {
+        "id": "discussion-8",
+        "title": "Is putting ketchup on a hot dog a culinary crime?",
+        "link": "#discussion-8-link",
+        "author": "HotDogHero",
+        "commentCount": 75,
+        "body": "Especially after age 10? Let's hear your passionate arguments for and against!",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+    {
+        "id": "discussion-9",
+        "title": "Best way to store fresh herbs to make them last longer?",
+        "link": "#discussion-9-link",
+        "author": "GreenThumbCook",
+        "commentCount": 41,
+        "body": "My cilantro and parsley always wilt so fast. What are your proven methods for extending their life?",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+    {
+        "id": "discussion-10",
+        "title": "Sheet Pan Dinners: Share your absolute favorite combo!",
+        "link": "#discussion-10-link",
+        "author": "EasyDinnerFan",
+        "commentCount": 30,
+        "body": "Love the simplicity of sheet pan meals. What protein + veg + seasoning combo never fails you?",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+    {
+        "id": "discussion-11",
+        "title": "Help me use up a whole bunch of ripe bananas!",
+        "link": "#discussion-11-link",
+        "author": "BananaBonanza",
+        "commentCount": 27,
+        "body": "Besides banana bread (already made some!), what else can I do with these super ripe bananas?",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+    {
+        "id": "discussion-12",
+        "title": "Cast Iron Skillet Care: What's your seasoning routine?",
+        "link": "#discussion-12-link",
+        "author": "IronChefHopeful",
+        "commentCount": 55,
+        "body": "New to cast iron cooking. Scared to ruin the seasoning! How do you clean and maintain yours?",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+    {
+        "id": "discussion-13",
+        "title": "What's one 'weird' food combination you secretly love?",
+        "link": "#discussion-13-link",
+        "author": "OddEater",
+        "commentCount": 62,
+        "body": "Peanut butter and pickle sandwich? Fries dipped in a milkshake? Share your guilty pleasures!",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+     {
+        "id": "discussion-14",
+        "title": "Best non-dairy milk for frothing / lattes?",
+        "link": "#discussion-14-link",
+        "author": "CafeAtHome",
+        "commentCount": 38,
+        "body": "Trying to perfect my homemade lattes. Oat? Soy? Almond? Which non-dairy options give the best foam?",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+    {
+        "id": "discussion-15",
+        "title": "Meal Prep Sunday: What are you making this week?",
+        "link": "#discussion-15-link",
+        "author": "PlannerEats",
+        "commentCount": 45,
+        "body": "Looking for inspiration! What lunches, dinners, or snacks are you prepping for the week ahead?",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+    {
+        "id": "discussion-16",
+        "title": "Secrets to perfectly crispy roasted potatoes?",
+        "link": "#discussion-16-link",
+        "author": "PotatoPerfect",
+        "commentCount": 33,
+        "body": "Mine sometimes end up soggy or burnt. High heat? Parboiling? Specific fats? Share your secrets!",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+    {
+        "id": "discussion-17",
+        "title": "Favorite simple salad dressing recipe?",
+        "link": "#discussion-17-link",
+        "author": "Jeanine D. Inspired", // Love & Lemons often features dressings
+        "commentCount": 29,
+        "body": "Tired of bottled dressings. What's your easy, go-to vinaigrette or creamy dressing recipe?",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+    {
+        "id": "discussion-18",
+        "title": "Air Fryer Owners: What's something that surprised you with how well it cooked?",
+        "link": "#discussion-18-link",
+        "author": "AirFryerNewbie",
+        "commentCount": 48,
+        "body": "Beyond fries and wings, what unexpected foods turn out amazing in the air fryer?",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+    {
+        "id": "discussion-19",
+        "title": "Comfort Food Classics: What's your ultimate rainy day meal?",
+        "link": "#discussion-19-link",
+        "author": "ComfortCook",
+        "commentCount": 51,
+        "body": "When it's gloomy outside, what dish instantly makes you feel warm and cozy?",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+    {
+        "id": "discussion-20",
+        "title": "Best way to chop onions without crying?",
+        "link": "#discussion-20-link",
+        "author": "TearyEyedChef",
+        "commentCount": 65,
+        "body": "I dread chopping onions! Goggles? Cold water? What actually works?",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+     {
+        "id": "discussion-21",
+        "title": "Impressive but EASY dessert for a dinner party?",
+        "link": "#discussion-21-link",
+        "author": "PartyHost",
+        "commentCount": 26,
+        "body": "Need a dessert that looks fancy but doesn't require hours of complicated steps. Ideas?",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+    {
+        "id": "discussion-22",
+        "title": "Favorite homemade pizza topping combinations?",
+        "link": "#discussion-22-link",
+        "author": "PizzaNightFan",
+        "commentCount": 40,
+        "body": "Moving beyond pepperoni! What are your creative or classic favorite topping combos?",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+    {
+        "id": "discussion-23",
+        "title": "How do you make boring chicken breasts exciting?",
+        "link": "#discussion-23-link",
+        "author": "ChickenChallenge",
+        "commentCount": 37,
+        "body": "Need new ways to flavor or cook chicken breasts so they aren't dry and bland.",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+    {
+        "id": "discussion-24",
+        "title": "What's worth the splurge: High-end olive oil?",
+        "link": "#discussion-24-link",
+        "author": "BudgetGourmet",
+        "commentCount": 24,
+        "body": "Can you really taste the difference between cheap and expensive extra virgin olive oil? When does it matter?",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+    {
+        "id": "discussion-25",
+        "title": "Best tips for cooking fish without it sticking to the pan?",
+        "link": "#discussion-25-link",
+        "author": "FishFlipper",
+        "commentCount": 31,
+        "body": "My salmon skin always gets stuck! Stainless steel vs non-stick? Heat level? Oil?",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+    {
+        "id": "discussion-26",
+        "title": "Go-to Lentil Soup Recipe?",
+        "link": "#discussion-26-link",
+        "author": "SoupSeason",
+        "commentCount": 20,
+        "body": "Looking for a hearty, flavorful, and reliable lentil soup recipe for colder weather.",
+        "imageUrl": null,
+        "contentType": "discussion"
+    },
+    {
+        "id": "discussion-27",
+        "title": "Favorite way to upgrade instant ramen?",
+        "link": "#discussion-27-link",
+        "author": "RamenHacks",
+        "commentCount": 50,
+        "body": "Beyond the flavor packet - what eggs, veggies, sauces, or toppings do you add?",
+        "imageUrl": null,
+        "contentType": "discussion"
+    }
+        ];
+    </script>
+    <script src="script.js"></script>
+
+</body>
+</html>

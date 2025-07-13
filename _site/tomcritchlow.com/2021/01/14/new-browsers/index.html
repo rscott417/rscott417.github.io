@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en" class="w-100 h-100">
+  <head>
+    <meta charset="utf-8">
+    <title>Why can't I write code inside my browser?</title>
+    <meta name="description" content="Tom Critchlow. Move. Think. Create.">
+
+    
+
+<link href='https://fonts.googleapis.com/css?family=Libre+Franklin:400,400italic,600,700,300,800|IBM+Plex+Mono|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet" href="/css/tachyons.min.css">
+<link rel="stylesheet" href="/css/hamburgers.css">
+
+
+<link href="/css/all.css" rel="stylesheet">
+<link href="/css/mobile.css" rel="stylesheet">
+
+<link rel="icon" href="/images/favicon.png" />
+
+<meta name="viewport" content="width=device-width">
+
+<script src="//code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="/js/feather.min.js" type="text/javascript"></script>
+
+<!--Custom Jquery UI only used for slidetoggle left/right-->
+<script src="/js/jquery-ui.min.js" type="text/javascript"></script>
+
+
+<link rel="alternate" type="application/rss+xml" title="RSS Feed for tomcritchlow.com" href="/feed.xml" />
+
+
+ <meta property="og:type"   content="article" />
+ <meta property="og:url"    content="https://tomcritchlow.com/tomcritchlow.com/2021/01/14/new-browsers/" />
+ <meta property="og:title"  content="Why can&#39;t I write code inside my browser?" />
+ <meta name="og:description" content="Notes on rethinking browsers">
+ 
+ <meta property="og:image"  content="https://tomcritchlow.com/images/green.png" />
+ 
+ <meta property="og:image:width"  content="600" />
+ <meta property="og:image:height"  content="315" />
+
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@tomcritchlow">
+<meta name="twitter:creator" content="@tomcritchlow">
+<meta name="twitter:title" content="Why can't I write code inside my browser?">
+<meta name="twitter:description" content="Notes on rethinking browsers">
+
+<meta name="twitter:image" content="https://tomcritchlow-tom_og.web.val.run/?headline=Why can't I write code inside my browser?&subheadline=Notes on rethinking browsers&date=January 14, 2021">
+
+
+
+
+
+ 
+<meta name="pocket-site-verification" content="d481265d27c9597cbdc003abbf1994" />
+
+<link rel="webmention" href="https://webmention.io/tomcritchlow.com/webmention" />
+<link rel="pingback" href="https://webmention.io/tomcritchlow.com/xmlrpc" />
+
+
+
+</head>
+
+<body class="ph0-l center">
+
+<!--From GA include-->
+
+
+
+
+<script defer data-domain="tomcritchlow.com" src="https://plausible.io/js/script.js"></script>
+
+
+
+<style>
+#nav{
+    width:223px;
+    height:100vh;
+  }
+
+  #maincontent{
+    margin-left:223px;
+  }
+
+  @media (max-width: 1024px) {
+      #nav{
+          width:100%;
+      }
+
+      #maincontent{
+          margin-left:auto;
+      }
+  }
+</style>
+
+
+<div class="dn-l db w-100 pa3 bg-near-white z-1" style="position:sticky;top:0px">
+    <a class="link dim dark-gray f6 f5-l dib ttu pt2 pt0-l dtc-l v-mid newgreen b" href="/" title="Home">TOM CRITCHLOW</a>
+    <div class="fr dib dn-l pt1">    
+        <div id="hamburger" class="hamburger hamburger--squeeze">
+                <div class="hamburger-box">
+                  <div class="hamburger-inner"></div>
+                </div>
+              </div>
+    
+    </div>
+</div>
+
+<div class="flex items-stretch h-100 w-100">
+  
+    
+
+    
+
+    <div id="nav" class="w5 bg-near-white f7 fw4 br-l bt-0-l bb-0-l bt bb b--black-10 fixed dn db-l top-0-l left-0 overflow-y-scroll z-1 pt2 pt0-l">
+      
+      
+      
+    
+      <a class="db-l dn  items-center ma2 ph3 pa2 mv3 mb4-l link fw8 f6 br3 newgreen" href="/">
+        TOM CRITCHLOW
+      </a>
+    
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Home" href="/">
+    <i data-feather="home" class="h1 pr3"></i> <span class="navname">Home</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="About me" href="/about">
+    <i data-feather="user" class="h1 pr3"></i> <span class="navname">About me</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Writing" href="/writing">
+    <i data-feather="rss" class="h1 pr3"></i> <span class="navname">Writing</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Library" href="/library">
+    <i data-feather="layers" class="h1 pr3"></i> <span class="navname">Library</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Newsletter" href="/newsletter">
+    <i data-feather="mail" class="h1 pr3"></i> <span class="navname">Newsletter</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Search" href="/search">
+    <i data-feather="search" class="h1 pr3"></i> <span class="navname">Search</span>
+  </a>
+
+
+
+<div class="mv4">
+    <div class="newgreen mh3 ph2 mv2 navname">Hire me</div>
+
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Consulting" href="/consulting">
+    <i data-feather="git-merge" class="h1 pr3"></i> <span class="navname">Consulting</span>
+  </a>
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Advisor" href="/advisor">
+    <i data-feather="git-pull-request" class="h1 pr3"></i> <span class="navname">Advisor</span>
+  </a>
+
+</div>
+
+<div class="mv4">
+    <div class="newgreen mh3 ph2 mv2 navname">Elsewhere</div>
+
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Twitter" href="https://twitter.com/tomcritchlow/">
+    <i data-feather="twitter" class="h1 pr3"></i> <span class="navname">Twitter</span>
+  </a>
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="LinkedIn" href="https://www.linkedin.com/in/tomcritchlow/">
+    <i data-feather="linkedin" class="h1 pr3"></i> <span class="navname">LinkedIn</span>
+  </a>
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Are.na" href="https://www.are.na/tom-critchlow/index">
+    <i data-feather="bookmark" class="h1 pr3"></i> <span class="navname">Are.na</span>
+  </a>
+
+</div>
+
+      
+      </div>
+
+<script>
+    
+var $hamburger = $("#hamburger");
+            $hamburger.on("click", function(e) {
+
+              $hamburger.toggleClass("is-active");
+              $("#nav").toggleClass("dn");
+   
+            }); 
+      
+            feather.replace();
+
+function addClassBasedOnUrlWithSwitch() {
+  // Get the current URL
+  const url = window.location.href;
+  
+  switch (true) {
+    case url == "https://tomcritchlow.com/":
+      const div0 = document.getElementById("Home");
+      if (div0) {
+        div0.classList.add('bg-white');
+      }
+      break;
+    case url.includes("https://tomcritchlow.com/?"):
+      const div1 = document.getElementById("Home");
+      if (div1) {
+        div1.classList.add('bg-white');
+      }
+      break;      
+    case url.includes("/about/"):
+      const div2 = document.getElementById("About me");
+      if (div2) {
+        div2.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/writing/"):
+      const div3 = document.getElementById("Writing");
+      if (div3) {
+        div3.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/newsletter"):
+      const div4 = document.getElementById("Newsletter");
+      if (div4) {
+        div4.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/search"):
+      const div5 = document.getElementById("Search");
+      if (div5) {
+        div5.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/start-here"):
+      const div6 = document.getElementById("Start here");
+      if (div6) {
+        div6.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/topics/"):
+      const div7 = document.getElementById("Topics");
+      if (div7) {
+        div7.classList.add('bg-white');
+      }
+      break;                              
+    
+    default:
+      // Code to run if none of the above cases are true
+      break;
+  }
+}
+
+// Call the function
+addClassBasedOnUrlWithSwitch();
+
+
+
+</script>
+
+    <div class="w-100 h-100" id="maincontent">
+      <div class="mw8 center w-100 h-100">
+        
+    
+        
+    
+
+
+
+
+
+
+<div class="pt4 pt5-l pb2 w-two-thirds-ns center">
+
+<div class="f4 ph3 pb4 ph0-l lh-copy">
+
+  
+<div class="bb b--newgreen w-100 ibmplexmono ttu f6 dt-published mb5" datetime="2021-01-14 00:00:00 -0500">
+    January 14, 2021
+  </div>
+  
+        <h1 class="f2 fw8 lh-solid mv1 posttitle p-name">Why can't I write code inside my browser?</h1>
+  
+      
+      <h2 class="f3 fw3 lh-copy mt1 subtitle pb2 p-summary i">Notes on rethinking browsers</h2>
+        
+    
+    <div class="postcontainer">
+    <p><strong>So I can write code inside my spreadsheet, but not inside my browser? WTF.</strong></p>
+
+<p>Ok, let’s back up. Coding is too hard.</p>
+
+<p>I’ve been playing with the web and code for years now and still feel like I’m an outsider to the “code club”. An incomplete list of things I’ve tried and failed to do:</p>
+
+<ul>
+  <li>Failed to install node</li>
+  <li>Failed to install pip</li>
+  <li>Failed to install ruby</li>
+</ul>
+
+<p>Meanwhile, things I do regularly:</p>
+
+<ul>
+  <li>Use Github extensively for a variety of projects, all through the Github GUI</li>
+  <li>Use Glitch to host some simple Node.js apps</li>
+  <li>Maintain a fairly complex Jekyll blog hosted on Github pages without Ruby or Jekyll running locally</li>
+</ul>
+
+<p>Increasingly there’s a disconnect between the kinds of activities code enables and the “expected” workflow for “being a coder”.</p>
+
+<p>Meanwhile - there’s been a kind of revolution around coding. “Javascript everywhere” (i.e. node.js) has really become the default web-development paradigm.</p>
+
+<p>Javascript is alluring - partly because every computer has a javascript GUI and runtime - the browser! You can code in javascript on your computer using a text editor and a browser - without ever touching the command line!</p>
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I think a lot about how easy and hackable javascript feels. How it feels easy to play with and build prototypes.<br /><br />And how this feeling is 100% because of the fact that every computer comes with a javascript GUI and runtime environment... the browser.</p>&mdash; Tom Critchlow (@tomcritchlow) <a href="https://twitter.com/tomcritchlow/status/1278878761681686530?ref_src=twsrc%5Etfw">July 3, 2020</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>But… on installing node.js you’re greeted with this screen (wtf is user/local/bin in $path?), and left to fire up the command line.</p>
+
+<p><img src="/images/node-install.png" alt="" /></p>
+
+<p>Ok, once again. I can write code inside my spreadsheet but not inside my browser? WTF.</p>
+
+<p>Here’s my pitch: build a browser that comes pre-installed with node.js, an IDE and a simple runtime environment.</p>
+
+<h2 id="defaults-matter">Defaults Matter</h2>
+
+<p>Why is this important? Because defaults matter. Defaults allow people to get started. Python is installed by default on the mac and so I’ve found it very easy to do some lightweight Python coding (e.g. <a href="https://tomcritchlow.com/2017/11/07/privacy-glitch/">some glitch art</a>)</p>
+
+<p><em>Can you imagine if Node.js was installed by default?</em></p>
+
+<h2 id="guis-matter">GUIs Matter</h2>
+
+<p>People hate command lines - not only do they LOOK scary, they give weird unhelpful error messages and… you have to type everything. Ugh. This is why people would rather code inside a spreadsheet application - because it’s an application.</p>
+
+<p><em>Can you imagine if the beginner version of Node.js came pre-installed with a GUI for managing and running your code?</em></p>
+
+<h2 id="code-for-all">Code for All</h2>
+
+<p>It’s not “designers should code” or “SEOs should code” - but rather code <em>is</em> and <em>should</em> be as widespread as spreadsheets. This is a great little read on how code is perhaps finally overtaking spreadsheets in a niche reinsurance industry, but really it gets to the heart of <em>every</em> industry:</p>
+
+<blockquote class="quoteback" darkmode="" data-title="Ditching%20Excel%20for%20Python%20-%20Lessons%20Learned%20from%20a%20Legacy%20Industry%20-%20Amy%20Peniston" data-author="Amy Peniston" cite="https://amypeniston.com/ditching-excel-for-python/">
+<p>During these three short years, I observed a radical shift in data analysis methodologies. Excel-based models, which had seemed top-of-the-line suddenly were too slow and too rigid; Integration with 3rd party data sources, which was once a luxury, became the norm; And analysts began to utilize scripts to accomplish many labor-intensive tasks typically performed by hand or in spreadsheets.</p>
+
+<p>Enabling this change is a suite of accessible Python-powered tools. These technologies are rapidly displacing the old way of doing things, ushering in a new wave of reinsurance models and the talent needed to support them.</p>
+
+<p>Admittedly, the following observations do come from a very niche industry. But I believe that the broader trends discussed here will also apply to other legacy companies and sectors.</p>
+<footer>Amy Peniston <cite><a href="https://amypeniston.com/ditching-excel-for-python/">https://amypeniston.com/ditching-excel-for-python/</a></cite></footer>
+</blockquote>
+<script note="" src="https://cdn.jsdelivr.net/gh/Blogger-Peer-Review/quotebacks@1/quoteback.js"></script>
+
+<h2 id="new-browsers">New Browsers</h2>
+
+<p>Ok - so honestly I’m surprised that Google isn’t taking some portion of their massive compute platform budget and putting it to work creating simple, widespread default onramps for code. Imagine if node.js shipped inside Chrome by default! But - in reality I doubt Google is going to do this.</p>
+
+<p>So it’s up to the new browsers on the block.</p>
+
+<p>Maybe Mozilla could buy up Glitch and integrate it natively inside Firefox?</p>
+
+<p>Maybe <a href="https://beakerbrowser.com/">BeakerBrowser</a> will get enough traction and look beyond the P2P web?</p>
+
+<p>Maybe the <a href="https://thebrowser.company/">Browser Company</a> will do something like this?</p>
+
+<p>Because I love building things using code. But coding is still too damn hard for beginners.</p>
+
+  </div>
+
+    
+    <hr class="w3 mv5">
+    
+
+  
+
+  
+  <div class="w-100 mv3 pa3 ba b--newgreen br2 f5 bg-near-white">
+    <div class="b pv1">More blog posts:</div>
+    
+    <div class="flex w-100">
+      <p class="pv0 mv1"><a href="/tomcritchlow.com/2025/06/27/taking-blogging-seriously/">Taking Blogging Seriously</a></p>
+      <p class="f6 black-50 ml-auto w-20-l w-40 tr pv0 mv1">June 27, 2025</p>
+    </div>
+    
+    
+    <div class="flex w-100">
+      <p class="pv0 mv1"><a href="/2025/06/27/taking-blogging-seriously/">Taking Blogging Seriously</a></p>
+      <p class="f6 black-50 ml-auto w-20-l w-40 tr pv0 mv1">June 27, 2025</p>
+    </div>
+    
+    
+    <div class="flex w-100">
+      <p class="pv0 mv1"><a href="/tomcritchlow.com/2025/03/21/better-ai-mode/">Google is Grounded and Needs to Learn How to Soar</a></p>
+      <p class="f6 black-50 ml-auto w-20-l w-40 tr pv0 mv1">March 21, 2025</p>
+    </div>
+    
+    
+        
+    <div class="bt b--black-10 mt3">
+      <p>This post was written by Tom Critchlow - blogger and independent consultant. Subscribe to join my occassional newsletter:</p>
+        <form action="https://buttondown.email/api/emails/embed-subscribe/tomcritchlow" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.email/tomcritchlow', 'popupwindow')" class="embeddable-buttondown-form flex items-center w-100 f5">
+            <input placeholder="Email Address" type="email" name="email" id="bd-email" class="bg-light-gray w-100 input-reset ba b--black-20 pv2 ph3 border-box br2 br--left">
+            <input type="hidden" name="metadata__cta" value="blogend">
+            <input type="submit" value="Subscribe" class="input-reset w-auto-ns pv2 ph3 ba b--newgreen bg-light-gray br2 br--right pointer">
+            </form>
+    </div>
+        
+    </div>
+    
+
+
+
+<hr class="w3 mv5">
+
+
+<script>
+
+    $( document ).ready(function() {
+        var footnotes = $(".footnotes p");
+        $("sup").each(function(index){
+            var fn = footnotes[index].removeChild(footnotes[index].lastChild);
+            $(this).replaceWith("<label for='"+index+"' class='margin-toggle sidenote-number'></label><input type='checkbox' id='"+index+"' class='margin-toggle'/><span class='sidenote'>"+footnotes[index].innerHTML+"</span>")  
+        });   
+        $(".footnotes").hide()
+    });    
+       
+
+    </script>
+
+
+<script type="application/json" class="js-hypothesis-config">
+  {
+    "openSidebar": false,
+    "theme": "clean"
+  }
+</script>
+
+
+<script src="https://hypothes.is/embed.js" async></script>
+
+<script type="text/javascript">
+
+window.hypothesisConfig = function () {
+  return {
+    branding: {
+      appBackgroundColor: 'white',
+      ctaBackgroundColor: 'rgba(3, 11, 16, 1)',
+      ctaTextColor: '#eee',
+      selectionFontFamily: 'helvetica, arial, sans serif'
+    }
+  };
+};
+
+if ($(window).width()<600){
+      window.hypothesisConfig = function () {
+        return {
+          "externalContainerSelector": "#hypbox",
+          "onLayoutChange": function(layout) {
+            if (layout.expanded) {
+              $('#hypbox').show();
+            } else {
+              $('#hypbox').hide();
+            }
+          }
+        };
+      };
+    };
+</script>
+
+<script defer src="https://cdn.commento.io/js/commento.js"></script>
+<div id="commento"></div>
+
+
+
+</div>
+</div>
+
+<div id="hypbox" style="display:none;width:100%;height:65%;position:fixed;bottom:0px;border-top:1px solid #02AD28;">
+      
+</div>
+
+</div>
+
+      
+    </div>
+      
+    </div>
+    </div>
+    
+    
+    
+    
+    <script>
+      feather.replace();
+    </script>
+
+    </body>
+    </html>

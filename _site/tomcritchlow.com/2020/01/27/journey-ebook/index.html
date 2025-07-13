@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en" class="w-100 h-100">
+  <head>
+    <meta charset="utf-8">
+    <title>Building an ebook version of Journey to the End of the Night for Erin</title>
+    <meta name="description" content="Tom Critchlow. Move. Think. Create.">
+
+    
+
+<link href='https://fonts.googleapis.com/css?family=Libre+Franklin:400,400italic,600,700,300,800|IBM+Plex+Mono|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet" href="/css/tachyons.min.css">
+<link rel="stylesheet" href="/css/hamburgers.css">
+
+
+<link href="/css/all.css" rel="stylesheet">
+<link href="/css/mobile.css" rel="stylesheet">
+
+<link rel="icon" href="/images/favicon.png" />
+
+<meta name="viewport" content="width=device-width">
+
+<script src="//code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="/js/feather.min.js" type="text/javascript"></script>
+
+<!--Custom Jquery UI only used for slidetoggle left/right-->
+<script src="/js/jquery-ui.min.js" type="text/javascript"></script>
+
+
+<link rel="alternate" type="application/rss+xml" title="RSS Feed for tomcritchlow.com" href="/feed.xml" />
+
+
+ <meta property="og:type"   content="article" />
+ <meta property="og:url"    content="https://tomcritchlow.com/tomcritchlow.com/2020/01/27/journey-ebook/" />
+ <meta property="og:title"  content="Building an ebook version of Journey to the End of the Night for Erin" />
+ <meta name="og:description" content="Technical specs and lessons learned trying to make a picture book "work" on the web">
+ 
+ <meta property="og:image"  content="https://tomcritchlow.com/images/green.png" />
+ 
+ <meta property="og:image:width"  content="600" />
+ <meta property="og:image:height"  content="315" />
+
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@tomcritchlow">
+<meta name="twitter:creator" content="@tomcritchlow">
+<meta name="twitter:title" content="Building an ebook version of Journey to the End of the Night for Erin">
+<meta name="twitter:description" content="Technical specs and lessons learned trying to make a picture book "work" on the web">
+
+<meta name="twitter:image" content="https://tomcritchlow-tom_og.web.val.run/?headline=Building an ebook version of Journey to the End of the Night for Erin&subheadline=Technical specs and lessons learned trying to make a picture book "work" on the web&date=January 27, 2020">
+
+
+
+
+
+ 
+<meta name="pocket-site-verification" content="d481265d27c9597cbdc003abbf1994" />
+
+<link rel="webmention" href="https://webmention.io/tomcritchlow.com/webmention" />
+<link rel="pingback" href="https://webmention.io/tomcritchlow.com/xmlrpc" />
+
+
+
+</head>
+
+<body class="ph0-l center">
+
+<!--From GA include-->
+
+
+
+
+<script defer data-domain="tomcritchlow.com" src="https://plausible.io/js/script.js"></script>
+
+
+
+<style>
+#nav{
+    width:223px;
+    height:100vh;
+  }
+
+  #maincontent{
+    margin-left:223px;
+  }
+
+  @media (max-width: 1024px) {
+      #nav{
+          width:100%;
+      }
+
+      #maincontent{
+          margin-left:auto;
+      }
+  }
+</style>
+
+
+<div class="dn-l db w-100 pa3 bg-near-white z-1" style="position:sticky;top:0px">
+    <a class="link dim dark-gray f6 f5-l dib ttu pt2 pt0-l dtc-l v-mid newgreen b" href="/" title="Home">TOM CRITCHLOW</a>
+    <div class="fr dib dn-l pt1">    
+        <div id="hamburger" class="hamburger hamburger--squeeze">
+                <div class="hamburger-box">
+                  <div class="hamburger-inner"></div>
+                </div>
+              </div>
+    
+    </div>
+</div>
+
+<div class="flex items-stretch h-100 w-100">
+  
+    
+
+    
+
+    <div id="nav" class="w5 bg-near-white f7 fw4 br-l bt-0-l bb-0-l bt bb b--black-10 fixed dn db-l top-0-l left-0 overflow-y-scroll z-1 pt2 pt0-l">
+      
+      
+      
+    
+      <a class="db-l dn  items-center ma2 ph3 pa2 mv3 mb4-l link fw8 f6 br3 newgreen" href="/">
+        TOM CRITCHLOW
+      </a>
+    
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Home" href="/">
+    <i data-feather="home" class="h1 pr3"></i> <span class="navname">Home</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="About me" href="/about">
+    <i data-feather="user" class="h1 pr3"></i> <span class="navname">About me</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Writing" href="/writing">
+    <i data-feather="rss" class="h1 pr3"></i> <span class="navname">Writing</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Library" href="/library">
+    <i data-feather="layers" class="h1 pr3"></i> <span class="navname">Library</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Newsletter" href="/newsletter">
+    <i data-feather="mail" class="h1 pr3"></i> <span class="navname">Newsletter</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Search" href="/search">
+    <i data-feather="search" class="h1 pr3"></i> <span class="navname">Search</span>
+  </a>
+
+
+
+<div class="mv4">
+    <div class="newgreen mh3 ph2 mv2 navname">Hire me</div>
+
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Consulting" href="/consulting">
+    <i data-feather="git-merge" class="h1 pr3"></i> <span class="navname">Consulting</span>
+  </a>
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Advisor" href="/advisor">
+    <i data-feather="git-pull-request" class="h1 pr3"></i> <span class="navname">Advisor</span>
+  </a>
+
+</div>
+
+<div class="mv4">
+    <div class="newgreen mh3 ph2 mv2 navname">Elsewhere</div>
+
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Twitter" href="https://twitter.com/tomcritchlow/">
+    <i data-feather="twitter" class="h1 pr3"></i> <span class="navname">Twitter</span>
+  </a>
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="LinkedIn" href="https://www.linkedin.com/in/tomcritchlow/">
+    <i data-feather="linkedin" class="h1 pr3"></i> <span class="navname">LinkedIn</span>
+  </a>
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Are.na" href="https://www.are.na/tom-critchlow/index">
+    <i data-feather="bookmark" class="h1 pr3"></i> <span class="navname">Are.na</span>
+  </a>
+
+</div>
+
+      
+      </div>
+
+<script>
+    
+var $hamburger = $("#hamburger");
+            $hamburger.on("click", function(e) {
+
+              $hamburger.toggleClass("is-active");
+              $("#nav").toggleClass("dn");
+   
+            }); 
+      
+            feather.replace();
+
+function addClassBasedOnUrlWithSwitch() {
+  // Get the current URL
+  const url = window.location.href;
+  
+  switch (true) {
+    case url == "https://tomcritchlow.com/":
+      const div0 = document.getElementById("Home");
+      if (div0) {
+        div0.classList.add('bg-white');
+      }
+      break;
+    case url.includes("https://tomcritchlow.com/?"):
+      const div1 = document.getElementById("Home");
+      if (div1) {
+        div1.classList.add('bg-white');
+      }
+      break;      
+    case url.includes("/about/"):
+      const div2 = document.getElementById("About me");
+      if (div2) {
+        div2.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/writing/"):
+      const div3 = document.getElementById("Writing");
+      if (div3) {
+        div3.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/newsletter"):
+      const div4 = document.getElementById("Newsletter");
+      if (div4) {
+        div4.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/search"):
+      const div5 = document.getElementById("Search");
+      if (div5) {
+        div5.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/start-here"):
+      const div6 = document.getElementById("Start here");
+      if (div6) {
+        div6.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/topics/"):
+      const div7 = document.getElementById("Topics");
+      if (div7) {
+        div7.classList.add('bg-white');
+      }
+      break;                              
+    
+    default:
+      // Code to run if none of the above cases are true
+      break;
+  }
+}
+
+// Call the function
+addClassBasedOnUrlWithSwitch();
+
+
+
+</script>
+
+    <div class="w-100 h-100" id="maincontent">
+      <div class="mw8 center w-100 h-100">
+        
+    
+        
+    
+
+
+
+
+
+
+<div class="pt4 pt5-l pb2 w-two-thirds-ns center">
+
+<div class="f4 ph3 pb4 ph0-l lh-copy">
+
+  
+<div class="bb b--newgreen w-100 ibmplexmono ttu f6 dt-published mb5" datetime="2020-01-27 00:00:00 -0500">
+    January 27, 2020
+  </div>
+  
+        <h1 class="f2 fw8 lh-solid mv1 posttitle p-name">Building an ebook version of Journey to the End of the Night for Erin</h1>
+  
+      
+      <h2 class="f3 fw3 lh-copy mt1 subtitle pb2 p-summary i">Technical specs and lessons learned trying to make a picture book "work" on the web</h2>
+        
+    
+    <div class="postcontainer">
+    <p>I’m so proud of Erin for completing her <a href="https://www.kickstarter.com/projects/erinprz/journey-to-the-end-of-the-night-a-childrens-book">kids book Kickstarter</a> last year. Successfully completing a Kickstarter is a wild feeling but in hindsight it feels as much like the start of a race not the end!</p>
+
+<p>Erin spent much of last year buried deep in logistics - print proofing, file layout, shipping research, packaging design and so much more to bring the project to life. Then we spent a mad 72 hours shipping out the physical copies.</p>
+
+<p>Ironically, the ebook version of the book ended up shipping after the physical one did, and that falls on my shoulders… (btw <a href="https://www.etsy.com/shop/ErinprzArt">the physical version of the book and art prints are available to purchase on Etsy</a> now if you missed the Kickstarter!)</p>
+
+<p><em>TL;DR I had fun building the ebook, sorry it’s late and if you don’t care for the theory and just want to <a href="http://erinprz.com/ebook/">skip straight to the ebook launch it here</a>!</em></p>
+
+<h2 id="a-personal-creative-coding-challenge">A Personal Creative Coding Challenge</h2>
+
+<p>I thought it would be fun to add an ebook option to the Kickstarter and as a way to have a digital reference for the book. A way to support Erin’s Kickstarter and scratch my itch for a creative coding project at the same time.</p>
+
+<p>I’ve spent much of my spare moments over the past 2-3 months working on this and honestly it’s still not perfectly polished. About 70% of the way through the project I realized that my default assumption of being able to build a landscape web HTML experience was flawed on iOS. It’s just not possible. Still I persevered…</p>
+
+<p><em>Reminder: I am a self-taught duct-tape coder and designer not trained or even practiced in either!</em></p>
+
+<p>It’s refreshing though to have creative projects where there’s some expectation - I’ve done this a few times: this blog, <a href="https://www.fiercelycurious.com/">our art business</a> and the ebook - projects where it’s a creative outlet but there’s at least <em>some</em> external pressures and expectations. That pressure helps to force a way through creative blocks that I might otherwise abandon…</p>
+
+<h2 id="the-ebook">The Ebook!</h2>
+
+<p>I’m pretty happy with how this came out! Launch the ebook here: <a href="http://erinprz.com/ebook/">erinprz.com/ebook</a>.</p>
+
+<p>It works mostly fine on both mobile and desktop:</p>
+
+<p><img src="/images/ebook-screenshots.png" alt="" /></p>
+
+<p>The biggest design decision in porting from print to web was deciding to split out the text onto it’s own screen. It’s just not possible on the screen to experience the text in the same way you can in print - especially on small phone screens!</p>
+
+<p>So we decided to split it out, compare the digital layout (left) with the print layout (right) here:</p>
+
+<p><img src="/images/ebook-spreads.png" alt="" /></p>
+
+<p>Let’s call this launch a beta shall we? See any bugs hit me up.</p>
+
+<h2 id="lessons-learned--limitations">Lessons Learned &amp; Limitations</h2>
+
+<p>Here’s some observations from building this project:</p>
+
+<h3 id="1-apples-web-hostile-stance">1) Apple’s Web-Hostile Stance</h3>
+
+<p>Honestly let’s talk about the elephant in the room. If you try and launch the ebook on an iphone you might get this:</p>
+
+<p><img src="/images/ebook-ios.png" alt="" /></p>
+
+<p>Ick.</p>
+
+<p>Now I’m no pro developer but this is squarely Apple’s fault (as if I needed more reason to dislike Apple). There’s no ability to launch a fullscreen HTML experience on iOS and they make it very difficult to create a PWA experience.</p>
+
+<p>Yes - there’s the PWA option that allows for fullscreen but this just isn’t natural for users and Apple doesn’t make it easy.</p>
+
+<p>It makes me sad how web-hostile Apple is. And yes, this probably would have been a great project to learn Swift but honestly - oof trying to learn new skills from scratch when you’ve got a full time job and two kiddos and family commitments…</p>
+
+<h3 id="2-embracing-hyperlinked-code-comments">2) Embracing hyperlinked code comments</h3>
+
+<p>Honestly I’m not sure why I didn’t do this earlier in my coding “career” but…</p>
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Love commenting my code! (am I doing it right?) <a href="https://t.co/VISUeGtpG8">pic.twitter.com/VISUeGtpG8</a></p>&mdash; Tom Critchlow (@tomcritchlow) <a href="https://twitter.com/tomcritchlow/status/1202771799462875136?ref_src=twsrc%5Etfw">December 6, 2019</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>Sticking the stackoverflow / codepen URL into my code as a comment is a great way to easily refer back to the source! And let’s be honest for all my coding projects I’m heavily relying on copy and pasting from the web!</p>
+
+<h3 id="3-swiperjs-">3) SwiperJS :(</h3>
+
+<p>At the beginning of the project I thought I could use <a href="https://swiperjs.com/">swiper.js</a> to power the swipe experience but after building it I found out that the way the library handles offscreen canvas just overwhelmed mobile devices. Too many full screen image swipes and it chokes out and crashes.</p>
+
+<p>There’s a chance that this was my poor implementation (disclaimer: not a coder) but I did try a few different ways including lazy-loading the images and more but just couldn’t get it to work.</p>
+
+<p>The end result is that a) I ended up building my own screen advance script and b) I abandoned any swipe based interaction. Especially when navigating between full-screen and drag to refresh etc on small screens the swipe interaction is just too problematic….</p>
+
+<h2 id="notes-on-the-stories-format-and-digital-books-especially-visual-books">Notes on the Stories format and digital books (especially visual books)</h2>
+
+<p>Finally - where does this leave us and what did I learn about translating a picture book to the web?</p>
+
+<p>From Robin Sloan’s <a href="https://www.robinsloan.com/fish/">FISH: a tap essay</a> to the <a href="https://www.nypl.org/blog/2018/08/22/instanovels">NYPL experimenting</a> with posting entire books into the Instagram story format - I remain convinced that tappable stories are a magical format and can support long-form narrative.</p>
+
+<p>Unfortunately the web’s ability to create tappable stories is <strong>still</strong> underwhelming. We’re making progress but it feels like it’s moving at a snail’s pace.</p>
+
+<p>If we’d had more time and infinite creative capacity I’d have loved to try and port Erin’s book into a portrait screen orientation and power the whole thing in a tappable format. AMP Stories have an <a href="https://amp.dev/documentation/examples/visual-effects/ken_burns/preview/?format=websites">image pan effect</a> that I think works especially well with picture book spreads.</p>
+
+<p>Check out <a href="https://aeolian-centaur.glitch.me/">this little demo</a> I whipped up:</p>
+
+<p><iframe class="ampframe" src="https://aeolian-centaur.glitch.me/" width="343px" height="572px"></iframe></p>
+
+<style>
+.ampframe{
+    border:none
+}
+</style>
+
+<p>It would be a lot of work to reformat the whole book for portrait orientation but look at the beautiful close-up on the textures! The art really comes to life in this format…</p>
+
+<p>Alas time is not infinite and this ebook is already late… So here we are. I hope you enjoy it - I’m happy that this ebook reflects faithfully to Erin’s magical print book and shows off Erin’s art for more people to see.</p>
+
+<p>Of course… to really support the project there’s always <a href="https://www.etsy.com/listing/737130607/journey-to-the-end-of-the-night?ref=shop_home_active_1">the actual book on Etsy</a> :)</p>
+
+  </div>
+
+    
+    <hr class="w3 mv5">
+    
+
+  
+
+  
+  <div class="w-100 mv3 pa3 ba b--newgreen br2 f5 bg-near-white">
+    <div class="b pv1">More blog posts:</div>
+    
+    <div class="flex w-100">
+      <p class="pv0 mv1"><a href="/tomcritchlow.com/2025/06/27/taking-blogging-seriously/">Taking Blogging Seriously</a></p>
+      <p class="f6 black-50 ml-auto w-20-l w-40 tr pv0 mv1">June 27, 2025</p>
+    </div>
+    
+    
+    <div class="flex w-100">
+      <p class="pv0 mv1"><a href="/2025/06/27/taking-blogging-seriously/">Taking Blogging Seriously</a></p>
+      <p class="f6 black-50 ml-auto w-20-l w-40 tr pv0 mv1">June 27, 2025</p>
+    </div>
+    
+    
+    <div class="flex w-100">
+      <p class="pv0 mv1"><a href="/tomcritchlow.com/2025/03/21/better-ai-mode/">Google is Grounded and Needs to Learn How to Soar</a></p>
+      <p class="f6 black-50 ml-auto w-20-l w-40 tr pv0 mv1">March 21, 2025</p>
+    </div>
+    
+    
+        
+    <div class="bt b--black-10 mt3">
+      <p>This post was written by Tom Critchlow - blogger and independent consultant. Subscribe to join my occassional newsletter:</p>
+        <form action="https://buttondown.email/api/emails/embed-subscribe/tomcritchlow" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.email/tomcritchlow', 'popupwindow')" class="embeddable-buttondown-form flex items-center w-100 f5">
+            <input placeholder="Email Address" type="email" name="email" id="bd-email" class="bg-light-gray w-100 input-reset ba b--black-20 pv2 ph3 border-box br2 br--left">
+            <input type="hidden" name="metadata__cta" value="blogend">
+            <input type="submit" value="Subscribe" class="input-reset w-auto-ns pv2 ph3 ba b--newgreen bg-light-gray br2 br--right pointer">
+            </form>
+    </div>
+        
+    </div>
+    
+
+
+
+<hr class="w3 mv5">
+
+
+<script>
+
+    $( document ).ready(function() {
+        var footnotes = $(".footnotes p");
+        $("sup").each(function(index){
+            var fn = footnotes[index].removeChild(footnotes[index].lastChild);
+            $(this).replaceWith("<label for='"+index+"' class='margin-toggle sidenote-number'></label><input type='checkbox' id='"+index+"' class='margin-toggle'/><span class='sidenote'>"+footnotes[index].innerHTML+"</span>")  
+        });   
+        $(".footnotes").hide()
+    });    
+       
+
+    </script>
+
+
+<script type="application/json" class="js-hypothesis-config">
+  {
+    "openSidebar": false,
+    "theme": "clean"
+  }
+</script>
+
+
+<script src="https://hypothes.is/embed.js" async></script>
+
+<script type="text/javascript">
+
+window.hypothesisConfig = function () {
+  return {
+    branding: {
+      appBackgroundColor: 'white',
+      ctaBackgroundColor: 'rgba(3, 11, 16, 1)',
+      ctaTextColor: '#eee',
+      selectionFontFamily: 'helvetica, arial, sans serif'
+    }
+  };
+};
+
+if ($(window).width()<600){
+      window.hypothesisConfig = function () {
+        return {
+          "externalContainerSelector": "#hypbox",
+          "onLayoutChange": function(layout) {
+            if (layout.expanded) {
+              $('#hypbox').show();
+            } else {
+              $('#hypbox').hide();
+            }
+          }
+        };
+      };
+    };
+</script>
+
+<script defer src="https://cdn.commento.io/js/commento.js"></script>
+<div id="commento"></div>
+
+
+
+</div>
+</div>
+
+<div id="hypbox" style="display:none;width:100%;height:65%;position:fixed;bottom:0px;border-top:1px solid #02AD28;">
+      
+</div>
+
+</div>
+
+      
+    </div>
+      
+    </div>
+    </div>
+    
+    
+    
+    
+    <script>
+      feather.replace();
+    </script>
+
+    </body>
+    </html>

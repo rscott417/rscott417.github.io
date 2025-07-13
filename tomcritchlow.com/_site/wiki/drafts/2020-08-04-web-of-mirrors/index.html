@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" class="w-100 h-100">
+  <head>
+    <meta charset="utf-8">
+    <title>A Web of Mirrors</title>
+    <meta name="description" content="Tom Critchlow. Move. Think. Create.">
+
+    
+
+<link href='https://fonts.googleapis.com/css?family=Libre+Franklin:400,400italic,600,700,300,800|IBM+Plex+Mono|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet" href="/css/tachyons.min.css">
+<link rel="stylesheet" href="/css/hamburgers.css">
+
+
+<link href="/css/all.css" rel="stylesheet">
+<link href="/css/mobile.css" rel="stylesheet">
+
+<link rel="icon" href="/images/favicon.png" />
+
+<meta name="viewport" content="width=device-width">
+
+<script src="//code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="/js/feather.min.js" type="text/javascript"></script>
+
+<!--Custom Jquery UI only used for slidetoggle left/right-->
+<script src="/js/jquery-ui.min.js" type="text/javascript"></script>
+
+
+<link rel="alternate" type="application/rss+xml" title="RSS Feed for tomcritchlow.com" href="/feed.xml" />
+
+
+ <meta property="og:type"   content="article" />
+ <meta property="og:url"    content="https://tomcritchlow.com/wiki/drafts/2020-08-04-web-of-mirrors/" />
+ <meta property="og:title"  content="A Web of Mirrors" />
+ <meta name="og:description" content="Reflections of our digital selves">
+ 
+ <meta property="og:image"  content="https://tomcritchlow.com/images/green.png" />
+ 
+ <meta property="og:image:width"  content="600" />
+ <meta property="og:image:height"  content="315" />
+
+
+
+
+ 
+<meta name="pocket-site-verification" content="d481265d27c9597cbdc003abbf1994" />
+
+<link rel="webmention" href="https://webmention.io/tomcritchlow.com/webmention" />
+<link rel="pingback" href="https://webmention.io/tomcritchlow.com/xmlrpc" />
+
+
+
+</head>
+
+<body class="ph0-l center">
+
+<!--From GA include-->
+
+
+
+
+<script defer data-domain="tomcritchlow.com" src="https://plausible.io/js/script.js"></script>
+
+
+
+
+
+<style>
+
+h1, h2, h3, h4{
+width:100%;
+max-width:600px;
+margin:auto;    
+}
+
+.postcontent p, .postcontent ul, .postcontent ol, .postcontent blockquote{
+width:100%;
+max-width:600px;
+margin:auto;
+padding-top:10px;
+padding-bottom:10px;
+font-size:16px;
+line-height:20px;
+font-family:'open sans';
+
+}
+</style>
+
+<div class="w-100 center ph3 ph0-l">
+
+<div class="pt4 pt5-l">
+
+<h1 class="f2 f1-l fw8 lh-solid mv1 posttitle">A Web of Mirrors</h1>
+
+
+<h2 class="f3 fw3 lh-copy mv1 subtitle">Reflections of our digital selves</h2>
+
+
+</div>
+
+<div class="postcontent">
+<style>
+.posttitle{
+-webkit-box-reflect: below 0px -webkit-gradient(linear, right top, right bottom, from(transparent), color-stop(0%, transparent), to(rgba(255, 255, 255, 0.2)));
+margin-bottom:100px;
+font-family:Inconsolata;
+font-weight:100;
+}
+
+.reflection{
+-webkit-box-reflect: below 0px -webkit-gradient(linear, right top, right bottom, from(transparent), color-stop(0%, transparent), to(rgba(255, 255, 255, 0.2)));    
+}
+
+video{
+width:100%;
+}
+</style>
+
+<p>We strive for identity and escape the shadows of ourselves. But digital spaces are unfluid and unspaced, unbounded and unescaped. This idea creates a dissonance between our behaviors and our actions.</p>
+
+<p>What should be</p>
+
+<div class="bg-grey">
+For the best reading experience this essay requires access to your webcam for some special effects. Please activate here.
+</div>
+
+<p>What if we have a little row of circles at the top of people reading the essay right now?? like insta?</p>
+
+<div class="w-50 center reflection">
+<div class="videowrapper">
+<h2 class="red absolute"><marquee>Who do you want to be?</marquee></h2>
+<h2 class="red absolute left0"><marquee>Who do you want to be?</marquee></h2>
+<h2 class="red absolute left10"><marquee>Who do you want to be?</marquee></h2>
+<h2 class="red absolute left20"><marquee>Who do you want to be?</marquee></h2>
+<h2 class="red absolute"><marquee>Who do you want to be?</marquee></h2>
+<video autoplay="true" id="videoElement"></video>
+</div>
+</div>
+
+<p>We strive for identity. We seek meaning reflected back at ourselves.</p>
+
+<p>But our sense of identity is undermined. The mirror is a funhouse. Our selves are reflected in a distorted way.</p>
+
+<p>What space can we be ourselves?</p>
+
+<iframe src="https://giphy.com/embed/l4hLRAwCyCjXiPbos" width="480" height="270" frameborder="0" class="giphy-embed" allowfullscreen=""></iframe>
+<p><a href="https://giphy.com/gifs/cinemagraph-cinemagraphs-l4hLRAwCyCjXiPbos">via GIPHY</a></p>
+
+<script>
+var video = document.querySelector("#videoElement");
+
+if (navigator.mediaDevices.getUserMedia) {
+navigator.mediaDevices.getUserMedia({ video: true })
+.then(function (stream) {
+video.srcObject = stream;
+})
+.catch(function (err0r) {
+console.log("Something went wrong!");
+});
+}</script>
+
+
+</div>
+
+</div>

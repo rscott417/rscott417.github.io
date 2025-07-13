@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en" class="w-100 h-100">
+  <head>
+    <meta charset="utf-8">
+    <title>Library JSON - A Proposal for a Decentralized Goodreads</title>
+    <meta name="description" content="Tom Critchlow. Move. Think. Create.">
+
+    
+
+<link href='https://fonts.googleapis.com/css?family=Libre+Franklin:400,400italic,600,700,300,800|IBM+Plex+Mono|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+<link rel="stylesheet" href="/css/tachyons.min.css">
+<link rel="stylesheet" href="/css/hamburgers.css">
+
+
+<link href="/css/all.css" rel="stylesheet">
+<link href="/css/mobile.css" rel="stylesheet">
+
+<link rel="icon" href="/images/favicon.png" />
+
+<meta name="viewport" content="width=device-width">
+
+<script src="//code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="/js/feather.min.js" type="text/javascript"></script>
+
+<!--Custom Jquery UI only used for slidetoggle left/right-->
+<script src="/js/jquery-ui.min.js" type="text/javascript"></script>
+
+
+<link rel="alternate" type="application/rss+xml" title="RSS Feed for tomcritchlow.com" href="/feed.xml" />
+
+
+ <meta property="og:type"   content="article" />
+ <meta property="og:url"    content="https://tomcritchlow.com/2020/04/15/library-json/" />
+ <meta property="og:title"  content="Library JSON - A Proposal for a Decentralized Goodreads" />
+ <meta name="og:description" content="V0.1 for an experimental open bookshelf spec">
+ 
+ <meta property="og:image"  content="https://tomcritchlow.com/images/green.png" />
+ 
+ <meta property="og:image:width"  content="600" />
+ <meta property="og:image:height"  content="315" />
+
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@tomcritchlow">
+<meta name="twitter:creator" content="@tomcritchlow">
+<meta name="twitter:title" content="Library JSON - A Proposal for a Decentralized Goodreads">
+<meta name="twitter:description" content="V0.1 for an experimental open bookshelf spec">
+
+<meta name="twitter:image" content="https://tomcritchlow-tom_og.web.val.run/?headline=Library JSON - A Proposal for a Decentralized Goodreads&subheadline=V0.1 for an experimental open bookshelf spec&date=April 15, 2020">
+
+
+
+
+
+ 
+<meta name="pocket-site-verification" content="d481265d27c9597cbdc003abbf1994" />
+
+<link rel="webmention" href="https://webmention.io/tomcritchlow.com/webmention" />
+<link rel="pingback" href="https://webmention.io/tomcritchlow.com/xmlrpc" />
+
+
+
+</head>
+
+<body class="ph0-l center">
+
+<!--From GA include-->
+
+
+
+
+<script defer data-domain="tomcritchlow.com" src="https://plausible.io/js/script.js"></script>
+
+
+
+<style>
+#nav{
+    width:223px;
+    height:100vh;
+  }
+
+  #maincontent{
+    margin-left:223px;
+  }
+
+  @media (max-width: 1024px) {
+      #nav{
+          width:100%;
+      }
+
+      #maincontent{
+          margin-left:auto;
+      }
+  }
+</style>
+
+
+<div class="dn-l db w-100 pa3 bg-near-white z-1" style="position:sticky;top:0px">
+    <a class="link dim dark-gray f6 f5-l dib ttu pt2 pt0-l dtc-l v-mid newgreen b" href="/" title="Home">TOM CRITCHLOW</a>
+    <div class="fr dib dn-l pt1">    
+        <div id="hamburger" class="hamburger hamburger--squeeze">
+                <div class="hamburger-box">
+                  <div class="hamburger-inner"></div>
+                </div>
+              </div>
+    
+    </div>
+</div>
+
+<div class="flex items-stretch h-100 w-100">
+  
+    
+
+    
+
+    <div id="nav" class="w5 bg-near-white f7 fw4 br-l bt-0-l bb-0-l bt bb b--black-10 fixed dn db-l top-0-l left-0 overflow-y-scroll z-1 pt2 pt0-l">
+      
+      
+      
+    
+      <a class="db-l dn  items-center ma2 ph3 pa2 mv3 mb4-l link fw8 f6 br3 newgreen" href="/">
+        TOM CRITCHLOW
+      </a>
+    
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Home" href="/">
+    <i data-feather="home" class="h1 pr3"></i> <span class="navname">Home</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="About me" href="/about">
+    <i data-feather="user" class="h1 pr3"></i> <span class="navname">About me</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Writing" href="/writing">
+    <i data-feather="rss" class="h1 pr3"></i> <span class="navname">Writing</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Library" href="/library">
+    <i data-feather="layers" class="h1 pr3"></i> <span class="navname">Library</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Newsletter" href="/newsletter">
+    <i data-feather="mail" class="h1 pr3"></i> <span class="navname">Newsletter</span>
+  </a>
+
+
+<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Search" href="/search">
+    <i data-feather="search" class="h1 pr3"></i> <span class="navname">Search</span>
+  </a>
+
+
+
+<div class="mv4">
+    <div class="newgreen mh3 ph2 mv2 navname">Hire me</div>
+
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Consulting" href="/consulting">
+    <i data-feather="git-merge" class="h1 pr3"></i> <span class="navname">Consulting</span>
+  </a>
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Advisor" href="/advisor">
+    <i data-feather="git-pull-request" class="h1 pr3"></i> <span class="navname">Advisor</span>
+  </a>
+
+</div>
+
+<div class="mv4">
+    <div class="newgreen mh3 ph2 mv2 navname">Elsewhere</div>
+
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Twitter" href="https://twitter.com/tomcritchlow/">
+    <i data-feather="twitter" class="h1 pr3"></i> <span class="navname">Twitter</span>
+  </a>
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="LinkedIn" href="https://www.linkedin.com/in/tomcritchlow/">
+    <i data-feather="linkedin" class="h1 pr3"></i> <span class="navname">LinkedIn</span>
+  </a>
+
+<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Are.na" href="https://www.are.na/tom-critchlow/index">
+    <i data-feather="bookmark" class="h1 pr3"></i> <span class="navname">Are.na</span>
+  </a>
+
+</div>
+
+      
+      </div>
+
+<script>
+    
+var $hamburger = $("#hamburger");
+            $hamburger.on("click", function(e) {
+
+              $hamburger.toggleClass("is-active");
+              $("#nav").toggleClass("dn");
+   
+            }); 
+      
+            feather.replace();
+
+function addClassBasedOnUrlWithSwitch() {
+  // Get the current URL
+  const url = window.location.href;
+  
+  switch (true) {
+    case url == "https://tomcritchlow.com/":
+      const div0 = document.getElementById("Home");
+      if (div0) {
+        div0.classList.add('bg-white');
+      }
+      break;
+    case url.includes("https://tomcritchlow.com/?"):
+      const div1 = document.getElementById("Home");
+      if (div1) {
+        div1.classList.add('bg-white');
+      }
+      break;      
+    case url.includes("/about/"):
+      const div2 = document.getElementById("About me");
+      if (div2) {
+        div2.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/writing/"):
+      const div3 = document.getElementById("Writing");
+      if (div3) {
+        div3.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/newsletter"):
+      const div4 = document.getElementById("Newsletter");
+      if (div4) {
+        div4.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/search"):
+      const div5 = document.getElementById("Search");
+      if (div5) {
+        div5.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/start-here"):
+      const div6 = document.getElementById("Start here");
+      if (div6) {
+        div6.classList.add('bg-white');
+      }
+      break;
+    case url.includes("/topics/"):
+      const div7 = document.getElementById("Topics");
+      if (div7) {
+        div7.classList.add('bg-white');
+      }
+      break;                              
+    
+    default:
+      // Code to run if none of the above cases are true
+      break;
+  }
+}
+
+// Call the function
+addClassBasedOnUrlWithSwitch();
+
+
+
+</script>
+
+    <div class="w-100 h-100" id="maincontent">
+      <div class="mw8 center w-100 h-100">
+        
+    
+        
+    
+
+
+
+
+
+
+<div class="pt4 pt5-l pb2 w-two-thirds-ns center">
+
+<div class="f4 ph3 pb4 ph0-l lh-copy">
+
+  
+<div class="bb b--newgreen w-100 ibmplexmono ttu f6 dt-published mb5" datetime="2020-04-15 00:00:00 -0400">
+    April 15, 2020
+  </div>
+  
+        <h1 class="f2 fw8 lh-solid mv1 posttitle p-name">Library JSON - A Proposal for a Decentralized Goodreads</h1>
+  
+      
+      <h2 class="f3 fw3 lh-copy mt1 subtitle pb2 p-summary i">V0.1 for an experimental open bookshelf spec</h2>
+        
+    
+    <div class="postcontainer">
+    <p>There’s been a lot of discussion around a “better” GoodReads and at some point almost every side-project-slinger has tried their hand at building a “books website”. Myself included.</p>
+
+<p>Back in 2010 I built a site called <a href="https://tomcritchlow.com/projects/7books/">7books</a> - the tagline was playlists for bookworms and it looked like this:</p>
+
+<p><img src="/images/projects/7books.png" alt="" /></p>
+
+<p>There is a large graveyard of these books sites.</p>
+
+<p>But there are (at least) three fundamental problems with building a GoodReads competitor:</p>
+
+<h3 id="1-amazon-owns-the-only-good-book-index">1. Amazon owns the only good book index</h3>
+
+<p>As far as I know there is no good reliable book index that’s open. Books come in so many different formats, re-issues, versions, languages and publishers that maintaining a canonical reference for a specific book is very tough.</p>
+
+<h3 id="2-a-books-website-is-a-cultural-black-hole">2. A books website is a cultural black hole</h3>
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Same is true of music social networks. Cultural black holes. Seductive and imaginary ideas about social networks that just don&#39;t work.</p>&mdash; Tom Critchlow (@tomcritchlow) <a href="https://twitter.com/tomcritchlow/status/1164386179187433472?ref_src=twsrc%5Etfw">August 22, 2019</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>It’s one of those alluring ideas that just does. not. work.</p>
+
+<h3 id="3-the-only-path-to-monetization-is-amazon">3. The only path to monetization is Amazon</h3>
+
+<p>Closely related to point #1 - the only (effective) way to monetize a books website is through Amazon. Any books site of meaningful size would get cut from the Amazon affiliate program in a heartbeat as it would compete directly with both Amazon and GoodReads.</p>
+
+<p>But…</p>
+
+<h2 id="web-of-books">Web of Books</h2>
+
+<p>On closer examination I realized that I’m not really interested in building a “startup” or a “business” around this - what I really want is</p>
+
+<blockquote class="twitter-tweet" data-conversation="none"><p lang="en" dir="ltr">Would love to see a &quot;web of books&quot; emerge from the indie web rather than via fixing goodreads</p>&mdash; Tom Critchlow (@tomcritchlow) <a href="https://twitter.com/tomcritchlow/status/1170340177702785024?ref_src=twsrc%5Etfw">September 7, 2019</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>There are lots of really really great indie sites that maintain structured reading lists. I’ve got a running list in my wiki: <a href="https://tomcritchlow.com/wiki/books/bookshelves/">web of books</a>. Probably my all time favorite is Mandy’s <a href="https://aworkinglibrary.com/">A Working Library</a>.</p>
+
+<h2 id="decentralized-architecture">Decentralized Architecture</h2>
+
+<p>Thinking through building some kind of “web of books” I realized that we could use something similar to RSS to build a kind of decentralized GoodReads powered by indie sites and an underlying easy to parse format.</p>
+
+<p>I created a proof of concept by converting <a href="https://tomcritchlow.com/wiki/books/books-read/">my own bookshelf</a> into a JSON file <a href="https://tomcritchlow.com/library.json">https://tomcritchlow.com/library.json</a>.</p>
+
+<p>If you think of several sites publishing their bookshelf as a library.json file you can imagine a bookshelf “feed reader” that let’s you keep track of friends bookshelves something like this<sup id="fnref:loldesign"><a href="#fn:loldesign" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>:</p>
+
+<p><img src="/images/library-json.png" alt="" /></p>
+
+<p>And combined with a “feed” something like this:</p>
+
+<p><img src="/images/library-json-feed.png" alt="" /></p>
+
+<h2 id="groups--control">Groups &amp; Control</h2>
+
+<p>The great thing about this being an open spec is that people can choose to participate in the centralized GoodReads-esque hub or… not. In fact people can hack on top of it in many ways - extending, modifying and so on.</p>
+
+<p>In particular it would be very easy for a small group of people to form a book club and host a summary view of a handful of library.json files completely independently of any open aggregator.</p>
+
+<h2 id="v01-of-a-libraryjson-spec">V0.1 of a library.json spec</h2>
+
+<p>So this brings me to my “spec”. Let’s imagine a library.json file that roughly looks like this:</p>
+
+<ul>
+  <li>Title</li>
+  <li>URL</li>
+  <li>Bio
+    <ul>
+      <li>Lists
+        <ul>
+          <li>List</li>
+          <li>List</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>Where each book list contains a series of book objects something like this:</p>
+
+<ul>
+  <li>Book
+    <ul>
+      <li>Title</li>
+      <li>Author</li>
+      <li>URL</li>
+      <li>Date_finished</li>
+      <li>ID</li>
+      <li>Notes (can be text or a link to a full review/note)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>I created some dummy example files <a href="https://gist.github.com/tomcritchlow/a4a9c8064a97a997fbbad4c338748173">in this gist</a>:</p>
+
+<script src="https://gist.github.com/tomcritchlow/a4a9c8064a97a997fbbad4c338748173.js"></script>
+
+<h2 id="feedback-next">Feedback? Next?</h2>
+
+<p>So where to next? Three obvious things:</p>
+
+<ol>
+  <li>Further research into a universal book ID solution. Without it this whole idea is going to be shaky ground.</li>
+  <li>Building an MVP of the feed reader experience slurping in some sample library.json files</li>
+  <li>Gather feedback on the json spec above</li>
+</ol>
+
+<p>If you are interested in building something in this space and/or maintain a page that’s part of the “web of books” I’d love to hear from you on the above proposal.</p>
+
+<p>–</p>
+
+<p><em>Update #1</em> - Ravern Koh has built a working proof of concept parser! This is lovely and shows the instant power in a kind of open remixable format:</p>
+
+<blockquote class="twitter-tweet" data-conversation="none"><p lang="en" dir="ltr">Have created a quick client for the libary.json files at <a href="https://t.co/nAeYTQhM4Y">https://t.co/nAeYTQhM4Y</a>!<br /><br />Some samples:<br /><br />- <a href="https://t.co/6Mn62YfpAn">https://t.co/6Mn62YfpAn</a><br />- <a href="https://t.co/Ire3MVGqfr">https://t.co/Ire3MVGqfr</a><br />- <a href="https://t.co/Z0Yw6uqLJH">https://t.co/Z0Yw6uqLJH</a></p>&mdash; Ravern Koh (@ravernkoh) <a href="https://twitter.com/ravernkoh/status/1250755193798397952?ref_src=twsrc%5Etfw">April 16, 2020</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>For example - <a href="https://bookshelves.ravern.co/shelf?url=https://tomcritchlow.com/library.json">here’s my bookshelf displayed on Ravern’s tool</a>. How cool is that! The ability to easily and quickly hack on top of this is super fun. Thanks Ravern!</p>
+
+<p>–</p>
+
+<p><em>Update #2</em> - Ravern also had the great suggestion to build the list of people (urls) you follow into the spec… I think that’s a pretty great idea that I will loop back in:</p>
+
+<blockquote class="twitter-tweet" data-conversation="none"><p lang="en" dir="ltr">This is a great idea.<br /><br />This still requires some kind of centralised listing of library files though. What if instead we added a &quot;following&quot; section where you own library contains links to the libraries of others?<br /><br />Clients can then build &quot;webs&quot; starting from a seed file</p>&mdash; Ravern Koh (@ravernkoh) <a href="https://twitter.com/ravernkoh/status/1250654173701369856?ref_src=twsrc%5Etfw">April 16, 2020</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>–</p>
+
+<p><em>Update #3</em> - Matt has posted a really thoughtful reply proposing building this all as an extension of RSS: <a href="http://interconnected.org/home/2020/04/16/rss_for_books">Re Tom Critchlow’s proposal for a decentralised Goodreads-like system, how about using RSS?</a>.</p>
+
+<p>Having built my own RSS feed reader already I’m very wary of RSS - it’s battle tested yes but also just one massive clusterf&amp;%$. Parsing and understanding RSS is much harder than JSON (imho!). But - Matt raises some good points and I do like the OPML version of aggregating bookfeeds… Lots of exisiting infrastructure and ideas there… Thanks Matt - plenty to chew on here.</p>
+
+<p>–</p>
+
+<p><em>Update #4</em> - Via twitter I found <a href="https://macwright.org/reading/">Tom’s bookshelf</a> and his <a href="https://macwright.org/2017/12/11/indieweb-reading.html">goodreads CSV to yaml converter</a>!! I tagged him and he posted a <a href="https://gist.github.com/tmcw/f88e31265363569ffcdcb709148fc8e8">lovely reply</a>. I don’t think he saw Matt’s reply yet but he echoed the idea of leveraging Atom/RSS for this. Hmm. That said I do love this quote which strikes to the heart of why I like json here:</p>
+
+<blockquote>
+  <p>That said, the thing that kills the indieweb is too much enthusiasm for specs, too few parsing implementations, and, ironically, too much focus on the ‘indie’ (building complicated self-hosted everything-machines) and not enough on the ‘web’ (noticing if anyone’s using any of the things you built). So if there’s a killer implementation and good content at the start, then momentum would potentially just carry you through.</p>
+</blockquote>
+
+<p>–</p>
+
+<p><em>Update #5</em> - <a href="https://twitter.com/doctorow/status/1250830877615026177">This thread from Cory Doctorow</a>:</p>
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Last September, <a href="https://twitter.com/tomcritchlow?ref_src=twsrc%5Etfw">@tomcritchlow</a> proposed a federated, decentralized &quot;web of books&quot; as an alternative to Goodreads, the monopoly platform of booklists owned by the monopoly platform of bookselling.<a href="https://t.co/FoBrSOZiyY">https://t.co/FoBrSOZiyY</a><br /><br />1/ <a href="https://t.co/VWrnG5mVhn">pic.twitter.com/VWrnG5mVhn</a></p>&mdash; Covered Dish People (@doctorow) <a href="https://twitter.com/doctorow/status/1250830877615026177?ref_src=twsrc%5Etfw">April 16, 2020</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>–</p>
+
+<p><em>Update #6</em> - Gregor <a href="https://gregorlove.com/2020/04/a-lot-of-interesting-ideas/">posted some nice thoughts</a>. In particular I’m curious about <a href="https://php.microformats.io/?url=https%3A%2F%2Fgregorlove.com%2Fchannels%2Freading%2F">this JSON file</a>. Not sure where it comes from but looks quite a lot like my library.json file! More exploration needed….</p>
+
+<p>–</p>
+
+<p><em>Update #7</em> - <a href="https://www.gyford.com/phil/writing/2020/04/27/tracking-reading/">Phil posted some great thoughts</a> with a strong book-flex!</p>
+
+<blockquote>
+  <p>Having spent some time writing code to track the past 22-40 years of my reading (22 consistenly, 40 with gaps) I thought I’d share a few things I’ve done or thought about, in terms of the data</p>
+</blockquote>
+
+<p>! Oh my. Thanks Phil - great insights.</p>
+
+<p>–</p>
+
+<p><em>Update #8</em> - <a href="https://www.zylstra.org/blog/2021/05/federated-bookshelf-proof-of-concept/">Ton Zijlstra has posted up some experimentation with an OPML file</a> implementation! Lovely. Lots to explore here.</p>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:loldesign">
+      <p>Not accepting freelance web design gigs atm, sorry. <a href="#fnref:loldesign" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+  </div>
+
+    
+    <hr class="w3 mv5">
+    
+
+  
+
+  
+  <div class="w-100 mv3 pa3 ba b--newgreen br2 f5 bg-near-white">
+    <div class="b pv1">More blog posts:</div>
+    
+    <div class="flex w-100">
+      <p class="pv0 mv1"><a href="/tomcritchlow.com/2025/06/27/taking-blogging-seriously/">Taking Blogging Seriously</a></p>
+      <p class="f6 black-50 ml-auto w-20-l w-40 tr pv0 mv1">June 27, 2025</p>
+    </div>
+    
+    
+    <div class="flex w-100">
+      <p class="pv0 mv1"><a href="/2025/06/27/taking-blogging-seriously/">Taking Blogging Seriously</a></p>
+      <p class="f6 black-50 ml-auto w-20-l w-40 tr pv0 mv1">June 27, 2025</p>
+    </div>
+    
+    
+    <div class="flex w-100">
+      <p class="pv0 mv1"><a href="/tomcritchlow.com/2025/03/21/better-ai-mode/">Google is Grounded and Needs to Learn How to Soar</a></p>
+      <p class="f6 black-50 ml-auto w-20-l w-40 tr pv0 mv1">March 21, 2025</p>
+    </div>
+    
+    
+        
+    <div class="bt b--black-10 mt3">
+      <p>This post was written by Tom Critchlow - blogger and independent consultant. Subscribe to join my occassional newsletter:</p>
+        <form action="https://buttondown.email/api/emails/embed-subscribe/tomcritchlow" method="post" target="popupwindow" onsubmit="window.open('https://buttondown.email/tomcritchlow', 'popupwindow')" class="embeddable-buttondown-form flex items-center w-100 f5">
+            <input placeholder="Email Address" type="email" name="email" id="bd-email" class="bg-light-gray w-100 input-reset ba b--black-20 pv2 ph3 border-box br2 br--left">
+            <input type="hidden" name="metadata__cta" value="blogend">
+            <input type="submit" value="Subscribe" class="input-reset w-auto-ns pv2 ph3 ba b--newgreen bg-light-gray br2 br--right pointer">
+            </form>
+    </div>
+        
+    </div>
+    
+
+
+
+<hr class="w3 mv5">
+
+
+<script>
+
+    $( document ).ready(function() {
+        var footnotes = $(".footnotes p");
+        $("sup").each(function(index){
+            var fn = footnotes[index].removeChild(footnotes[index].lastChild);
+            $(this).replaceWith("<label for='"+index+"' class='margin-toggle sidenote-number'></label><input type='checkbox' id='"+index+"' class='margin-toggle'/><span class='sidenote'>"+footnotes[index].innerHTML+"</span>")  
+        });   
+        $(".footnotes").hide()
+    });    
+       
+
+    </script>
+
+
+<script type="application/json" class="js-hypothesis-config">
+  {
+    "openSidebar": false,
+    "theme": "clean"
+  }
+</script>
+
+
+<script src="https://hypothes.is/embed.js" async></script>
+
+<script type="text/javascript">
+
+window.hypothesisConfig = function () {
+  return {
+    branding: {
+      appBackgroundColor: 'white',
+      ctaBackgroundColor: 'rgba(3, 11, 16, 1)',
+      ctaTextColor: '#eee',
+      selectionFontFamily: 'helvetica, arial, sans serif'
+    }
+  };
+};
+
+if ($(window).width()<600){
+      window.hypothesisConfig = function () {
+        return {
+          "externalContainerSelector": "#hypbox",
+          "onLayoutChange": function(layout) {
+            if (layout.expanded) {
+              $('#hypbox').show();
+            } else {
+              $('#hypbox').hide();
+            }
+          }
+        };
+      };
+    };
+</script>
+
+<script defer src="https://cdn.commento.io/js/commento.js"></script>
+<div id="commento"></div>
+
+
+
+</div>
+</div>
+
+<div id="hypbox" style="display:none;width:100%;height:65%;position:fixed;bottom:0px;border-top:1px solid #02AD28;">
+      
+</div>
+
+</div>
+
+      
+    </div>
+      
+    </div>
+    </div>
+    
+    
+    
+    
+    <script>
+      feather.replace();
+    </script>
+
+    </body>
+    </html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RRN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- StorifyMe scripts -->
+    <script type="text/javascript" async defer src="https://cdn.storifyme.xyz/static/web-components/storifyme-elements.min.js"></script>
+    <style>
+      /* Lucide font setup */
+      @font-face {
+        font-family: 'LucideIcons';
+        /* Standard unpkg URL */
+        src: url(https://cdn.jsdelivr.net/npm/lucide-static@latest/font/Lucide.ttf) format('truetype');
+      }
+      .lucide { font-family: 'LucideIcons'; font-size: 1.5rem; line-height: 1; display: inline-block; font-style: normal; font-weight: normal; font-variant: normal; text-rendering: auto; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+      body { font-family: 'Inter', sans-serif; background-color: #f9fafb; padding-bottom: 80px; }
+
+      /* --- Layout Control --- */
+      #pin-container.view-pins { column-gap: 1rem; columns: 2; }
+      @media (min-width: 640px) { #pin-container.view-pins { columns: 3; } }
+      @media (min-width: 1024px) { #pin-container.view-pins { columns: 4; } }
+      @media (min-width: 1280px) { #pin-container.view-pins { columns: 5; } }
+      @media (min-width: 1536px) { #pin-container.view-pins { columns: 6; } }
+
+      /* Reset columns for other views */
+      #pin-container.view-community,
+      #pin-container.view-profile,
+      #pin-container.view-videos { columns: 1; }
+
+      /* Prevent items breaking in column view */
+      .pin, .community-card, .profile-section, .video-card { break-inside: avoid-column; margin-bottom: 1rem; display: block; width: 100%; }
+      .community-card { margin-bottom: 1.5rem; }
+      .pin { display: inline-block; }
+
+
+      /* Modal scrollbar */
+      .modal-content::-webkit-scrollbar,
+      #aiChatMessages::-webkit-scrollbar { width: 8px; }
+      .modal-content::-webkit-scrollbar-track,
+      #aiChatMessages::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+      .modal-content::-webkit-scrollbar-thumb,
+      #aiChatMessages::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+      .modal-content::-webkit-scrollbar-thumb:hover,
+      #aiChatMessages::-webkit-scrollbar-thumb:hover { background: #aaa; }
+
+      /* Active nav item style */
+      .bottom-nav-item.active { color: #dc2626; }
+
+      /* Saved button state */
+      .save-button.saved, .modal-save-button.saved { background-color: #6b7280; color: white; cursor: default; }
+      .save-button.saved:hover, .modal-save-button.saved:hover { background-color: #4b5563; }
+
+      /* Full screen video player */
+      #videoPlayerModal { overscroll-behavior: contain; }
+      /* AI Chat Modal */
+      #aiChatModal { overscroll-behavior: contain; }
+
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm p-3 px-6 flex items-center h-16">
+        <div class="text-red-600 mr-4 flex-shrink-0">
+             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-utensils"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3z"/><path d="M17 2v20"/></svg>
+        </div>
+        <div class="flex-grow">
+            <input type="text" id="search-input" placeholder="Search..." class="w-full h-10 px-4 py-2 text-sm bg-gray-100 border border-transparent rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white focus:border-blue-500"/>
+        </div>
+        <nav class="flex items-center space-x-2 ml-4">
+             <button id="aiChatButton" title="AI Recipe Chat" class="p-2 rounded-full text-gray-600 hover:bg-gray-100 hover:text-blue-600 transition-colors">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+             </button>
+        </nav>
+    </header>
+
+    <main class="pt-20 px-4 md:px-6 lg:px-8">
+        <div id="pin-container" class="pin-container">
+            </div>
+    </main>
+
+    <div id="pinModal" class="fixed inset-0 z-[100] bg-black bg-opacity-70 hidden items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-3xl max-h-[90vh] flex flex-col md:flex-row overflow-hidden my-auto">
+            <div class="w-full md:w-1/2 flex-shrink-0 bg-gray-100 flex items-center justify-center p-4 max-h-[55vh] md:max-h-full"> <img id="modalImage" src="" alt="Modal Pin Image" class="max-w-full max-h-full object-contain rounded"/> </div>
+            <div class="w-full md:w-1/2 p-6 flex flex-col overflow-y-auto modal-content"> <button id="closeModalButton" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-3xl leading-none font-bold z-10">&times;</button> <h2 id="modalTitle" class="text-xl font-bold mb-2">Pin Title Placeholder</h2> <p id="modalDescription" class="text-gray-600 text-sm mb-4">Detailed description about the pin would go here.</p> <a id="modalSeeRecipeButton" href="#" target="_blank" rel="noopener noreferrer" class="hidden items-center justify-center bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-full text-sm font-bold transition-colors mb-4 w-full md:w-auto"> <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link mr-2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg> See Recipe </a> <div class="flex items-center mb-4 border-t pt-4"> <div class="w-10 h-10 bg-gray-300 rounded-full mr-3 flex-shrink-0"></div> <div> <div id="modalUsername" class="font-semibold text-sm">Source Domain</div> <div class="text-gray-500 text-xs">1k Followers</div> </div> <button class="ml-auto bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-1.5 rounded-full text-sm font-semibold transition-colors flex-shrink-0">Follow</button> </div> <h3 class="font-semibold mb-2">Comments</h3> <div class="space-y-2 text-sm"> <p class="bg-gray-100 p-2 rounded">Comment placeholder 1...</p> <p class="bg-gray-100 p-2 rounded">Comment placeholder 2...</p> </div> <div class="mt-auto pt-4 flex space-x-2"> <button class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 rounded-full font-semibold transition-colors">Share</button> <button class="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 rounded-full font-semibold transition-colors modal-save-button">Save</button> </div> </div>
+        </div>
+    </div>
+
+    <div id="videoPlayerModal" class="fixed inset-0 z-[110] bg-black hidden flex-col items-center justify-center">
+        <button id="closeVideoPlayerButton" class="absolute top-4 right-4 z-20 text-white text-4xl font-bold opacity-70 hover:opacity-100">&times;</button>
+        <div id="videoPlayerContent" class="relative w-full h-full flex items-center justify-center overflow-hidden"> <img id="videoPlayerImage" src="" alt="Full screen video content" class="block max-h-full max-w-full object-contain" /> <div class="absolute bottom-16 left-4 right-4 p-4 bg-gradient-to-t from-black/50 to-transparent text-white z-10"> <h3 id="videoPlayerTitle" class="font-bold text-lg mb-1">Video Title</h3> <p id="videoPlayerUploader" class="text-sm opacity-80">Uploader Name</p> </div> </div>
+    </div>
+
+    <div id="aiChatModal" class="fixed inset-0 z-[120] bg-gray-100 dark:bg-gray-900 hidden flex-col">
+        <div class="flex-shrink-0 bg-white dark:bg-gray-800 shadow-md p-4 flex items-center justify-between"> <h2 class="text-lg font-semibold text-gray-800 dark:text-white">AI Recipe Assistant</h2> <button id="closeAiChatButton" class="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> </button> </div>
+        <div id="aiChatMessages" class="flex-grow overflow-y-auto p-4 space-y-4"> </div>
+        <div class="flex-shrink-0 p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800"> <div class="flex items-center bg-gray-100 dark:bg-gray-700 rounded-full px-4 py-2"> <input type="text" placeholder="Tap anywhere above to continue chat..." class="flex-grow bg-transparent text-gray-700 dark:text-gray-200 focus:outline-none text-sm" disabled> <button class="ml-2 text-blue-500 hover:text-blue-600"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send-horizontal"><path d="m3 3 3 9-3 9 19-9Z"/><path d="M6 12h16"/></svg> </button> </div> </div>
+    </div>
+
+
+    <footer class="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-200 shadow-[0_-2px_5px_rgba(0,0,0,0.1)] px-4 py-2 flex justify-around items-center">
+        <a href="#" data-tab="home" class="bottom-nav-item active flex flex-col items-center text-center text-gray-600 hover:text-red-600 transition-colors w-1/5"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home mb-1"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> <span class="text-xs font-medium">Home</span> </a>
+        <a href="#" data-tab="video" class="bottom-nav-item flex flex-col items-center text-center text-gray-600 hover:text-red-600 transition-colors w-1/5"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play-circle mb-1"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg> <span class="text-xs font-medium">Video</span> </a>
+        <a href="#" data-tab="community" class="bottom-nav-item flex flex-col items-center text-center text-gray-600 hover:text-red-600 transition-colors w-1/5"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users mb-1"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> <span class="text-xs font-medium">Community</span> </a>
+        <a href="#" data-tab="my-recipes" class="bottom-nav-item flex flex-col items-center text-center text-gray-600 hover:text-red-600 transition-colors w-1/5"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-notebook-text mb-1"><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M9.5 8h5"/><path d="M9.5 12H18"/><path d="M9.5 16H16"/></svg> <span class="text-xs font-medium">My Recipes</span> </a>
+        <a href="#" data-tab="profile" class="bottom-nav-item flex flex-col items-center text-center text-gray-600 hover:text-red-600 transition-colors w-1/5"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-round mb-1"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg> <span class="text-xs font-medium">Profile</span> </a>
+    </footer>
+
+
+    <script>
+        // --- DATA ---
+        const pinData =[ /* Truncated */ { "id": "18397", "imageUrl": "https://natashaskitchen.com/wp-content/uploads/2025/02/How-to-dye-Easter-Eggs-With-Onion-Skins-7.jpg", "altText": "How to Dye Easter Eggs with Onion Skins", "sourceUrl": "https://natashaskitchen.com/natural-easter-eggs-3-ways/", "sourceText": "Natasha's Kitchen" }, { "id": "108392", "imageUrl": "https://natashaskitchen.com/wp-content/uploads/2025/03/Ground-Beef-Strir-Fry-4.jpg", "altText": "Ground Beef Stir Fry (with Video)", "sourceUrl": "https://natashaskitchen.com/ground-beef-stir-fry/", "sourceText": "Natasha's Kitchen" }, { "id": "336412", "imageUrl": "https://www.spendwithpennies.com/wp-content/uploads/2025/03/Chicken-Scallopini-SpendWithPennies-8.jpg", "altText": "Chicken Scallopini", "sourceUrl": "https://www.spendwithpennies.com/chicken-scallopini/", "sourceText": "Spend With Pennies" }, { "id": "145936", "imageUrl": "https://www.spendwithpennies.com/wp-content/uploads/2025/03/Parmesan-Roasted-Leeks-2-SpendWithPennies-21.jpg", "altText": "Roasted Leeks", "sourceUrl": "https://www.spendwithpennies.com/parmesan-roasted-leeks/", "sourceText": "Spend With Pennies" }, { "id": "35959", "imageUrl": "https://www.loveandlemons.com/wp-content/uploads/2025/03/carrot-cake-social.jpg", "altText": "Easy Carrot Cake", "sourceUrl": "https://www.loveandlemons.com/carrot-cake-recipe/", "sourceText": "Love & Lemons" }, { "id": "56962", "imageUrl": "https://www.loveandlemons.com/wp-content/uploads/2025/03/311_LLBlogJan_RoastedAsparagus_66081-social.jpg", "altText": "Roasted Asparagus", "sourceUrl": "https://www.loveandlemons.com/roasted-asparagus/", "sourceText": "Love & Lemons" }, { "id": "169075", "imageUrl": "https://www.recipetineats.com/tachyon/2025/03/The-Chocolate-Chip-Cookie-of-my-dreams-_2.jpg", "altText": "The Chocolate Chip Cookies of my dreams", "sourceUrl": "https://www.recipetineats.com/the-chocolate-chip-cookies-of-my-dreams/", "sourceText": "RecipeTin Eats" }, { "id": "168886", "imageUrl": "https://www.recipetineats.com/tachyon/2025/02/Devilled-eggs_8.jpg", "altText": "Devilled eggs", "sourceUrl": "https://www.recipetineats.com/devilled-eggs/", "sourceText": "RecipeTin Eats" }, { "id": "62235", "imageUrl": "https://www.onceuponachef.com/images/2025/01/Charoset-Hero-4.jpg", "altText": "Charoset (A Sweet Apple and Nut Mixture for Passover)", "sourceUrl": "https://www.onceuponachef.com/recipes/charoset-a-sweet-apple-and-nut-mixture-for-passover.html", "sourceText": "Once Upon a Chef" }, { "id": "63015", "imageUrl": "https://www.onceuponachef.com/images/2025/03/Minestrone-Soup-16-1200x1800.jpg", "altText": "Minestrone Soup", "sourceUrl": "https://www.onceuponachef.com/recipes/minestrone-soup.html", "sourceText": "Once Upon a Chef" }, { "id": "59554", "imageUrl": "https://downshiftology.com/wp-content/uploads/2022/03/St.-Patricks-Day-Recipes-1.jpg", "altText": "Best St. Patrick's Day Food Ideas", "sourceUrl": "https://downshiftology.com/best-st-patricks-day-recipes/", "sourceText": "Downshiftology" }, { "id": "49801", "imageUrl": "https://downshiftology.com/wp-content/uploads/2021/02/Best-Salmon-Recipes-5.jpg", "altText": "20+ Best Salmon Recipes", "sourceUrl": "https://downshiftology.com/best-easy-salmon-recipes/", "sourceText": "Downshiftology" }, { "id": "88786", "imageUrl": "https://www.gimmesomeoven.com/wp-content/uploads/2025/03/Cilantro-Lime-Cauliflower-Quinoa-Bowls-11.jpg", "altText": "Chili-Lime Roasted Cauliflower Quinoa Bowls", "sourceUrl": "https://www.gimmesomeoven.com/chili-lime-roasted-cauliflower-quinoa-bowls/", "sourceText": "Gimme Some Oven" }, { "id": "88828", "imageUrl": "https://www.gimmesomeoven.com/wp-content/uploads/2025/03/Shakshuka-7.jpg", "altText": "Shakshuka", "sourceUrl": "https://www.gimmesomeoven.com/shakshuka-recipe/", "sourceText": "Gimme Some Oven" }, { "id": "179121", "imageUrl": "https://www.halfbakedharvest.com/wp-content/uploads/2025/04/Strawberry-Oatmeal-Cookie-Cobbler-1-scaled.jpg", "altText": "Strawberry Oatmeal Cookie Cobbler.", "sourceUrl": "https://www.halfbakedharvest.com/strawberry-oatmeal-cookie-cobbler/", "sourceText": "Half Baked Harvest" }, { "id": "179097", "imageUrl": "https://www.halfbakedharvest.com/wp-content/uploads/2025/03/Baked-Cheesy-Cuban-Chicken-Taquitos-1-scaled.jpg", "altText": "Baked Cheesy Cuban Chicken Taquitos.", "sourceUrl": "https://www.halfbakedharvest.com/cuban-chicken-taquitos/", "sourceText": "Half Baked Harvest" }, { "id": "74236", "imageUrl": "https://www.cookingclassy.com/wp-content/uploads/2024/11/tiramisu-cupcakes-7.jpg", "altText": "Tiramisu Cupcakes", "sourceUrl": "https://www.cookingclassy.com/tiramisu-cupcakes/", "sourceText": "Cooking Classy" }, { "id": "20052", "imageUrl": "https://www.cookingclassy.com/wp-content/uploads/2015/07/cheesy-garlic-bread-1.jpg", "altText": "Cheesy Garlic Bread", "sourceUrl": "https://www.cookingclassy.com/cheesy-garlic-bread/", "sourceText": "Cooking Classy" }, { "id": "107157", "imageUrl": "https://www.themediterraneandish.com/wp-content/uploads/2025/03/TMD-Baghali-Polo-Leads-05.jpg", "altText": "Baghali Polo (Persian Dill and Fava Bean Rice)", "sourceUrl": "https://www.themediterraneandish.com/baghali-polo-persian-dill-rice-with-fava-beans/", "sourceText": "The Mediterranean Dish" }, { "id": "106688", "imageUrl": "https://www.themediterraneandish.com/wp-content/uploads/2025/03/AirFryerShrimp-15.jpg", "altText": "Air Fryer Shrimp", "sourceUrl": "https://www.themediterraneandish.com/air-fryer-shrimp/", "sourceText": "The Mediterranean Dish" }, { "id": "143295", "imageUrl": "https://www.skinnytaste.com/wp-content/uploads/2025/03/Golden-Beet-Salad-18.jpg", "altText": "Golden Beet Salad", "sourceUrl": "https://www.skinnytaste.com/golden-beet-salad/", "sourceText": "Skinnytaste" }, { "id": "21541", "imageUrl": "https://www.skinnytaste.com/wp-content/uploads/2014/05/Fruit-Pizza-20.jpg", "altText": "Fruit Pizza", "sourceUrl": "https://www.skinnytaste.com/fruit-pizza/", "sourceText": "Skinnytaste" } ];
+        const communityData = [ /* Truncated */ { id: "comm1", name: "Natasha's Kitchen Fans", description: "Sharing classic recipes and kitchen tips.", imageUrl: "https://placehold.co/600x150/e0f2fe/0ea5e9?text=Natasha's+Kitchen+Community", sampleConversations: ["Anyone tried the beef stroganoff? Amazing!", "My family loved the chocolate cake!", "Tips for getting kids to eat veggies?"] }, { id: "comm2", name: "Spend With Pennies Savers", description: "Budget-friendly meals and smart shopping.", imageUrl: "https://placehold.co/600x150/dcfce7/16a34a?text=Spend+With+Pennies+Community", sampleConversations: ["Best casserole for leftovers?", "Made the chicken scallopini - so easy!", "Where do you find the best deals on groceries?"] }, { id: "comm3", name: "Love & Lemons Fresh Finds", description: "Celebrating seasonal ingredients and vibrant food.", imageUrl: "https://placehold.co/600x150/fef9c3/ca8a04?text=Love+&+Lemons+Community", sampleConversations: ["The roasted asparagus is my go-to side.", "What's everyone making with spring produce?", "Carrot cake success! Thanks for the recipe."] }, { id: "comm4", name: "RecipeTin Eats Enthusiasts", description: "Bold flavours and foolproof recipes from Nagi.", imageUrl: "https://placehold.co/600x150/fce7f3/db2777?text=RecipeTin+Eats+Community", sampleConversations: ["Those chocolate chip cookies are dangerous!", "Devilled eggs were a hit at the party.", "Anyone else obsessed with Dozer?"] }, { id: "comm5", name: "Once Upon a Chef Classics", description: "Tested and perfected recipes for home cooks.", imageUrl: "https://placehold.co/600x150/f3e8ff/9333ea?text=Once+Upon+a+Chef+Community", sampleConversations: ["Making the minestrone soup today!", "The lemon poppy seed cake is divine.", "Perfect potato soup recipe."] }, { id: "comm6", name: "Downshiftology Wellness", description: "Healthy recipes and lifestyle tips.", imageUrl: "https://placehold.co/600x150/ecfdf5/10b981?text=Downshiftology+Community", sampleConversations: ["Love the salmon ideas!", "Great healthy Super Bowl snacks.", "What are your favorite meal prep tips?"] }, { id: "comm7", name: "Gimme Some Oven Gatherings", description: "Everyday recipes made easy and delicious.", imageUrl: "https://placehold.co/600x150/ffedd5/f97316?text=Gimme+Some+Oven+Community", sampleConversations: ["Shakshuka for brunch this weekend!", "The potsticker salad is genius.", "Tried the iced matcha latte - yum!"] }, { id: "comm8", name: "Half Baked Harvest Creations", description: "Cozy, indulgent recipes with a rustic touch.", imageUrl: "https://placehold.co/600x150/e0e7ff/4f46e5?text=Half+Baked+Harvest+Community", sampleConversations: ["Making the strawberry cobbler tonight!", "Those taquitos look amazing.", "Favorite HBH comfort food?"] }, { id: "comm9", name: "Cooking Classy Connoisseurs", description: "Elegant and approachable recipes for all occasions.", imageUrl: "https://placehold.co/600x150/fee2e2/dc2626?text=Cooking+Classy+Community", sampleConversations: ["The tiramisu cupcakes were incredible!", "Best cheesy garlic bread ever.", "Italian wedding soup is perfect for a chilly day."] }, { id: "comm10", name: "Mediterranean Dish Delights", description: "Fresh, flavorful recipes inspired by the Mediterranean.", imageUrl: "https://placehold.co/600x150/dbeafe/2563eb?text=Mediterranean+Dish+Community", sampleConversations: ["Air fryer shrimp is a game changer!", "Making Kumpir tonight!", "Love the Biftekia recipe."] }, { id: "comm11", name: "Skinnytaste Sensations", description: "Delicious, healthy, family-friendly recipes.", imageUrl: "https://placehold.co/600x150/ede9fe/7c3aed?text=Skinnytaste+Community", sampleConversations: ["The golden beet salad is so refreshing.", "Fruit pizza was a hit with the kids!", "Chickpea 'tuna' salad is surprisingly good!"] } ];
+        const tomProfileData = { name: "Tom Critchlow", imageUrl: "https://placehold.co/128x128/e0e7ff/4f46e5?text=TC", bio: "Food enthusiast exploring the web's best recipes. Particularly interested in simple weeknight meals and classic comfort food. Always looking for the next great find!", joinedCommunityIds: ["comm1", "comm2", "comm3", "comm4", "comm5"] };
+        const videoData = [ /* Truncated */ { id: "vid1", thumbnailUrl: "https://placehold.co/300x500/ef4444/ffffff?text=Video+1+Preview", videoUrl: "https://placehold.co/1080x1920/ef4444/ffffff?text=Vertical+Video+1", title: "Quick Pasta Hack", uploader: "Chef Quickie" }, { id: "vid2", thumbnailUrl: "https://placehold.co/300x500/f97316/ffffff?text=Video+2+Preview", videoUrl: "https://placehold.co/1080x1920/f97316/ffffff?text=Vertical+Video+2", title: "Amazing Cake Decorating", uploader: "SweetArt" }, { id: "vid3", thumbnailUrl: "https://placehold.co/300x500/eab308/ffffff?text=Video+3+Preview", videoUrl: "https://placehold.co/1080x1920/eab308/ffffff?text=Vertical+Video+3", title: "Spicy Noodle Challenge", uploader: "FoodAdventures" }, { id: "vid4", thumbnailUrl: "https://placehold.co/300x500/84cc16/ffffff?text=Video+4+Preview", videoUrl: "https://placehold.co/1080x1920/84cc16/ffffff?text=Vertical+Video+4", title: "Healthy Breakfast Bowl", uploader: "FitFoodie" }, { id: "vid5", thumbnailUrl: "https://placehold.co/300x500/22c55e/ffffff?text=Video+5+Preview", videoUrl: "https://placehold.co/1080x1920/22c55e/ffffff?text=Vertical+Video+5", title: "Gardening Tips for Herbs", uploader: "GreenThumb" }, { id: "vid6", thumbnailUrl: "https://placehold.co/300x500/14b8a6/ffffff?text=Video+6+Preview", videoUrl: "https://placehold.co/1080x1920/14b8a6/ffffff?text=Vertical+Video+6", title: "Perfect Coffee Pour", uploader: "BaristaLife" }, { id: "vid7", thumbnailUrl: "https://placehold.co/300x500/0ea5e9/ffffff?text=Video+7+Preview", videoUrl: "https://placehold.co/1080x1920/0ea5e9/ffffff?text=Vertical+Video+7", title: "Travel Eats: Italy", uploader: "WanderlustFood" }, { id: "vid8", thumbnailUrl: "https://placehold.co/300x500/6366f1/ffffff?text=Video+8+Preview", videoUrl: "https://placehold.co/1080x1920/6366f1/ffffff?text=Vertical+Video+8", title: "DIY Kitchen Gadgets", uploader: "MakerMan" }, { id: "vid9", thumbnailUrl: "https://placehold.co/300x500/a855f7/ffffff?text=Video+9+Preview", videoUrl: "https://placehold.co/1080x1920/a855f7/ffffff?text=Vertical+Video+9", title: "Cute Pet Moments", uploader: "AnimalAntics" }, { id: "vid10", thumbnailUrl: "https://placehold.co/300x500/ec4899/ffffff?text=Video+10+Preview", videoUrl: "https://placehold.co/1080x1920/ec4899/ffffff?text=Vertical+Video+10", title: "Makeup Tutorial", uploader: "GlamGuru" } ];
+        // --- AI Chat Dummy Data (Updated Flow & Cards) ---
+        const dummyChatMessages = [
+            { sender: "ai", type: "text", text: "Hi Tom! What are you looking for?" },
+            { sender: "user", type: "text", text: "Some quick kid friendly weeknight recipes" },
+            { sender: "ai", type: "text", text: "Here's a few options:" },
+            { sender: "ai", type: "recipeCard", recipe: { id: "108392", title: "Ground Beef Stir Fry (with Video)", imageUrl: "https://natashaskitchen.com/wp-content/uploads/2025/03/Ground-Beef-Strir-Fry-4.jpg", sourceUrl: "https://natashaskitchen.com/ground-beef-stir-fry/" } },
+            { sender: "ai", type: "recipeCard", recipe: { id: "21541", title: "Fruit Pizza", imageUrl: "https://www.skinnytaste.com/wp-content/uploads/2014/05/Fruit-Pizza-20.jpg", sourceUrl: "https://www.skinnytaste.com/fruit-pizza/" } },
+            { sender: "ai", type: "recipeCard", recipe: { id: "20052", title: "Cheesy Garlic Bread", imageUrl: "https://www.cookingclassy.com/wp-content/uploads/2015/07/cheesy-garlic-bread-1.jpg", sourceUrl: "https://www.cookingclassy.com/cheesy-garlic-bread/" } },
+            { sender: "user", type: "text", text: "what about something veggie?" },
+            { sender: "ai", type: "text", text: "Got it, how about these veggie ideas:" },
+            { sender: "ai", type: "recipeCard", recipe: { id: "88786", title: "Chili-Lime Roasted Cauliflower Quinoa Bowls", imageUrl: "https://www.gimmesomeoven.com/wp-content/uploads/2025/03/Cilantro-Lime-Cauliflower-Quinoa-Bowls-11.jpg", sourceUrl: "https://www.gimmesomeoven.com/chili-lime-roasted-cauliflower-quinoa-bowls/" } },
+            { sender: "ai", type: "recipeCard", recipe: { id: "143295", title: "Golden Beet Salad", imageUrl: "https://www.skinnytaste.com/wp-content/uploads/2025/03/Golden-Beet-Salad-18.jpg", sourceUrl: "https://www.skinnytaste.com/golden-beet-salad/" } },
+            { sender: "ai", type: "recipeCard", recipe: { id: "56962", title: "Roasted Asparagus", imageUrl: "https://www.loveandlemons.com/wp-content/uploads/2025/03/311_LLBlogJan_RoastedAsparagus_66081-social.jpg", sourceUrl: "https://www.loveandlemons.com/roasted-asparagus/" } },
+            { sender: "ai", type: "text", text: "Let me know if any of those look interesting!" },
+            { sender: "ai", type: "text", text: "End of demo conversation." }
+        ];
+        // --- END OF DATA ---
+
+
+        // --- Global Variables & DOM References ---
+        const SAVED_PINS_KEY = 'pinterestDemoSavedPins';
+        const pinContainer = document.getElementById('pin-container');
+        const modal = document.getElementById('pinModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalSeeRecipeButton = document.getElementById('modalSeeRecipeButton');
+        const modalUsername = document.getElementById('modalUsername');
+        const closeModalButton = document.getElementById('closeModalButton');
+        const navItems = document.querySelectorAll('.bottom-nav-item');
+        const searchInput = document.getElementById('search-input');
+        const videoPlayerModal = document.getElementById('videoPlayerModal');
+        const videoPlayerImage = document.getElementById('videoPlayerImage');
+        const videoPlayerTitle = document.getElementById('videoPlayerTitle');
+        const videoPlayerUploader = document.getElementById('videoPlayerUploader');
+        const closeVideoPlayerButton = document.getElementById('closeVideoPlayerButton');
+        const aiChatModal = document.getElementById('aiChatModal');
+        const aiChatMessages = document.getElementById('aiChatMessages');
+        const closeAiChatButton = document.getElementById('closeAiChatButton');
+        const aiChatButton = document.getElementById('aiChatButton');
+
+        let currentView = 'home';
+        let currentVideoIndex = -1;
+        let touchStartY = 0;
+        let touchEndY = 0;
+        const swipeThreshold = 50;
+        let nextMessageIndex = 0;
+
+        // --- Local Storage Functions ---
+        function getSavedPinIds() { const saved = localStorage.getItem(SAVED_PINS_KEY); return saved ? JSON.parse(saved) : []; }
+        function savePinId(pinId) { const savedIds = getSavedPinIds(); if (!savedIds.includes(pinId)) { savedIds.push(pinId); localStorage.setItem(SAVED_PINS_KEY, JSON.stringify(savedIds)); return true; } return false; }
+        function removePinId(pinId) { const savedIds = getSavedPinIds(); const index = savedIds.indexOf(pinId); if (index > -1) { savedIds.splice(index, 1); localStorage.setItem(SAVED_PINS_KEY, JSON.stringify(savedIds)); return true; } return false; }
+        function isPinSaved(pinId) { return getSavedPinIds().includes(String(pinId)); }
+
+        // --- Rendering Functions ---
+        function getDomainFromUrl(url) { if (!url) return null; try { const u = new URL(url); return u.hostname.replace(/^www\./, ''); } catch (e) { return null; } }
+        function createPinElementHTML(pin) { /* ... (same as before) ... */
+            const domainName = getDomainFromUrl(pin.sourceUrl); const saved = isPinSaved(pin.id); const buttonClass = saved ? 'saved' : ''; const buttonText = saved ? 'Saved' : 'Save';
+            return `<div class="pin group relative cursor-pointer bg-gray-200 rounded-lg overflow-hidden" data-id="${pin.id}"><img src="${pin.imageUrl}" alt="${pin.altText || 'Pin image'}" class="w-full h-auto block" onerror="this.onerror=null; this.src='https://placehold.co/400x300/fecaca/991b1b?text=Image+Error';" loading="lazy" /><div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex flex-col justify-between p-3"><button class="save-button self-end bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 rounded-full text-sm font-semibold transition-colors ${buttonClass}">${buttonText}</button>${domainName ? `<a href="${pin.sourceUrl || '#'}" target="_blank" rel="noopener noreferrer" class="source-link mt-auto bg-white bg-opacity-80 hover:bg-opacity-100 text-black px-3 py-1 rounded-full text-xs font-medium truncate transition-colors self-start">${domainName}</a>` : ''}</div></div>`;
+        }
+        function renderPins(pinsToRender, containerClass = 'view-pins') { /* ... (same as before) ... */
+            if (!pinContainer) return; pinContainer.className = `pin-container ${containerClass}`; pinContainer.innerHTML = '';
+            if (!pinsToRender || pinsToRender.length === 0) { pinContainer.innerHTML = '<p class="text-gray-500 text-center col-span-full py-10">No recipes found.</p>'; return; }
+            pinsToRender.forEach(pin => { pinContainer.insertAdjacentHTML('beforeend', createPinElementHTML(pin)); }); attachPinListeners();
+        }
+        function createCommunityCardHTML(community) { /* ... (same as before) ... */
+             const conversationItemsHTML = community.sampleConversations.map(convo => `<li class="text-xs text-gray-600 truncate italic">"${convo}"</li>`).join('');
+             return `<div class="community-card bg-white rounded-lg shadow-md overflow-hidden border border-gray-200" data-id="${community.id}"><img src="${community.imageUrl}" alt="${community.name} banner" class="w-full h-24 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/600x150/cccccc/999999?text=Community+Image';"><div class="p-4"><div class="flex justify-between items-start mb-2"><div><h3 class="font-bold text-lg text-gray-800">${community.name}</h3><p class="text-sm text-gray-500">${community.description}</p></div><button class="join-button bg-blue-500 hover:bg-blue-600 text-white px-4 py-1.5 rounded-full text-sm font-semibold transition-colors flex-shrink-0 ml-4">Join</button></div><div class="mt-3 border-t pt-3"><h4 class="text-xs font-semibold text-gray-700 mb-1 uppercase">Recent Chatter:</h4><ul class="space-y-1">${conversationItemsHTML}</ul></div></div></div>`;
+        }
+        function renderCommunities(communitiesToRender) { /* ... (same as before) ... */
+             if (!pinContainer) return; pinContainer.className = 'pin-container view-community space-y-6'; pinContainer.innerHTML = '';
+             if (!communitiesToRender || communitiesToRender.length === 0) { pinContainer.innerHTML = '<p class="text-gray-500 text-center col-span-full py-10">No communities found.</p>'; return; }
+             communitiesToRender.forEach(community => { pinContainer.insertAdjacentHTML('beforeend', createCommunityCardHTML(community)); });
+        }
+        function renderProfilePage(profile, allCommunities, savedRecipePins) { /* ... (same as before) ... */
+            if (!pinContainer) return; pinContainer.className = 'pin-container view-profile'; pinContainer.innerHTML = '';
+            const profileHeaderHTML = `<div class="profile-section text-center mb-8 p-6 bg-white rounded-lg shadow"><img src="${profile.imageUrl}" alt="${profile.name}" class="w-24 h-24 md:w-32 md:h-32 rounded-full mx-auto mb-4 border-4 border-gray-200 shadow-sm" onerror="this.onerror=null; this.src='https://placehold.co/128x128/cccccc/999999?text=??';"><h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">${profile.name}</h2><p class="text-gray-600 max-w-xl mx-auto">${profile.bio}</p></div>`; pinContainer.insertAdjacentHTML('beforeend', profileHeaderHTML);
+            const joinedCommunities = allCommunities.filter(comm => profile.joinedCommunityIds.includes(comm.id)); let communityBadgesHTML = '<div class="profile-section mb-8"><h3 class="text-xl font-semibold text-gray-700 mb-3 px-1">Joined Communities</h3><div class="flex flex-wrap gap-2">'; if (joinedCommunities.length > 0) { joinedCommunities.forEach(comm => { communityBadgesHTML += `<span class="inline-block bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded-full">${comm.name}</span>`; }); } else { communityBadgesHTML += '<p class="text-gray-500">Not part of any communities yet.</p>'; } communityBadgesHTML += '</div></div>'; pinContainer.insertAdjacentHTML('beforeend', communityBadgesHTML);
+            let savedRecipesHTML = '<div class="profile-section mb-8"><h3 class="text-xl font-semibold text-gray-700 mb-4 px-1">Saved Recipes</h3>'; if (!savedRecipePins || savedRecipePins.length === 0) { savedRecipesHTML += '<p class="text-gray-500">No recipes saved yet.</p></div>'; pinContainer.insertAdjacentHTML('beforeend', savedRecipesHTML); } else { savedRecipesHTML += '<div id="profile-saved-pins-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4">'; savedRecipesHTML += '</div></div>'; pinContainer.insertAdjacentHTML('beforeend', savedRecipesHTML); const savedPinsGrid = document.getElementById('profile-saved-pins-grid'); if (savedPinsGrid) { savedRecipePins.forEach(pin => { savedPinsGrid.insertAdjacentHTML('beforeend', createPinElementHTML(pin)); }); attachProfilePinListeners(savedPinsGrid); } }
+        }
+        function createVideoCardHTML(video) { /* ... (same as before) ... */
+            return `<div class="video-card group relative cursor-pointer bg-gray-800 rounded-lg overflow-hidden shadow-lg" data-video-id="${video.id}"><img src="${video.thumbnailUrl}" alt="${video.title || 'Video preview'}" class="w-full h-auto block aspect-[9/16] object-cover" onerror="this.onerror=null; this.src='https://placehold.co/300x500/cccccc/999999?text=Video+Error';" loading="lazy" /><div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-100 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex flex-col justify-end p-3"><h4 class="text-white font-semibold text-sm truncate">${video.title}</h4><p class="text-white text-xs opacity-80 truncate">By ${video.uploader}</p></div><div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="white" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play-circle opacity-70"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg></div></div>`;
+        }
+        function renderVideos(videosToRender) { /* ... (same as before) ... */
+             if (!pinContainer) return; pinContainer.className = 'pin-container view-videos grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4'; pinContainer.innerHTML = '';
+             if (!videosToRender || videosToRender.length === 0) { pinContainer.innerHTML = '<p class="text-gray-500 text-center col-span-full py-10">No videos found.</p>'; return; }
+             videosToRender.forEach(video => { pinContainer.insertAdjacentHTML('beforeend', createVideoCardHTML(video)); }); attachVideoCardListeners();
+        }
+
+        // --- Event Listener Functions ---
+        function attachPinListeners() { const pins = pinContainer.querySelectorAll('.pin'); pins.forEach(pin => { pin.removeEventListener('click', handlePinClick); pin.addEventListener('click', handlePinClick); }); }
+        function attachProfilePinListeners(container) { const pins = container.querySelectorAll('.pin'); pins.forEach(pin => { pin.removeEventListener('click', handlePinClick); pin.addEventListener('click', handlePinClick); }); }
+        function attachVideoCardListeners() { const videoCards = pinContainer.querySelectorAll('.video-card'); videoCards.forEach(card => { card.removeEventListener('click', handleVideoCardClick); card.addEventListener('click', handleVideoCardClick); }); }
+
+        function handlePinClick(event) { if (event.target.closest('.save-button') || event.target.closest('.source-link')) return; openModal(event.currentTarget); }
+        function handleSaveClick(event) { /* ... (same as before) ... */
+            const saveButton = event.target.closest('.save-button'); if (!saveButton) return; const pinElement = saveButton.closest('.pin'); const pinId = pinElement?.dataset.id; if (!pinId) return;
+            if (isPinSaved(pinId)) { if (removePinId(pinId)) { saveButton.classList.remove('saved'); saveButton.textContent = 'Save'; if (currentView === 'my-recipes' || currentView === 'profile') { pinElement.remove(); if (currentView === 'my-recipes' && pinContainer.querySelectorAll('.pin').length === 0) { renderPins([]); } const profileGrid = document.getElementById('profile-saved-pins-grid'); if (currentView === 'profile' && profileGrid && profileGrid.querySelectorAll('.pin').length === 0) { profileGrid.innerHTML = '<p class="text-gray-500 col-span-full">No recipes saved yet.</p>'; } } } }
+            else { if (savePinId(pinId)) { saveButton.classList.add('saved'); saveButton.textContent = 'Saved'; } }
+        }
+        function handleVideoCardClick(event) { const card = event.currentTarget; const videoId = card.dataset.videoId; if (videoId) { openVideoPlayer(videoId); } }
+        function openModal(pinElement) { /* ... (same as before) ... */
+            const pinId = pinElement?.dataset.id; const pin = pinData.find(p => p.id === pinId); if (!pin) return; const imageElement = pinElement.querySelector('img'); const imgSrc = imageElement ? imageElement.src : 'https://placehold.co/600x600/ccc/ffffff?text=No+Image'; const imgAlt = pin.altText || 'Pin image'; const sourceHref = pin.sourceUrl || '#'; const domainName = getDomainFromUrl(pin.sourceUrl);
+            modalImage.src = imgSrc; modalImage.alt = imgAlt; modalTitle.textContent = imgAlt; modalDescription.textContent = `Details for "${imgAlt}". Description from a real source would go here. (ID: ${pinId})`;
+            if (modalUsername) { modalUsername.textContent = domainName || 'Source'; }
+            if (modalSeeRecipeButton) { if (pin.sourceUrl) { modalSeeRecipeButton.href = sourceHref; modalSeeRecipeButton.classList.remove('hidden'); modalSeeRecipeButton.classList.add('inline-flex'); } else { modalSeeRecipeButton.classList.add('hidden'); modalSeeRecipeButton.classList.remove('inline-flex'); } }
+            const modalSaveButton = modal.querySelector('.modal-save-button'); if (modalSaveButton) { if (isPinSaved(pinId)) { modalSaveButton.textContent = 'Saved'; modalSaveButton.classList.add('saved'); } else { modalSaveButton.textContent = 'Save'; modalSaveButton.classList.remove('saved'); } modalSaveButton.dataset.pinId = pinId; }
+            modal.classList.remove('hidden'); modal.classList.add('flex'); document.body.style.overflow = 'hidden';
+        }
+        function closeModal() { modal.classList.add('hidden'); modal.classList.remove('flex'); document.body.style.overflow = ''; }
+        function setActiveTab(activeTabElement) { navItems.forEach(item => item.classList.remove('active')); if (activeTabElement) activeTabElement.classList.add('active'); }
+
+        // --- Video Player Functions ---
+        function displayVideoInPlayer(index) { /* ... (same as before) ... */ if (index < 0 || index >= videoData.length) return; const video = videoData[index]; videoPlayerImage.src = video.videoUrl; videoPlayerImage.alt = video.title || 'Video content'; videoPlayerTitle.textContent = video.title || ''; videoPlayerUploader.textContent = `By ${video.uploader || 'Unknown Uploader'}`; currentVideoIndex = index; }
+        function openVideoPlayer(videoId) { /* ... (same as before) ... */ const initialIndex = videoData.findIndex(v => v.id === videoId); if (initialIndex === -1) return; displayVideoInPlayer(initialIndex); videoPlayerModal.classList.remove('hidden'); videoPlayerModal.classList.add('flex'); document.body.style.overflow = 'hidden'; videoPlayerModal.addEventListener('touchstart', handleTouchStart, { passive: true }); videoPlayerModal.addEventListener('touchmove', handleTouchMove, { passive: true }); videoPlayerModal.addEventListener('touchend', handleTouchEnd); }
+        function closeVideoPlayer() { /* ... (same as before) ... */ videoPlayerModal.classList.add('hidden'); videoPlayerModal.classList.remove('flex'); document.body.style.overflow = ''; currentVideoIndex = -1; videoPlayerModal.removeEventListener('touchstart', handleTouchStart); videoPlayerModal.removeEventListener('touchmove', handleTouchMove); videoPlayerModal.removeEventListener('touchend', handleTouchEnd); }
+
+        // --- Swipe Logic ---
+        function handleTouchStart(event) { touchStartY = event.touches[0].clientY; touchEndY = touchStartY; }
+        function handleTouchMove(event) { touchEndY = event.touches[0].clientY; }
+        function handleTouchEnd() { /* ... (same as before) ... */ const deltaY = touchEndY - touchStartY; if (Math.abs(deltaY) > swipeThreshold) { if (deltaY < 0) { const nextIndex = currentVideoIndex + 1; if (nextIndex < videoData.length) { displayVideoInPlayer(nextIndex); } } else { const prevIndex = currentVideoIndex - 1; if (prevIndex >= 0) { displayVideoInPlayer(prevIndex); } } } touchStartY = 0; touchEndY = 0; }
+
+        // --- AI Chat Functions ---
+        function openAiChat() { /* ... (same as before) ... */
+            nextMessageIndex = 0; aiChatMessages.innerHTML = ''; aiChatModal.classList.remove('hidden'); aiChatModal.classList.add('flex'); document.body.style.overflow = 'hidden'; addNextChatMessage();
+        }
+        function closeAiChat() { /* ... (same as before) ... */
+            aiChatModal.classList.add('hidden'); aiChatModal.classList.remove('flex'); document.body.style.overflow = '';
+        }
+        // ** Updated addNextChatMessage with Recipe Card Row Logic **
+        function addNextChatMessage() {
+            if (!aiChatMessages || nextMessageIndex >= dummyChatMessages.length) {
+                if (nextMessageIndex === dummyChatMessages.length && aiChatMessages) {
+                     const endMsg = document.createElement('p'); endMsg.className = 'text-center text-xs text-gray-400 dark:text-gray-500 italic py-4'; endMsg.textContent = 'End of demo conversation.'; aiChatMessages.appendChild(endMsg); aiChatMessages.scrollTop = aiChatMessages.scrollHeight; nextMessageIndex++;
+                } return;
+            }
+
+            const message = dummyChatMessages[nextMessageIndex];
+            const prevMessage = dummyChatMessages[nextMessageIndex - 1];
+            const lastMessageBubble = aiChatMessages.lastElementChild;
+
+            const shouldGroupWithPrevious =
+                message.sender === 'ai' && message.type === 'recipeCard' &&
+                prevMessage && prevMessage.sender === 'ai' && prevMessage.type === 'recipeCard' &&
+                lastMessageBubble?.classList.contains('ai-bubble');
+
+            let aiBubbleContainer;
+            let recipeRowContainer;
+
+            if (shouldGroupWithPrevious) {
+                aiBubbleContainer = lastMessageBubble.querySelector('.ai-bubble-content');
+                recipeRowContainer = aiBubbleContainer?.querySelector('.recipe-card-row');
+            }
+
+            if (!shouldGroupWithPrevious || !recipeRowContainer) {
+                const messageContainer = document.createElement('div');
+                messageContainer.classList.add('w-full', 'flex');
+
+                if (message.sender === 'user') {
+                    messageContainer.classList.add('justify-end');
+                    const textBubble = document.createElement('div');
+                    textBubble.classList.add('max-w-[80%]', 'p-3', 'rounded-lg', 'text-sm', 'bg-blue-500', 'text-white', 'rounded-br-none');
+                    textBubble.textContent = message.text;
+                    messageContainer.appendChild(textBubble);
+                } else { // AI sender (start new bubble)
+                    messageContainer.classList.add('justify-start', 'ai-bubble');
+                    aiBubbleContainer = document.createElement('div');
+                    aiBubbleContainer.classList.add('ai-bubble-content', 'max-w-[80%]', 'p-3', 'rounded-lg', 'text-sm', 'bg-gray-200', 'dark:bg-gray-700', 'text-gray-800', 'dark:text-gray-100', 'rounded-bl-none');
+
+                    if (message.text) {
+                        const introText = document.createElement('p');
+                        introText.textContent = message.text;
+                        if (message.type === 'recipeCard') introText.classList.add('mb-2');
+                        aiBubbleContainer.appendChild(introText);
+                    }
+
+                    if (message.type === 'recipeCard') {
+                        recipeRowContainer = document.createElement('div');
+                        recipeRowContainer.classList.add('recipe-card-row', 'flex', 'flex-wrap', 'gap-2', 'mt-1');
+                        aiBubbleContainer.appendChild(recipeRowContainer);
+                    }
+                    messageContainer.appendChild(aiBubbleContainer);
+                }
+                aiChatMessages.appendChild(messageContainer);
+            }
+
+            if (message.type === 'recipeCard' && message.recipe && recipeRowContainer) {
+                const recipe = message.recipe;
+                // Removed incorrect comments from this template literal
+                const cardHTML = `
+                    <div class="recipe-card bg-white dark:bg-gray-600 rounded-md overflow-hidden shadow border border-gray-300 dark:border-gray-500 w-36 flex-shrink-0">
+                        <img src="${recipe.imageUrl}" alt="${recipe.title}" class="w-full h-20 object-cover" onerror="this.onerror=null; this.src='https://placehold.co/150x100/cccccc/999999?text=No+Image';">
+                        <div class="p-1.5">
+                            <h5 class="font-semibold text-[11px] mb-1 truncate text-gray-900 dark:text-gray-50">${recipe.title}</h5>
+                            <a href="${recipe.sourceUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center text-[10px] bg-red-500 hover:bg-red-600 text-white px-2 py-0.5 rounded-full font-medium w-full transition-colors">
+                                View Recipe
+                                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link ml-1"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+                            </a>
+                        </div>
+                    </div>`;
+                recipeRowContainer.insertAdjacentHTML('beforeend', cardHTML);
+            }
+
+            aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+            nextMessageIndex++;
+        }
+
+
+        // --- Search Functionality ---
+        function handleSearchInput() { /* ... (same as before) ... */
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            if (currentView === 'community') { const filteredCommunities = communityData.filter(community => { const nameMatch = community.name && community.name.toLowerCase().includes(searchTerm); const descMatch = community.description && community.description.toLowerCase().includes(searchTerm); return nameMatch || descMatch; }); renderCommunities(filteredCommunities); }
+            else if (currentView === 'profile') { const savedPins = getSavedPinsData(); const filteredPins = savedPins.filter(pin => { return pin.altText && typeof pin.altText === 'string' && pin.altText.toLowerCase().includes(searchTerm); }); const savedPinsGrid = document.getElementById('profile-saved-pins-grid'); if (savedPinsGrid) { savedPinsGrid.innerHTML = ''; if (!filteredPins || filteredPins.length === 0) { savedPinsGrid.innerHTML = '<p class="text-gray-500 col-span-full">No matching saved recipes found.</p>'; } else { filteredPins.forEach(pin => { savedPinsGrid.insertAdjacentHTML('beforeend', createPinElementHTML(pin)); }); attachProfilePinListeners(savedPinsGrid); } } }
+            else if (currentView === 'video') { const filteredVideos = videoData.filter(video => { return video.title && typeof video.title === 'string' && video.title.toLowerCase().includes(searchTerm); }); renderVideos(filteredVideos); }
+            else { let sourceData = (currentView === 'my-recipes') ? getSavedPinsData() : pinData; const filteredPins = sourceData.filter(pin => { return pin.altText && typeof pin.altText === 'string' && pin.altText.toLowerCase().includes(searchTerm); }); renderPins(filteredPins, currentView === 'my-recipes' ? 'view-pins' : 'view-pins'); }
+        }
+
+        // --- Navigation ---
+        function handleNavClick(event) { /* ... (same as before) ... */
+            event.preventDefault(); const targetTabElement = event.currentTarget; const targetTab = targetTabElement.dataset.tab; if (targetTabElement.classList.contains('active')) return; currentView = targetTab; setActiveTab(targetTabElement); searchInput.value = ''; updateSearchPlaceholder(); pinContainer.className = 'pin-container';
+            switch (targetTab) {
+                case 'home': renderPins(pinData); break;
+                case 'video': renderVideos(videoData); break;
+                case 'community': renderCommunities(communityData); break;
+                case 'my-recipes': renderPins(getSavedPinsData()); break;
+                case 'profile': const savedPins = getSavedPinsData(); renderProfilePage(tomProfileData, communityData, savedPins); break;
+                default: currentView = 'home'; setActiveTab(document.querySelector('.bottom-nav-item[data-tab="home"]')); updateSearchPlaceholder(); renderPins(pinData);
+            }
+        }
+        function getSavedPinsData() { const savedIds = getSavedPinIds(); return pinData.filter(pin => savedIds.includes(pin.id)); }
+        function updateSearchPlaceholder() { /* ... (same as before) ... */
+             if (currentView === 'community') searchInput.placeholder = "Search communities...";
+             else if (currentView === 'profile') searchInput.placeholder = "Search saved recipes...";
+             else if (currentView === 'video') searchInput.placeholder = "Search videos...";
+             else searchInput.placeholder = "Search recipes by title...";
+        }
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            updateSearchPlaceholder(); renderPins(pinData); // Initial render (Home view)
+            if (searchInput) searchInput.addEventListener('input', handleSearchInput);
+            if (pinContainer) pinContainer.addEventListener('click', handleSaveClick); // Handles saves for pins/profile pins
+            if (closeModalButton) closeModalButton.addEventListener('click', closeModal);
+            if (modal) modal.addEventListener('click', (event) => { if (event.target === modal) closeModal(); });
+            document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !modal.classList.contains('hidden')) closeModal(); });
+            navItems.forEach(item => item.addEventListener('click', handleNavClick));
+             // Video Player Close Button
+             if(closeVideoPlayerButton) closeVideoPlayerButton.addEventListener('click', closeVideoPlayer);
+             // AI Chat Listeners
+             if(aiChatButton) aiChatButton.addEventListener('click', openAiChat);
+             if(closeAiChatButton) closeAiChatButton.addEventListener('click', closeAiChat);
+             // ** Updated AI Chat Tap Listener **
+             if(aiChatModal) {
+                 aiChatModal.addEventListener('click', (event) => {
+                    // Prevent advancing chat if clicking interactive elements like buttons or links
+                    if (event.target.closest('button') || event.target.closest('a')) {
+                        // Allow close button to function
+                        if (event.target.closest('#closeAiChatButton')) { return; }
+                        // Prevent advancing if clicking other buttons/links (like recipe card links)
+                        return;
+                    }
+                    // If click is not on an interactive element, advance chat
+                    addNextChatMessage();
+                 });
+             }
+             // Modal Save Button Listener
+             const modalSaveBtn = modal.querySelector('.modal-save-button');
+             if(modalSaveBtn) {
+                 modalSaveBtn.addEventListener('click', (e) => {
+                     const pinId = e.target.dataset.pinId; if (!pinId) return; const gridPinButton = pinContainer.querySelector(`.pin[data-id="${pinId}"] .save-button`);
+                     if (isPinSaved(pinId)) { if(removePinId(pinId)) { e.target.textContent = 'Save'; e.target.classList.remove('saved'); if(gridPinButton) { gridPinButton.textContent = 'Save'; gridPinButton.classList.remove('saved'); } if (currentView === 'my-recipes' || currentView === 'profile') { const pinElement = pinContainer.querySelector(`.pin[data-id="${pinId}"]`); if(pinElement) pinElement.remove(); if (currentView === 'my-recipes' && pinContainer.querySelectorAll('.pin').length === 0) renderPins([]); const profileGrid = document.getElementById('profile-saved-pins-grid'); if (currentView === 'profile' && profileGrid && profileGrid.querySelectorAll('.pin').length === 0) { profileGrid.innerHTML = '<p class="text-gray-500 col-span-full">No recipes saved yet.</p>'; } } } }
+                     else { if(savePinId(pinId)) { e.target.textContent = 'Saved'; e.target.classList.add('saved'); if(gridPinButton) { gridPinButton.textContent = 'Saved'; gridPinButton.classList.add('saved'); } } }
+                 });
+             }
+        });
+    </script>
+</body>
+</html>
