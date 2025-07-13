@@ -3,9 +3,9 @@ layout: blog
 title: About Me
 ---
 
-Hi there, I'm based in Brooklyn, NY and currently do independent consulting work for media and technology companies. I also run the SEO MBA. I'm always happy to grab a coffee or a zoom!
+Hi there, I'm based in Raleigh, NC and currently work for Coastal Credit Union.
 
-Get in touch: [tjcritchlow@gmail.com](mailto:tjcritchlow@gmail.com) / [@tomcritchlow](http://twitter.com/tomcritchlow) 
+Get in touch: [ruffin@ruffinscott.com](mailto:ruffin@ruffinscott.com) / [@tomcritchlow](http://twitter.com/tomcritchlow) 
 
 <hr class="mv4">
 
