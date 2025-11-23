@@ -141,53 +141,11 @@
   </a>
 
 
-<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Library" href="/library">
-    <i data-feather="layers" class="h1 pr3"></i> <span class="navname">Library</span>
-  </a>
-
-
 <a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Newsletter" href="/newsletter">
     <i data-feather="mail" class="h1 pr3"></i> <span class="navname">Newsletter</span>
   </a>
 
 
-<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Search" href="/search">
-    <i data-feather="search" class="h1 pr3"></i> <span class="navname">Search</span>
-  </a>
-
-
-
-<div class="mv4">
-    <div class="newgreen mh3 ph2 mv2 navname">Hire me</div>
-
-
-<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Consulting" href="/consulting">
-    <i data-feather="git-merge" class="h1 pr3"></i> <span class="navname">Consulting</span>
-  </a>
-
-<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Advisor" href="/advisor">
-    <i data-feather="git-pull-request" class="h1 pr3"></i> <span class="navname">Advisor</span>
-  </a>
-
-</div>
-
-<div class="mv4">
-    <div class="newgreen mh3 ph2 mv2 navname">Elsewhere</div>
-
-
-<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Twitter" href="https://twitter.com/tomcritchlow/">
-    <i data-feather="twitter" class="h1 pr3"></i> <span class="navname">Twitter</span>
-  </a>
-
-<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="LinkedIn" href="https://www.linkedin.com/in/tomcritchlow/">
-    <i data-feather="linkedin" class="h1 pr3"></i> <span class="navname">LinkedIn</span>
-  </a>
-
-<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Are.na" href="https://www.are.na/tom-critchlow/index">
-    <i data-feather="bookmark" class="h1 pr3"></i> <span class="navname">Are.na</span>
-  </a>
-
-</div>
 
       
       </div>
@@ -215,18 +173,18 @@ function addClassBasedOnUrlWithSwitch() {
         div0.classList.add('bg-white');
       }
       break;
-    case url.includes("https://tomcritchlow.com/?"):
+    case url.includes("https://ruffinscott.com/?"):
       const div1 = document.getElementById("Home");
       if (div1) {
         div1.classList.add('bg-white');
       }
       break;      
-    case url.includes("/about/"):
-      const div2 = document.getElementById("About me");
-      if (div2) {
-        div2.classList.add('bg-white');
-      }
-      break;
+    //case url.includes("/about/"):
+    //  const div2 = document.getElementById("About me");
+    //  if (div2) {
+    //    div2.classList.add('bg-white');
+    //  }
+    //  break;
     case url.includes("/writing/"):
       const div3 = document.getElementById("Writing");
       if (div3) {
@@ -302,27 +260,6 @@ No website feels as alive as a Google Doc covered in comments. I've experimented
 </div>
 
 <div class="ttu f5 newgreen b pt4 pb2">WRITING</div>
-
-<div>
-<a href="/2020/06/09/quotebacks/" class="flex flex-wrap w-100 bb b--black-10 pv3 justify-between dim db black link">
-<div class="w-100 w-50-l"><div class="link black f5 b">Introducing: Quotebacks</div><div class="f5">A chrome extension to quote the web</div></div>
-<div class="black-50 f6 ibmplexmono ttu">June 9, 2020</div>
-</a>
-</div>
-
-<div>
-<a href="/2018/01/05/networked-writing/" class="flex flex-wrap w-100 bb b--black-10 pv3 justify-between dim db black link">
-<div class="w-100 w-50-l"><div class="link black f5 b">Experiments in Networked Writing</div><div class="f5">What's next?</div></div>
-<div class="black-50 f6 ibmplexmono ttu">January 5, 2018</div>
-</a>
-</div>
-
-<div>
-<a href="/2012/11/15/the-500-meteor-doodle/" class="flex flex-wrap w-100 bb b--black-10 pv3 justify-between dim db black link">
-<div class="w-100 w-50-l"><div class="link black f5 b">The 500 Year Old Meteor Doodle</div><div class="f5"></div></div>
-<div class="black-50 f6 ibmplexmono ttu">November 15, 2012</div>
-</a>
-</div>
 
 <div class="ttu f5 newgreen b pv4">RESEARCH</div>
 <div id="arenaoutput" class="w-100"></div>

@@ -141,53 +141,11 @@
   </a>
 
 
-<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Library" href="/library">
-    <i data-feather="layers" class="h1 pr3"></i> <span class="navname">Library</span>
-  </a>
-
-
 <a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Newsletter" href="/newsletter">
     <i data-feather="mail" class="h1 pr3"></i> <span class="navname">Newsletter</span>
   </a>
 
 
-<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Search" href="/search">
-    <i data-feather="search" class="h1 pr3"></i> <span class="navname">Search</span>
-  </a>
-
-
-
-<div class="mv4">
-    <div class="newgreen mh3 ph2 mv2 navname">Hire me</div>
-
-
-<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Consulting" href="/consulting">
-    <i data-feather="git-merge" class="h1 pr3"></i> <span class="navname">Consulting</span>
-  </a>
-
-<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Advisor" href="/advisor">
-    <i data-feather="git-pull-request" class="h1 pr3"></i> <span class="navname">Advisor</span>
-  </a>
-
-</div>
-
-<div class="mv4">
-    <div class="newgreen mh3 ph2 mv2 navname">Elsewhere</div>
-
-
-<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Twitter" href="https://twitter.com/tomcritchlow/">
-    <i data-feather="twitter" class="h1 pr3"></i> <span class="navname">Twitter</span>
-  </a>
-
-<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="LinkedIn" href="https://www.linkedin.com/in/tomcritchlow/">
-    <i data-feather="linkedin" class="h1 pr3"></i> <span class="navname">LinkedIn</span>
-  </a>
-
-<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Are.na" href="https://www.are.na/tom-critchlow/index">
-    <i data-feather="bookmark" class="h1 pr3"></i> <span class="navname">Are.na</span>
-  </a>
-
-</div>
 
       
       </div>
@@ -215,18 +173,18 @@ function addClassBasedOnUrlWithSwitch() {
         div0.classList.add('bg-white');
       }
       break;
-    case url.includes("https://tomcritchlow.com/?"):
+    case url.includes("https://ruffinscott.com/?"):
       const div1 = document.getElementById("Home");
       if (div1) {
         div1.classList.add('bg-white');
       }
       break;      
-    case url.includes("/about/"):
-      const div2 = document.getElementById("About me");
-      if (div2) {
-        div2.classList.add('bg-white');
-      }
-      break;
+    //case url.includes("/about/"):
+    //  const div2 = document.getElementById("About me");
+    //  if (div2) {
+    //    div2.classList.add('bg-white');
+    //  }
+    //  break;
     case url.includes("/writing/"):
       const div3 = document.getElementById("Writing");
       if (div3) {
@@ -302,27 +260,6 @@ I've been writing on the internet for 15+ years and it's so nourishing! But peop
 </div>
 
 <div class="ttu f5 newgreen b pt4 pb2">WRITING</div>
-
-<div>
-<a href="/2023/02/10/riffs/" class="flex flex-wrap w-100 bb b--black-10 pv3 justify-between dim db black link">
-<div class="w-100 w-50-l"><div class="link black f5 b">Writing, Riffs &amp; Relationships</div><div class="f5">Conversation is the unit of content</div></div>
-<div class="black-50 f6 ibmplexmono ttu">February 10, 2023</div>
-</a>
-</div>
-
-<div>
-<a href="/2019/05/17/blogpunk/" class="flex flex-wrap w-100 bb b--black-10 pv3 justify-between dim db black link">
-<div class="w-100 w-50-l"><div class="link black f5 b">Blogpunk</div><div class="f5">The weirdos and zeroes of blogging</div></div>
-<div class="black-50 f6 ibmplexmono ttu">May 17, 2019</div>
-</a>
-</div>
-
-<div>
-<a href="/2018/02/23/small-b-blogging/" class="flex flex-wrap w-100 bb b--black-10 pv3 justify-between dim db black link">
-<div class="w-100 w-50-l"><div class="link black f5 b">Small b blogging</div><div class="f5">Network topology and the ghost of the digg homepage</div></div>
-<div class="black-50 f6 ibmplexmono ttu">February 23, 2018</div>
-</a>
-</div>
 
 <div class="ttu f5 newgreen b pv4">RESEARCH</div>
 <div id="arenaoutput" class="w-100"></div>

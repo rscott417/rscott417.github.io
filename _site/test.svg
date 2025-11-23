@@ -11,5 +11,5 @@
   <text x="20" y="35" class="small">My</text>
   <text x="40" y="35" class="heavy">blog's</text>
   <text x="55" y="55" class="small">name</text>
-  <text x="65" y="55" class="Rrrrr">is </text>
+  <text x="65" y="55" class="Rrrrr">is http://localhost:4000</text>
 </svg>

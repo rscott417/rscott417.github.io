@@ -139,53 +139,11 @@ http://khole.net/
   </a>
 
 
-<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Library" href="/library">
-    <i data-feather="layers" class="h1 pr3"></i> <span class="navname">Library</span>
-  </a>
-
-
 <a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Newsletter" href="/newsletter">
     <i data-feather="mail" class="h1 pr3"></i> <span class="navname">Newsletter</span>
   </a>
 
 
-<a class="db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Search" href="/search">
-    <i data-feather="search" class="h1 pr3"></i> <span class="navname">Search</span>
-  </a>
-
-
-
-<div class="mv4">
-    <div class="newgreen mh3 ph2 mv2 navname">Hire me</div>
-
-
-<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Consulting" href="/consulting">
-    <i data-feather="git-merge" class="h1 pr3"></i> <span class="navname">Consulting</span>
-  </a>
-
-<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Advisor" href="/advisor">
-    <i data-feather="git-pull-request" class="h1 pr3"></i> <span class="navname">Advisor</span>
-  </a>
-
-</div>
-
-<div class="mv4">
-    <div class="newgreen mh3 ph2 mv2 navname">Elsewhere</div>
-
-
-<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Twitter" href="https://twitter.com/tomcritchlow/">
-    <i data-feather="twitter" class="h1 pr3"></i> <span class="navname">Twitter</span>
-  </a>
-
-<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="LinkedIn" href="https://www.linkedin.com/in/tomcritchlow/">
-    <i data-feather="linkedin" class="h1 pr3"></i> <span class="navname">LinkedIn</span>
-  </a>
-
-<a class=" db flex items-center mh3 pa2 bg-animate hover-bg-white link black br3 ttu" id="Are.na" href="https://www.are.na/tom-critchlow/index">
-    <i data-feather="bookmark" class="h1 pr3"></i> <span class="navname">Are.na</span>
-  </a>
-
-</div>
 
       
       </div>
@@ -213,18 +171,18 @@ function addClassBasedOnUrlWithSwitch() {
         div0.classList.add('bg-white');
       }
       break;
-    case url.includes("https://tomcritchlow.com/?"):
+    case url.includes("https://ruffinscott.com/?"):
       const div1 = document.getElementById("Home");
       if (div1) {
         div1.classList.add('bg-white');
       }
       break;      
-    case url.includes("/about/"):
-      const div2 = document.getElementById("About me");
-      if (div2) {
-        div2.classList.add('bg-white');
-      }
-      break;
+    //case url.includes("/about/"):
+    //  const div2 = document.getElementById("About me");
+    //  if (div2) {
+    //    div2.classList.add('bg-white');
+    //  }
+    //  break;
     case url.includes("/writing/"):
       const div3 = document.getElementById("Writing");
       if (div3) {
